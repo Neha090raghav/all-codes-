@@ -1,0 +1,1475 @@
+Interesting Facts
+
+This
+*The this keyword in JavaScript behaves differently across execution contexts and varies between strict and non-strict modes.
+1. Behavior of this inside browser
+*In a browser, 'this' refers to the global window object in the global context
+*console.log(this)->Window
+
+
+2. Behavior of this inside Node.js
+*In Node.js, 'this'refers to the module.export object in the global context but is undefined inside modules when using strict mode.
+
+3. Inside a function kept in global space
+
+Inside a function in the global space, this refers to the global object (window in browsers, global in Node.js) in non-strict mode, but is undefined` in strict mode
+
+*//function strict.js
+
+"use strict";
+function a() {
+	console.log(this); 
+}
+a();
+
+
+✅ Node.js Example
+🔸 Non-Strict Mode (Default)
+js
+Copy
+Edit
+function a() {
+  console.log(this);
+}
+a(); // logs: global object
+Output in Node.js:
+
+js
+Copy
+Edit
+Object [global] {
+  global: [Circular],
+  setTimeout: [Function: setTimeout],
+  ...
+}
+Since you're not using "use strict", the function is called in the global context.
+
+this inside the function defaults to the global object (global in Node.js).
+
+🔸 Strict Mode
+js
+Copy
+Edit
+"use strict";
+
+function a() {
+  console.log(this);
+}
+a(); // logs: undefined
+Output:
+
+js
+Copy
+Edit
+undefined
+In "use strict", this in a regular function called in the global scope is not bound, so it becomes undefined.
+
+✅ Browser Comparison
+🔸 Non-Strict Mode in Browser:
+html
+Copy
+Edit
+<script>
+function a() {
+  console.log(this); // window
+}
+a();
+</script>
+Output:
+
+js
+Copy
+Edit
+Window {...}
+🔸 Strict Mode in Browser:
+html
+Copy
+Edit
+<script>
+"use strict";
+function a() {
+  console.log(this); // undefined
+}
+a();
+</script>
+Output:
+
+js
+Copy
+Edit
+undefined
+
+4. In arrow functions kept in global space
+*In arrow functions, this is automatically inherited from the surrounding context or the parent context. It has same behavior in strict and non strict mode.
+*let obj = {a : 10, b : () => {
+    console.log(this); 
+}}
+
+obj.b()
+*here the as node js module by default uses the strict mode there it will inherit from the parent scope hence this  will be the {}
+and if in browser than the this will be the windows object
+
+5.6. Inside a normal function kept in an object
+*If you use a normal function inside an object and call it as a method on that object, then this refers to that object:
+*let obj = {a : 10, b : function() { 
+    console.log(this); 
+}} 
+
+obj.b();
+
+{ a: 10, b: [Function: b] }
+
+
+6.Inside an arrow function in an object
+Inside an arrow function in an object, this does not refer to the object but inherits this from the surrounding context where the function is defined.
+*let obj = {a : 10, b : () => {
+    console.log(this); 
+}}
+
+obj.b();
+
+{}
+
+7.8. Inside an arrow function kept inside a normal function
+*Inside an arrow function within a normal function in an object, this still inherits from the surrounding context, not the object itself.
+*let obj = {
+    name : "Pranjal",
+    a : function() {
+        let b = () => { 
+            console.log(this.name); 
+        } 
+        b();
+    }
+} 
+obj.a();--Pranjal
+
+9. Inside nested arrow functions in an object
+*In a nested arrow function, this is inherited from the outer function where the arrow function is defined. It does not change based on the inner function's context.
+*let obj = {
+    name: "Pranjal",
+    a: () => {
+        let b = () => {
+            console.log(this);
+        };
+        b();
+    },
+};
+obj.a();
+
+{}
+
+
+10.Inside nested normal functions in an object
+*Inside nested normal functions in an object, 'this' points to the global object because regular functions have their own 'this' and cannot access the value of the parent function
+*causing it to default to the global object.
+*let obj = {
+    name: "Pranjal",
+    a: function () {
+        let b = function () {
+            console.log(this);
+        };
+        b();
+    },
+};
+obj.a();
+*<ref *1> Object [global] {
+  global: [Circular *1],
+  clearInterval: [Function: clearInterval],
+  clearTimeout: [Function: clearTimeout],
+  setInterval: [Function: setInterval],
+  setTimeout: [Functio...
+
+
+
+
+11.11. Behavior of 'this' in call
+*In call(), this is set to the object reference you pass as the first argument
+*allowing the function to use that object's properties.
+let obj = {
+    name: "GEEKS FOR GEEKS",
+};
+function print(greet) {
+    console.log(`${greet} Welcome to ${this.name}`);
+}
+print.call(obj, "Hello");
+
+14. Behavior of this inside DOM element
+*Inside the DOM element the this point to the current element in which it is placed
+*<html>
+
+<body>
+    <button onclick="alert(this.tagName)">Click me</button>
+</body>
+
+</html>
+here on click this will point to button
+
+15.15. Behavior of this inside a class
+*'this' inside a class refers to the current instance of that class and it can access the properties present in that instance.
+*class Gfg{
+    constructor(name){
+        this.name=name;
+    }
+    greet(){
+    console.log(`Welcome to ${this.name}`);
+    }
+}
+
+let a=new Gfg("GEEKS FOR GEEKS");
+a.greet();
+
+
+16. In an arrow function method of class
+*Arrow functions inside methods inherit this from the class.
+*class Gfg{
+    constructor(name){
+        this.name=name;
+    }
+    print(){
+    let show=()=>{
+        console.log(`Welcome to ${this.name}`);
+    }
+    show();
+    }
+}
+
+const a=new Gfg("GEEKS FOR GEEKS");
+a.print();
+
+
+17. In Event Handlers or Callbacks
+
+If you use a regular function in event handlers or callbacks, 'this' might lose its reference to the class instance.
+*//this in callbacks and eventlistners
+class play{
+    constructor(label)
+    {
+        this.label=label;
+       
+    }
+    handle(){
+        console.log(`${this.label}`)
+    }
+}
+
+const a=new play("Cricket");
+a.handle();
+but if i use the setTimeout(a.handle, 1000);
+we are here passing the reference or the value of function a.handle we are not calling it using the object so hence the this will be th ewindw onject in browser or global in browser and in strict will be unefined
+*so net result for syre will be undefined
+*so to solve this we can have
+Solution 1:
+        this.label=label;
+        this.handle=this.handle.bind(this);
+
+Solution 2:
+setTimeout(a.handle.bind(a), 1000);
+
+Solution 3:
+setTimeout(()=>a.handle(), 1000);
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Interesting Facts About JavaScript Data Type
+1.Only One Number Type
+*Unlike languages like C++, Java, or Python, where numbers are categorized as int, float, or double
+*JavaScript has just one number type: a 64-bit floating-point number
+*This means all integers and decimals are treated the same.
+Integer precision is accurate up to 15 digits
+
+console.log(999999999999999);
+console.log(9999999999999999);
+
+2.Dynamic Typing
+*JavaScript - How is JS Dynamically Typed ?
+*Writing a data type (like we do in C/C++/Java) is not required
+*A variable name can hold any type of information
+*Mainly data type is stored with value (not with variable name) and is decided & checked at run time
+*let x = 42;   
+console.log(x)
+
+x = "hello";  
+console.log(x)
+
+x = [1, 2, 3]
+console.log(x)
+
+
+
+*A function can receive any type of argument.
+*function print(x) {
+  console.log(x);
+}
+
+print(42);        
+print("hello");   
+print({ key: "val" });
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+3.Primitive vs. Reference Types
+*Primitive and Reference value in JavaScript
+*Primitive value:JavaScript provides six types of primitive values that include Number, String, Boolean, Undefined, Symbol, and BigInt
+*The size of Primitive values are fixed, therefore JavaScript stores the primitive value in the call stack (Execution context).
+*Thus, variables that are primitive are accessed by Value
+*When we assign a variable that stores a primitive value to another, the value stored in the variable is created and copied into the new variable.
+*let age = 30;
+let age1 = age; // Copying the value of age into age1
+
+console.log(`age = ${age}  age1 = ${age1}`);
+
+age = 31; // Reassigning a new value to age
+
+console.log(`age = ${age}  age1 = ${age1}`);
+
+Steps
+*let age = 30;
+
+A variable age is created and stores the primitive value 30.
+*let age1 = age;
+
+A copy of the value stored in age (which is 30) is assigned to age1.
+
+Now both age and age1 hold independent copies of the value 30.
+
+
+*age = 31;
+
+This does not affect age1 because it's a separate copy.
+
+age now stores a new primitive value 31.
+
+*age = 30  age1 = 30
+age = 31  age1 = 30
+
+Key concpets
+*Key Concept:
+Primitive values are copied by value, not by reference.
+
+This means that changing the value of one variable does not affect the other, even if one was initially assigned from the other.
+
+
+
+
+
+
+
+Reference Value
+*JavaScript provides three types of Reference values that include Array, Object, and Function.
+*The size of a reference value is dynamic therefore It is stored on Heap.
+*Thus, variables that are reference values are accessed by reference. 
+*When we assign a reference value from one variable to another, the value stored in the variable is also copied into the location of the new variable but the difference is that the values stored in both variables now are the address of the actual object stored on the heap. As a result, both variables are referencing the same object, So we can manipulate the original object from both variables.
+*let info = {
+    Name :"Abc",
+    Age :10
+}
+console.log(`Name : ${info.Name} Age : ${info.Age}`);
+
+let info1 = info;
+info1.Age = 14; // Change the Age of original object
+console.log(`Name : ${info.Name} Age : ${info.Age}`);
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Array
+*1.1. Create Array using Literal
+*// Creating an Empty Array
+let a = [];
+console.log(a);
+
+// Creating an Array and Initializing with Values
+let b = [10, 20, 30];
+console.log(b);
+
+
+2.2. Create using new Keyword (Constructor)
+*
+
+// Creating and Initializing an array with values
+let a = new Array(10, 20, 30);
+
+console.log(a);
+
+Operayions on an array
+
+1.// Creating an Array and Initializing with Values
+let a = ["HTML", "CSS", "JS"];
+
+// Add Element to the end of Array
+a.push("Node.js");
+
+// Add Element to the beginning
+a.unshift("Web Development");
+
+console.log(a);
+
+
+
+2. Removing Elements from an Array
+To remove the elements from an array we have different methods like pop(), shift(), or splice().
+*The pop() method removes an element from the last index of the array.
+The shift() method removes the element from the first index of the array.
+The splice() method removes or replaces the element from the array.
+
+3. Check the Type of an Arrays
+The JavaScript typeof operator is used ot check the type of an array. It returns "object" for arrays.
+// Creating an Array and Initializing with Values
+let a = ["HTML", "CSS", "JS"];
+
+// Check type of array
+console.log(typeof a);onject
+
+
+
+
+4.Recognizing a JavaScript Array
+There are two methods by which we can recognize a JavaScript array:
+1.Array.isArray()
+The isArray() method in JavaScript is used to determine whether a given value is an array or not. This method returns true if the argument passed is an array else it returns false.
+*Array.isArray(obj);
+*// JavaScript code for isArray() function
+function func() {
+    console.log(Array.isArray('foobar'));
+}
+
+func();
+2.JavaScript Instanceof Operator
+*The instanceof operator in JavaScript is used to check the type of an object at run time.
+*It returns a boolean value if true then it indicates that the object is an instance of a particular class and if false then it is not. 
+*<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        How to Check/Uncheck the
+        checkbox using JavaScript ?
+    </title>
+</head>
+
+<body>
+    <h1 style="color:green">
+        GeeksforGeeks
+    </h1>
+    <h3>
+        Instanceof Operator.
+    </h3>
+
+    <p id="GFG"></p>
+
+    <script>
+        let a = ["Geeks", "for", "Geeks"];
+
+        document.getElementById("GFG").innerHTML =
+            (a instanceof Array) + "<br>" +
+            (a instanceof Number);
+    </script>
+</body>
+
+</html>
+output is true ,false
+*<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        How to Check/Uncheck the
+        checkbox using JavaScript ?
+    </title>
+</head>
+
+<body>
+    <h1 style="color:green">
+        GeeksforGeeks
+    </h1>
+    <h3>
+        Instanceof Operator.
+    </h3>
+
+    <p id="GFG"></p>
+
+    <script>
+        let fruits = ["Apple", "Mango", "Banana"];
+
+        document.getElementById("GFG").innerHTML =
+            (fruits instanceof Array) + "<br>" +
+            (fruits instanceof Object) + "<br>" +
+            (fruits instanceof String) + "<br>" +
+            (fruits instanceof Number);
+    </script>
+</body>
+
+</html>
+true,true,false,false
+*<script>
+    var myString = new String();
+    var myDate = new Date();
+    
+    console.log(myString instanceof Object);
+    console.log(myString instanceof Date);
+    console.log(myString instanceof String);
+    console.log(myDate instanceof Date);
+    console.log(myDate instanceof Object);
+    console.log(myDate instanceof String);
+</script>
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*JavaScript Array toString() Method
+*The toString() method returns a string with array values separated by commas. The toString() method does not change the original array. This method converts an array into a readable string format, often for display or logging purposes.
+
+*// JavaScript to illustrate toString() method
+function func() {
+
+    // Original array
+    let arr = ["Geeks", "for", "Geeks"];
+
+    // Creating a string
+    let str = arr.toString();
+    console.log(str);
+}
+func();
+geeks,for,geekss
+
+
+*----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+JavaScript Interview Questions and Answers
+
+1.1. How to concatenate two strings in JavaScript?
+*we can concatenate two strings using the "+" operator as code below:
+
+
+
+
+let str1 = "Hello";
+let str2 = "World";
+let result = str1 + str2;
+console.log(result);
+
+
+2.2. What would be the result of 3+2+"7"?
+
+
+
+let result = 3 + 2 + "7";
+console.log(result);
+Output:
+
+57
+
+
+
+3.Are JavaScript and Java related?
+Java
+*Java is a strongly typed language
+*In Java, the type of a variable is checked at compile-time.
+*Java is an object-oriented programming language primarily used for developing complex enterprise applications.
+*Java applications can run in any virtual machine(JVM) or browser.
+*Objects of Java are class-based even we can't make any program in java without creating a class.
+
+
+
+Js
+*JavaScript is a loosely typed 
+*type is determined by value of variable and is checked at run time
+*JavaScript is a scripting language used for creating interactive and dynamic web pages.
+*JavaScript code used to run only in the browser, but now it can run on the server via Node.js.
+*JavaScript Objects are prototype-based.
+
+
+4.4. What is the difference between JavaScript and TypeScript?
+
+*JavaScript is a Dynamically Typed language which means the developers do not have to provide data types of variables.
+*means the data type is determined by its values
+*and data type is checked at run time
+*hence we cn face the run time errors
+
+
+TypeScript is developed and maintained by Microsoft, it compiles down to plain JavaScript, making it compatible with all JavaScript environments, including web browsers and Node.js.
+
+
+
+5.5. What is a Variable Scope in JavaScript?
+*it means any variable can be accessed 
+
+
+
+*<html>
+<head>
+</head>
+<body>
+    <button onclick="create()">
+        Click Here!
+    </button>
+
+    <script>
+        function create() {
+            let geeks = document.createElement('geeks');
+            geeks.textContent = "Geeksforgeeks";
+            geeks.setAttribute('class', 'note');
+            document.body.appendChild(geeks);
+        }
+    </script>
+</body>
+</html>
+
+
+*A primitive value automatically assigned to:
+Uninitialized variables
+Missing function arguments
+Missing object properties
+It means: "value not assigned yet"
+
+let x;
+console.log(x); // undefined
+
+function foo(a) {
+  console.log(a); // undefined if no argument is passed
+}
+foo();
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+15. What are global variables? How are these variables declared, and what are the problems associated with them?
+*
+In contrast, global variables are the variables that define outside of functions.
+* These variables have a global scope, so they can be used by any function without passing them to the function as parameters
+*let petName = "Rocky"; // Global Variable
+myFunction();
+
+function myFunction() {
+    console.log("Inside myFunction - Type of petName:", typeof petName);
+    console.log("Inside myFunction - petName:", petName);
+}
+
+console.log("Outside myFunction - Type of petName:", typeof petName);
+console.log("Outside myFunction - petName:", petName);
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+23. Explain the working of timers in JavaScript. Also explain the drawbacks of using the timer, if any.
+*The timer executes some specific code at a specific time or any small amount of code in repetition to do that you need to use the functions setTimout, setInterval, and clearInterval.
+*JavaScript setTimeout() Method
+*The setTimeout() Method executes a function, after waiting a specified number of milliseconds. 
+*setTimeout(gfg1, 2000);
+function gfg1() {
+    console.log("gfg1");
+}
+*The setInterval() method repeats a given function at every given time interval. 
+function gfg() {
+    console.log("gfg");
+}
+setInterval(gfg, 1000);
+
+*Interesting Facts
+Asynchronous Execution: Both methods are asynchronous, meaning the browser doesn’t block other code execution while waiting for the timer.
+Return Value: Both methods return a unique identifier (ID), which can be used with clearTimeout() or clearInterval() to stop the scheduled task.
+Timer Accuracy: Timers are not perfectly precise; delays can vary due to browser limitations and other queued tasks.
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+25. What is the difference between ViewState and SessionState?
+*ViewState: It is specific to a single page in a session.
+SessionState: It is user specific that can access all the data on the web pages
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+26. How to submit a form using JavaScript?
+*HTML | DOM Form submit() Method
+*The form submit() Method in HTML DOM is used to send the form data to the web-server.
+*<!DOCTYPE html> 
+<html> 
+<head>
+    <title>
+        HTML DOM Form submit() Method
+    </title>
+</head>
+<body style="text-align:center;"> 
+    <h1 style="color:green;">
+        GeeksForGeeks
+    </h1>
+    <!-- HTML code to create form -->
+    <h2>DOM Form submit() Method</h2>
+    <form id="GFG" action="https://www.geeksforgeeks.org/community/">
+          <label for="username">Username:</label> 
+        <input type="text" name="username" id="Username">
+        <br>
+        <label for="password">Password:</label> 
+        <input type="password" name="password" id ="password">
+        <br><br>
+          <input type="button" onclick="myGeeks()" value="Submit form">
+    </form>
+    <!-- script to use submit() method -->
+    <script>
+        function myGeeks() {
+              document.getElementById("GFG").submit();
+        }
+    </script>
+</body>
+</html>
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+28. What is a template literal in JavaScript?
+*Template literals are string literals that allow embedded expressions (variables) into your code
+*hey are enclosed by backticks (`) instead of single (') or double (") quotes.
+*It was introduced in ES6, which provides a more flexible and readable way to work with strings
+*Syntax
+
+`string text ${expression} string text`
+Backticks (``): Used to define a template literal.
+${}: Used to insert expressions inside the string, such as variables, function calls, or arithmetic operations.
+
+*let a='GFG'
+console.log(`hello ${a}`)
+Note:Instead of using + for string concatenation, template literals allow a more readable and convenient way to embed variables and expressions inside strings.
+
+
+Advantages
+
+1.String Interpolation with Expressions
+String interpolation lets you insert not just variables but also expressions, like math operations or function results, directly into a string.
+
+
+
+
+let x = 5;
+let y = 10;
+console.log(`The sum of ${x} and ${y} is ${x + y}`);
+
+Output
+The sum of 5 and 10 is 15
+Expression evaluation: Inside ${}, expressions like x + y are evaluated, and the result is inserted into the string.
+Dynamic string creation: This technique allows you to dynamically create strings by combining variables and expressions, making the code cleaner and easier to read.
+
+
+
+
+2.Tgged template literal
+*Tagged template literals let you run a custom function on a template literal.
+*hat function (called a tag) gets the string parts and expression values separately 
+tagFunction`stringPart1 ${expression1} stringPart2 ${expression2} ...`
+
+Which becomes:
+
+tagFunction(["stringPart1", "stringPart2", ...], expression1, expression2, ...)
+
+
+Tagged template literals let you intercept and customize how template literals are turned into strings by giving you access to both the literal text and the values inside ${} expression
+
+
+For example
+*function greet(strings, name) {
+    return `${strings[0]}${name.toUpperCase()}${strings[1]}`;
+}
+
+const name = 'gfg';
+console.log(greet`Hello, ${name}!`);
+
+
+greet(["Hello, ", "!"], "gfg")
+
+
+
+Use cases
+*1. Multi-line Strings
+*Template literals support multi-line strings without special characters.
+*
+const poem = `Roses are red,
+Violets are blue,
+JavaScript is awesome,
+And so are you!`;
+console.log(poem);
+
+
+
+2.2. Dynamic Expressions
+
+*Embedding arithmetic expressions within template literals. This example calculates the sum dynamically.
+*const a = 5, b = 10;
+const result = `Sum of ${a} and ${b} is ${a + b}.`;
+console.log(result);
+
+3.tagged template literals
+
+4.Template literals build HTML strings dynamically. This example creates an h1 element
+const title = "Welcome";
+const html = `<h1>${title}</h1>`;
+console.log(html);
+
+
+4.5. Conditionals in Templates
+*Ternary operators evaluate conditions within template literals. This example displays a role based on a condition.
+*const isAdmin = true;
+const userRole = `User role: ${isAdmin ? "Admin" : "Guest"}.`;
+console.log(userRole);
+
+
+
+6.Loops with Templates
+const items = ["apple", "banana", "cherry"];
+const list = `Items: ${items.map(item => `\n- ${item}`)}`;
+console.log(list);
+
+
+7.7. Embedding Functions
+Template literals call functions directly. This example transforms text to uppercase.
+const toUpper = str => str.toUpperCase();
+const s = `Shouting: ${toUpper("hello")}`;
+console.log(s);
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+31. What is lexical scope in JavaScript?
+*Lexical scope is a fundamental concept in programming that determines the accessibility of variables and functions based on where they are defined in the source code.
+* lexical scope is the scope of a variable or function determined at compile time by its physical location in the code
+*Unlike dynamic scope, which depends on how functions are called at runtime,
+*lexical scope is static and remains the same throughout the program's execution.
+*Variables and functions have different levels of scope:
+1.global scope
+2.function scope
+3.block scope
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+32. How does lexical scoping work with the this keyword in JavaScript?
+*In JavaScript, lexical scoping primarily applies to variable resolution, while the behavior of the this keyword is determined by how a function is called, not by its position in the code. The value of this is dynamically determined at runtime based on the function’s context (e.g., whether it’s called as a method, in a global context, or with call, apply, or bind).
+const obj = {
+    name: "JavaScript",
+    greet: function () {
+        console.log(this.name);
+    }
+};
+obj.greet(); // "JavaScript"
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+JavaScript Hoisting
+*Hoisting refers to the behaviour where JavaScript moves the declarations of variables, functions, and classes to the top of their scope during the compilation phase.
+*Hoisting applies to variable and function declarations.
+*var' variables are hoisted with undefined, while 'let' and 'const' are hoisted but remain in the Temporal Dead Zone until initialized.
+
+
+
+
+
+emporal Dead Zone (TDZ)
+The Temporal Dead Zone (TDZ) is a critical concept in JavaScript hoisting. It refers to the period between the entering of a scope (such as a function or block) and the actual initialization of a variable declared with let or const. During this time, any reference to the variable before its initialization will throw a ReferenceError.
+*How does the TDZ Work?
+
+Variables declared with let and const are hoisted to the top of their scope, but they are not initialized until their declaration line is reached.
+Any attempt to access these variables before their declaration will result in an error.
+The TDZ exists only for variables declared using let and const. Variables declared with var do not have this issue, as they are hoisted and initialized to undefined.
+
+
+
+hello(); // TypeError: hello is not a function
+var hello = function() {
+    console.log("Hi!");
+};
+Note: The variable hello is hoisted, but it is not initialized until the assignment line is reached since it holds a function expression. Thus, calling hello() before its initialization throws a TypeError.
+
+
+1. Variable Hoisting with var
+*When you use var to declare a variable, the declaration is hoisted to the top, but its value is not assigned until the code execution reaches the variable’s initialization. This results in the variable being assigned undefined during the hoisting phase.
+*console.log(a); // undefined
+var a = 5;
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+36. How to convert the string of any base to integer in JavaScript?
+*In JavaScript, parseInt() function is used to convert the string to an integer.
+*This function returns an integer of base which is specified in second argument of parseInt() function.
+*The parseInt() function returns Nan (not a number) when the string doesn’t contain number.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------37. Explain how to detect the operating system on the client machine?
+*To detect the operating system on the client machine, one can simply use navigator.appVersion or navigator.userAgent property. 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+38. What are the types of Pop up boxes available in JavaScript?
+1.alert
+:The alert() method in HTML and JavaScript is used to display an alert box with a specified message with one ok button
+2.Javascript Window confirm() Method
+
+The confirm() method in JavaScript displays a dialog box with a message and two buttons: OK and Cancel. 
+
+3.Javascript Window prompt() Method
+*The window.prompt() method in JavaScript is a built-in function that displays a dialog box prompting the user to input some text
+*This method is particularly useful for gathering simple user input in a straightforward manner.
+*Syntax
+
+let result = window.prompt(message, defaultText);
+In the above syntax
+
+message (optional): A string of text to display to the user.
+defaultText (optional): A string containing the default value displayed in the text input field.
+result: The value entered by the user, or null if the user clicks "Cancel" or dismisses the prompt.
+
+
+<html>
+<head>
+    <title>Prompt() method</title>
+</head>
+<body style="text-align: center">
+    <h2>Window prompt() Method</h2>
+
+    <button onclick="geek()">
+        Click me!
+    </button>
+    <p id="g"></p>
+
+    <script>
+        function geek() {
+            let doc = prompt(
+                "Please enter some text",
+                "GeeksforGeeks"
+            );
+
+            if (doc != null) {
+                document.getElementById(
+                    "g"
+                ).innerHTML =
+                    "Welcome to " + doc;
+            }
+        }
+    </script>
+</body>
+</html>
+here above theinputlabel the test please enter the text and deflault value is geeks fpr geeks and we press ok without the typing then welcome eto geeksforgeeks else the welcme to neha as neha is typed by me
+
+
+
+*<html>
+<head>
+    <title>Prompt with Default Text</title>
+</head>
+
+<body style="text-align: center">
+    <h2>Prompt with Default Text Example</h2>
+
+    <button onclick="askUser()">Click Me!</button>
+    <p id="output"></p>
+
+    <script>
+        function askUser() {
+            let userName = prompt("Please enter your name:", "Guest");
+            if (userName != null && userName !== "") {
+                document.getElementById("output").innerHTML = `Hello, ${userName}!`;
+            }
+            else {
+                document.getElementById("output").innerHTML = "User canceled or didn't enter a name.";
+            }
+        }
+    </script>
+</body>
+
+</html>
+*Validating User Input with window.prompt()
+
+<html>
+<head>
+    <title>Email Validation</title>
+</head>
+<body style="text-align: center">
+    <h2>Enter Your Email Address</h2>
+
+    <button onclick="getEmail()">Submit</button>
+    <p id="output"></p>
+
+    <script>
+        function getEmail() {
+            let email = prompt("Please enter your email address:");
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (email != null && emailPattern.test(email)) {
+                document.getElementById("output").innerHTML = `Thank you! Your email is: ${email}`;
+            } else {
+                document.getElementById("output").innerHTML = "Please enter a valid email address.";
+            }
+        }
+    </script>
+</body>
+</html>
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+39. What is the use of void(0) ?
+
+*javascript:void(0) is commonly used in HTML to create a link that doesn’t perform any action(means reload the page) or navigate to a new page.
+*This is particularly useful for triggering JavaScript functions while preventing the default behavior of navigating away from the current page.
+*<a href="javascript:void(0)" onclick="JavaScriptFunction()">Click Here</a>
+*In the above syntax:
+
+href="javascript:void(0)": This ensures that the link doesn’t navigate anywhere. It tells the browser to do nothing when the link is clicked.
+onclick="JavaScriptFunction()": This part runs a JavaScript function (in this case, JavaScriptFunction()) when the link is clicked, without reloading or navigating away from the page.
+
+<html>
+<body>
+    <a href="javascript:void(0)" onClick=
+    "document.getElementById('demo').style.display='block'">
+        Click to Show Message
+    </a>
+    <div id="demo" style="display:none;">
+        <p>This is a hidden message that appears 
+        when you click the link!</p>
+    </div>
+</body>
+</html>
+
+Why Do Developers Use javascript:void(0)?
+Developers use javascript:void(0) for a few reasons:
+
+1.Prevent Page Navigation: When you click a link, it usually takes you to another page. But sometimes, developers don’t want that to happen. They want to run some JavaScript code instead, like opening a menu or showing a popup. javascript:void(0) stops the page from navigating away.
+2.Trigger Actions Without Reloading: Sometimes a link or button is used to trigger a function, like showing hidden content or changing something on the page. By using javascript:void(0), the page doesn’t reload or change, and the desired action can still take place.
+
+
+Alternative to javascript:void(0)
+While javascript:void(0) is commonly used, there are a few alternatives that can achieve the same results
+
+1. Using "#" in an anchor tag
+It is the another way to prevent navigation is by using # in the link’s href attribute. The hash sign # refers to the current page, and clicking it won’t cause any real navigation:
+
+
+
+
+<html>
+<body>
+    <a href="#" onClick="alert('Welcome to Geeks for Geeks')">
+        Click on me
+    </a>
+​
+</body>
+</html>
+2. Using event.preventDefault()
+It is the more advanced method is to use JavaScript to cancel the default behavior of the link or button
+
+
+
+
+<html>
+​
+<head>
+    <script>
+        function handleClick(event) {
+            event.preventDefault();
+            alert('Link clicked!');
+        }
+    </script>
+</head>
+​
+<body>
+    <a href="https://www.geeksforgeeks.com/" 
+        onclick="handleClick(event)">Click Me</a>
+</body>
+​
+</html>
+In this approach, event.preventDefault() is used within the onclick event handler to prevent the default action (navigating to a new page) and perform custom JavaScript actions. This method is more useful because it doesn't modify the href attribute.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+40. What are JavaScript modules, and how do you import/export them?
+What are modules in JavaScript?
+
+*It helps break down big projects into smaller, more manageable sections, each focused on a specific task. 
+**A JavaScript module is a small piece of code that can be used in different parts of your program. s
+
+Types of Modules
+JavaScript provides two primary module systems
+1. CommonJS Modules
+*In JavaScript, CommonJS is a module system primarily used in NodeJS environments
+*It enables developers to break down their code into reusable modules by using module.exports to export functions, objects, or variables from a module. 
+*an then access these exports using the require() function.
+//import
+const module1 = require('./module1');
+
+//export
+module.exports = { module1, module2, ....};
+
+Working of CommonJS
+*The require() function is used to import modules into a file.
+*To share functions, variables, or objects, CommonJS uses module.exports.
+*Modules are loaded synchronously, meaning execution waits until the module is fully loaded before continuing.
+*Each CommonJS module runs in its own scope, preventing variable conflicts and making code modular and reusable.
+*CommonJS is the default module system for NodeJS but is not natively supported in browsers.
+
+
+Use cases of CommonJS module
+1.Creating a Utility Module
+A Utility Module is a collection of reusable helper functions that make coding easier by handling common tasks like formatting, validation, and logging.
+*//one.js
+function greet(name) {
+    return `Hello, ${name}!`;
+}
+module.exports = greet;
+// two.js
+const greet = require('./one.js');
+console.log(greet('Sandeep'));
+
+
+2. Building a Configuration File
+*A Configuration File stores settings and environment-specific variables to manage an application's behavior.
+*//one.js
+module.exports = {
+    port: 3000,
+    dbURL: 'mongodb://localhost:27017/mydb'
+};
+
+
+3.3. Handling Routes in an ExpressJS App
+
+
+
+
+
+
+
+2... ES6 module
+*ES6 Modules (ECMAScript Modules) provide a standardized way to structure and organize JavaScript code into separate, reusable modules.
+*Unlike CommonJS, ES6 Modules use the import and export keywords for handling exports and imports.
+*In JavaScript, setting "type": "module" in your package.json tells NodeJS to treat .js files as ES6 modules, enabling import and export syntax. With ES6 modules, NodeJS expects static import and export statements, which are optimized at compile time, leading to smaller bundles.
+*
+
+Working of ES6 modules
+ES6 modules allow you to use import to bring in code from other files and export to make code available to other files.
+Files with "type": "module" in package.json are treated as ES6 modules, enabling the use of import and export syntax.
+Imports are static, meaning they are determined at compile time, allowing for optimization and better performance.
+Unlike CommonJS, ES6 modules use import and export instead of require and module.exports.
+
+
+Use cases of ES6 modules
+1.1. Default Export and Import
+*//greet.js
+export default function greet(name) {
+  return `Hello, ${name}!`;
+}
+*// file: main.js
+import greet from './greet.js';
+console.log(greet('GFG'));
+
+
+
+22. Named Exports with Aliases
+*This code demonstrates how to export multiple functions from a module and import them with new names for use in another file. It shows how to perform basic arithmetic operations using modular JavaScript.
+*import { multiply as mul, divide as div } from './Operations.js';
+console.log(mul(6, 3));
+console.log(div(10, 2));
+
+
+
+3. Dynamic Imports
+This code demonstrates the use of dynamic import() in JavaScript to load a module asynchronously at runtime. It shows how to use the import() function to load a module and access its exports.
+//codes2.js
+(async () => {
+    const module = await import('./codes1.js');
+    console.log(module.greet('GFG'));
+  })();
+
+
+4.combiing named and default exports
+//person.js
+export default class Person {
+    constructor(name) {
+        this.name = name;
+    }
+    sayHello() {
+        return `Hello, I am ${this.name}`;
+    }
+}
+
+export const greet = (name) => `Hi, ${name}!`;
+
+
+
+Key Features of JavaScript Modules
+Static Structure: Module imports and exports are statically analyzed at compile time.
+Scope Isolation: Variables and functions in a module are scoped to that module.
+Named and Default Exports: Support for exporting multiple or a single default member.
+Support for Both ES6 and CommonJS: Compatibility with different module systems.
+Dynamic Import: Ability to load modules dynamically at runtime.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------JavaScript Interview Questions for Experienced
+44. What are the advantages and disadvantages of using async/await over traditional callbacks or promises?
+
+Advantages of async/await:
+*Improved Readability : Async/await makes asynchronous code look like synchronous code, making it easier to read and maintain.
+*implified Error Handling : With try/catch, error handling is more straightforward compared to .catch() with promises or callback-based error handling.
+*Avoids callback hell : It eliminates deeply nested callbacks, reducing complexity in asynchronous logic.
+
+Disadvantages of async/await:
+*Requires modern JavaScript : It’s supported in ES2017 and above, so older environments may need transpiling.
+*Limited concurrency control : Unlike promises with .all() or .race(), async/await can be less flexible for handling multiple parallel tasks.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+47. How to target a particular frame from a hyperlink in JavaScript ?
+*This can be done by using the target attribute in the hyperlink. Like
+
+<a href="/geeksforgeeks.htm" target="newframe">New Page</a>
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*50. How many ways an HTML element can be accessed in JavaScript code? 
+There are four possible ways to access HTML elements in JavaScript which are:
+*The getElementById() method returns the elements that have given an ID which is passed to the function
+*If the passed ID to the function does not exist then it returns null.
+*Note: Each ID needs to be unique. If there are multiple elements with the same ID, only the first one will be returned.
+*Syntax:
+document.getElementById( element_ID )
+*<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        DOM getElementById() Method
+    </title>
+    <script>
+        // Function to change the color of element
+        function geeks() {
+            let demo = document.getElementById("geeks");
+            demo.style.color = "green";
+        }
+    </script>
+</head>
+
+<body style="text-align:center">
+    <h1 id="geeks">GeeksforGeeks</h1>
+    <h2>DOM getElementById() Method</h2>
+
+    <!-- Click on the button to change color -->
+    <input type="button" onclick="geeks()" 
+           value="Click here to change color" />
+</body>
+
+</html>
+
+
+
+2.HTML DOM getElementsByClassName() Method
+*The getElementsByClassName() method in Javascript returns an object containing all the elements with the specified class names in the document as objects.
+*Each element in the returned object can be accessed by its index. The index value will start with 0.
+*Parameters: This is a required method that takes only one parameter, which is a string containing space-separated class names of the elements that are to be searched for. For searching with multiple class names, it must be separated with space.
+
+Note: We can use the length property that returns the collection of all HTML elements in a document for the specified class name & then by looping through the HTML elements, we can take the information that wants
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        DOM getElementByClassName() Method
+    </title>
+    <style>
+        h1 {
+            color: green;
+        }
+
+        body {
+            text-align: center;
+        }
+
+        .example {
+            padding: 10px;
+            margin: auto;
+            margin-top: 10px;
+            border: 1px solid black;
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>
+        GeeksforGeeks
+    </h1>
+    <h2>
+        DOM getElementByClassName() Method
+    </h2>
+    <div>
+        <h4 class="example">
+            div1
+        </h4>
+        <h4 class="yellowBorder example">
+            div2
+        </h4>
+        <h4 class="greenBorder example">
+            div3
+        </h4>
+        <h4 class="example">
+            div4
+        </h4>
+    </div>
+    <script>
+        document.getElementsByClassName('greenBorder example')[0]
+            .style.border = "10px solid green";
+        document.getElementsByClassName('yellowBorder example')[0]
+            .style.border = "10px solid yellow";
+    </script>
+</body>
+
+</html>
+
+3.HTML DOM getElementsByTagName() Method
+* The getElementsByTagName() method in the HTML DOM allows the selection of elements by their tag name.
+* It returns a collection of elements with the specified tag name within the specified document or element.
+*To extract any info just iterate through all the elements using the length property. 
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DOM getElementsByTagName() Method</title>
+</head>
+
+<body style="text-align: center">
+    <p>A computer science portal for geeks.</p>
+    <button onclick="geek()">Try it</button>
+    <script>
+        function geek() {
+            let doc = document.getElementsByTagName("p");
+            doc[0].style.background = "green";
+            doc[0].style.color = "white";
+        }
+    </script>
+</body>
+
+</html>
+
+
+4.HTML DOM querySelector() Method
+*The querySelector() method returns the first element that matches the specified Selector.
+* It only gives one element from the HTML DOM if found else it returns null.
+* To get all the matching elements, you can use the querySelectorAll() method.
+*<!DOCTYPE html>
+<html>
+<body style="text-align: center">
+    <p>This is paragraph 1.</p>
+    <p>This is paragraph 2.</p>
+
+    <button onclick="myFunction()">Try it</button>
+    <script>
+        function myFunction() {
+
+            // Select the first p element
+            let e = document.querySelector("p");
+
+            // Dynamically apply styling 
+            // to the first p element
+            e.style.backgroundColor = "Green";
+            e.style.color = "white";
+        }
+    </script>
+</body>
+</html>
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+52. Explain the concept of memoization in JavaScript?
+*Memoization in JavaScript is an optimization technique that stores the results of expensive function calls and reuses them when the same inputs occur again. This reduces the number of computations by caching the results. 
+*const expensiveAPI = memoize((id) => {
+  console.log(`Fetching data for ID: ${id}`);
+  return `Data for ${id}`; // Simulated expensive operation
+});
+
+console.log(expensiveAPI(101)); // Fetches
+console.log(expensiveAPI(101)); // Cached
+
+*You can use libraries like:
+
+Lodash: _.memoize(fn)
+
+Memoizee
+
+reselect (for React Redux selectors)
+
+javascript
+Copy
+Edit
+const _ = require('lodash');
+
+const add = (a, b) => a + b;
+const memoizedAdd = _.memoize(add);
+
+console.log(memoizedAdd(1, 2)); // 3 - computed
+console.log(memoizedAdd(1, 2)); // 3 - cached
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+53. What is the difference between == and === in JavaScript?
+*In JavaScript, == is the loose equality operator, which compares two values for equality after performing type coercion if necessary. This means it converts the operands to the same type before comparing.
+
+=== is the strict equality operator, which compares both the values and their types, without performing type conversion.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+55. What is the difference between a shallow copy and a deep copy?
+*Shallow copy: In the case of shallow copy when we copy the original object into the clone object then the clone object has the copy of the memory address of the original object. Means both points to the same memory address.
+
+Both original object and cloned object internally point to the same referenced object. Since they point to the same memory address so if we changed the cloned object then changes would be reflected back to the original object because they point to the same memory address.
+<script>
+
+var obj1 = {
+    id: 1,
+    company: "GFG"
+};
+var obj2 = obj1;
+obj2.id = 2;
+console.log(obj1.id);
+console.log(obj2.id);
+
+</script>
+
+
+
+2.Deep copy:But in the case of deep copy, changing the value of the cloned object will not reflect into the original object, because both are pointing to different reference objects. Because the original object has its own reference object and after cloning, the cloned object has its own referenced object. Both are different.
+
+
+
+How to avoid shallow copying so that changing the cloned object didn't affect our original object. We can use the following methods to avoid shallow copy.
+1.Using spread operator
+*<script>
+    var obj1 = {
+        id: 1,
+        company: "GFG"
+    };
+    var obj2 = { ...obj1 };
+    obj2.id = 2;
+    console.log(obj1.id);
+    console.log(obj2.id);
+</script>
+
+
+2.Using Object.assign operator
+*Using Object.assign operator: It takes the two parameters:
+
+Empty object and
+Original object
+<script>
+    var obj1 = {
+        id: 1,
+        company: "GFG"
+    };
+    var obj2 = Object.assign({}, obj1);
+    obj2.id = 2;
+    console.log(obj1.id);
+    console.log(obj2.id);
+</script>
+Note:But the problem of working with Object.assign operator is that it doesn't work perfectly in the case of nested objects.
+<script>
+    var obj1 = {
+        id: 1,
+        company: "GFG",
+        details:
+        {
+            employee_no: 10
+        }
+    };
+    var obj2 = Object.assign({}, obj1);
+    obj2.details.employee_no = 20;
+    console.log(obj1.details.employee_no);
+    console.log(obj2.details.employee_no);
+</script>
+
+3.JSON.stringify and JSON.parse: It works perfectly in the case of nested objects. Unlike Object.assign operator it doesn't change our original object when we make any changes in the clone object.
+*<script>
+    var obj1 = {
+        id: 1,
+        company: "GFG",
+        details:
+        {
+            employee_no: 10
+        }
+    };
+    var obj2 = JSON.parse(JSON.stringify(obj1))
+    obj2.details.employee_no = 20;
+    console.log(obj1.details.employee_no);
+    console.log(obj2.details.employee_no);
+</script>
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+57. What are Web Workers, and how do you use them to run scripts in the background?
+*
+
+
+
+
+
+
+
+
+
+
+
+
