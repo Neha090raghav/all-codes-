@@ -1,0 +1,2839 @@
+typescript
+css
+tailwind css
+js interview and the other
+react js interview and the other
+redux
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+dsa 2 question
+system design 1 whole lecture
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+java 50
+MySQL 5 video
+springboot 5 video
+microservices
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*Typescript is the superset of the js with additional features
+*here we define data types also called the static typing and helps in increasing code reusability
+*here first in folder install npi i typescript latest versio is 5
+*then make app.ts there write var name:string="neha"
+*then in the terminal write npx tsc app.ts then the app.js js fule will be generated
+*as the browser understand only the js o the typescript is finally conveted to js only
+*Note:in the browser window there is already a variable of name
+*so we cant write var name='neha'
+*
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Number data type
+*var num1:number=10                                  .js->var num1=10;
+*let num2:number=10;//error as when we are creating its js js sees as we are redckaring the num2 in .js file so use the var fpor that or else we will make the changes in the configuration file
+*then when we  var total=num1+num2;
+*when we hover on the total it automatically determine the data type as number thta is called the type interference
+*anther example of interference is var num=12;
+num='13' it will say no you cant
+*so interference is it itself assume the type explicty 
+*No w to solve the above problem we have to say var num:nuber|string=12;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Sstring and Boolean data types
+*var age:string="neha"
+*var age1:string='neha'
+*var age2:string=`neha`
+*var num=21;
+*now to var description=`my age is {age}` so here string will automatically changes to string
+
+
+*now to conbert any data type to string we uses the toString() method
+*var num:number=1;
+*var str:string=num.toString();
+*var bool:boolean=true //it tkaes 2 value either true or false
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+*null means variable dont have nay value nor the empty value too
+*var nullvar=null;interfere as null
+*if we assign another value as string no not allowedd
+*mostly used when any variable initialy as null byt can be assigned diffrenet type
+*
+var data:null|string=null
+if(login)
+{
+data="user"
+}
+*type of null is object but as here data is string so type is string now
+*sismilray var num=undefined
+*type of data si undefined
+*so we assisgn any string then the not allowed so var data:undefined|string=undefined
+*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Now to generate the config file then the 
+tsc -- init
+*then tscconfig.json generated
+*in this file we have many configuartions like target which measn when we are converting the typescript converted to which javascript version we have ecmsasript 24 now
+*now we have config file i want to get js of all ts file so run tsc only
+*Note:we can declare var variable in many ts file but data type of both declaration must be same otherwise erro
+*Note:when we run tsconfig it run as project and give errors
+
+*so tsco fig file run all files as project,tsc all ts file ,errorrs and then in the tsconfig.json output: we can give any folder so all files of js comes in this folder
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------working with the html and typescript
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./null.js"> </script>
+  </head>
+  <body>
+    <input type="text" id="username" />
+    <input type="text" id="password" />
+    <button onclick="getInfo()">Login</button>
+  </body>
+</html>
+and i null .ts
+function getInfo()
+{
+var name=docume.getElemntById("username").value
+}
+
+
+
+*----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Array data type
+*var arr:number[]=[1,2,3,4,5]
+* var arr:Array<string>=["neha,"Raghav"]
+
+
+Tuple data type
+*in tuple the data types are diffrenet and they are of fixed length
+*and they are in the order
+*var user:[number,string,boolean]=[1,"2",true]
+*Note:erro ininitialzed if we give value but not type
+*but when we push it will not give error
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+var studentdata{
+name:string,
+age:number,
+adres:string}={name:'neha',age:25,address:'ada colony'}
+*if i change  studentdata.name='golu'
+*it will work
+*Note:while initialize we need to give same data type as being used in static typing of object
+*Now to add more keys to object we will fac error while the assigning
+*studentdata.company //error 
+var studentdata{
+[key:string]:string\number}
+This is first solution
+*second is while initilizaing add
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Any data type and unknown data type
+*when the variable have no idea what will be the data type of data being initlized to variable so we use the nay data type
+*Any data type use:
+1.when migrating code from js to ts
+*when dealing with dynaic value from api
+*use of third part library whic converts data
+suppose we ave var value='neha'
+i want value=2;
+so soluton is var value:string|number
+*if more than add above but we can have
+var value:any
+*means any data type
+*but it reduce  purpose of static typing
+*so use it when needed only
+*
+
+Now unknow same purpose but one thing it does it befor sing it or applying any metod it will always say to chevk the data type 
+var val:unknown
+val="neha";
+val.to_uppercase()
+it will say check the data type first then perform
+so if(type of val=='string')
+{
+val.to_uppercase()
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Function return type
+*function getapple{
+reurn "apple"
+}
+by type infrenec its return ty ep is string or we can mention explicity
+*and if we dont return anything than by inference its data type is void
+*and if we are not confirm which data tyeof retu value so
+function getapple:any{
+reurn 
+}
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Never in typescript
+*when any function isn't executed due to the error due t which its not able to return the last line
+*so here the return type is never
+*function neverexample:never{
+while(true)
+{
+console.log()
+}
+}
+
+*function neverexample:never{
+while(true)
+{
+throw new Error()}
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Function param type
+suppose we have the function calculatePrice(int num1:nmber,int nus2:number,int num3?:string){if(num3
+{
+}
+}
+calculatePrice(12,12)
+?:tells that it can be undefine dor string
+*--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Interface
+*It is usedto define the structure of object or function
+*and can be used as data typ for many variable an hence can be reused
+*Intercae infp{
+name:
+roll no:
+
+}
+interace teacher info exteds info
+{
+techerid
+}
+var teachr:teacherifo={
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Intersection data type
+*It is used basically when we want to combine many data types
+*so we have interface a{
+}
+interface b
+{
+}
+type c=a&b
+*When we combine the interface that result interface needs to be converted to the type
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Type:
+Define Custom data type for the object or function
+*interface a
+*interace b
+interface c=a|b//not allowed,similarly intersection not allowed
+
+similary
+but with the type a
+type b
+type c=a|b and alos a&b
+
+Note:type can be extended whereas interface can be
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Enum data type
+A data type that helps you dfined set of named constant
+*Enum whotype
+{
+student="neha"
+teacher="Madhu"
+son="lucky"
+}
+var student:whotype=whotype.student
+means in variable student it can take only 4 values from the above set
+*suppose Enum whotype
+{
+student
+teacher
+son
+}
+var student:whotype=whotype.student->0
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Dom handling and typecasting
+*suppose we have <h1>hi</h1>
+*Now suppose var ele= document.querySelector('h1')
+ele?.text//we want to check if its not null,'',undefine,false
+*now var ele= document.querySelector('h1')! will say that this element exist in dom and will predict the type of ele as htmlheadding elemnst
+*var ele= document.querySelector('h1') then htmlheadingelement|null so place !
+
+
+Supose <a href="google.com" class="anchor">
+var ele= document.querySelector('.anchor') here the type will be elemnst
+*so here if we consoleele.hre then error so here we need to do typecasting as var ele= document.querySelector('.anchor') as htmlanchorelement
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Module:
+A self contained unit of code that encapsulated the related functionalities
+*-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+class student
+{
+name:string,
+age:number;
+constructor(name,age)
+{
+this.name=ame,
+tis.age=age;
+}
+}
+*Now whati wantis thetthe hen every i et ame ten add the mr 
+*if tjusand studentthen every time s.name+Mr
+*so insted of doing this 
+*declaree properies as getter
+*solass student
+{
+name:string,
+age:number;
+set name(name)
+{
+this.-nmae=name;
+}
+get name()
+{
+return this.name
+}
+}
+Student s=new Stdent();
+s1.name="neha"
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Typeguard
+A typeguard is a property i typescrit with which we can narrow down the type of variabl al with a conditional block
+*suppose with helpf | we declared the data type of variable as strig|numer
+*nw i want if string then do this else numberdo this so this is typegurad
+*There are 3 type of typeguards  ypescript
+1.type of-primitiv
+2.instane of->class
+3.Custom Type->interface
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Generics in typescrits allows you to create the reusable copnents that works with various data type ensuring typesfet
+*suppose function fruits(nam:strig):sring
+{
+retrun nam;
+}
+frite"apple")
+fruite(1) so here error s using | cange the nuber
+*again something else
+*so we an here makin this uction generic a function fruites <T>(name:T):T
+{
+}
+varname=fruits("ppe")->ten retur is alsostring
+So here it easn that itsinputtype output type and return type all must be same
+*Counter question will be us an so if write an and return any than for sure itwill return any
+*---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Key of operator
+*suppose type Perso
+{
+ame:strin,
+address:string
+}
+var person2:Person={
+name:"neha
+}
+*const personx=keyof Person
+*personx="neha"//wrog
+here in person x we can gie "name",addess so ke of retrive union of ll keys from the type
+*----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Indx signature
+*Indx signature helps you to define dynamic keys on objects specifying type of values
+*suppose type info{
+name:sting
+id:string}
+*var student:info={
+name:"neha"
+id:"1"
+semester:""
+roolno:""
+
+}
+so keys are the dynamc any numer of eys an be added so
+* type info{
+[key:strig]:string}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+suppose info{
+name:sting
+id:string}
+
+*now what happens is that the var student:info={
+name:"neha"}
+*so here branch mayhappens or nt
+*so  var student:Parial<info>={
+name:"neha"}
+
+Hence we make 2 poperteis as optional
+*Utility are builtin data ype tathelps to convert one type ito oher
+*if you want optional should be the required than 	Require<info>
+*ReadOnly
+*Omit
+*Exclude
+*Extarct
+*NoNullable
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------Typescriptnamespace
+*What is a Namespace?
+
+A namespace in TypeScript is a way to group related code (variables, classes, interfaces, functions) under a single name to avoid naming conflicts.
+
+Think of it as a container for your code.
+(It’s similar to Java’s package.)
+
+🔹 Basic Example
+namespace Utils {
+  export function toUpperCase(str: string): string {
+    return str.toUpperCase();
+  }
+
+  export function toLowerCase(str: string): string {
+    return str.toLowerCase();
+  }
+}
+
+// Usage
+console.log(Utils.toUpperCase("neha")); // Output: NEHA
+console.log(Utils.toLowerCase("NEHA")); // Output: neha
+
+
+✅ Notice the export keyword — without it, members stay private to the namespace.
+
+🔹 Namespace with Class
+namespace Shapes {
+  export class Circle {
+    constructor(public radius: number) {}
+
+    area(): number {
+      return Math.PI * this.radius * this.radius;
+    }
+  }
+
+  export class Rectangle {
+    constructor(public width: number, public height: number) {}
+
+    area(): number {
+      return this.width * this.height;
+    }
+  }
+}
+
+// Usage
+const circle = new Shapes.Circle(5);
+console.log("Circle Area:", circle.area()); // 78.54
+
+const rect = new Shapes.Rectangle(4, 6);
+console.log("Rectangle Area:", rect.area()); // 24
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Loggers are special kinds of declaration added t class to modify their behavior
+*That’s possible because TypeScript supports decorators (when "experimentalDecorators": true is enabled in tsconfig.json).
+We can create a class decorator @Logger that automatically logs whenever a class is created or its methods are called.
+
+🔹 Example 1: Class Decorator @Logger
+function Logger(constructor: Function) {
+  console.log(`📌 Class ${constructor.name} has been created.`);
+}
+
+@Logger
+class UserService {
+  constructor(public name: string) {}
+}
+
+const user = new UserService("Neha");
+// Console Output:
+// 📌 Class UserService has been created.
+
+
+Here, @Logger logs when the class is defined/instantiated.
+
+🔹 Example 2: Method Decorator @LogMethod
+function LogMethod(
+  target: Object,
+  propertyKey: string,
+  descriptor: PropertyDescriptor
+) {
+  const originalMethod = descriptor.value;
+
+  descriptor.value = function (...args: any[]) {
+    console.log(`🔹 Calling ${propertyKey} with args:`, args);
+    const result = originalMethod.apply(this, args);
+    console.log(`✅ ${propertyKey} returned:`, result);
+    return result;
+  };
+
+  return descriptor;
+}
+
+class Calculator {
+  @LogMethod
+  add(a: number, b: number): number {
+    return a + b;
+  }
+
+  @LogMethod
+  multiply(a: number, b: number): number {
+    return a * b;
+  }
+}
+
+const calc = new Calculator();
+calc.add(5, 3);
+// 🔹 Calling add with args: [5, 3]
+// ✅ add returned: 8
+
+🔹 Example 3: Parameter Decorator @LogParam
+function LogParam(target: Object, propertyKey: string, parameterIndex: number) {
+  console.log(`📝 Parameter in method ${propertyKey} at index ${parameterIndex}`);
+}
+
+class Greeting {
+  greet(@LogParam name: string) {
+    console.log(`Hello, ${name}!`);
+  }
+}
+
+const g = new Greeting();
+g.greet("Neha");
+// 📝 Parameter in method greet at index 0
+// Hello, Neha!
+
+
+✅ This way, you can use @Logger (or more specific decorators like @LogMethod) instead of manually calling logger functions.
+They are super useful in large apps for aud
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Type promise
+function complelogic:Promise<string>
+{
+nw Promise(
+ettieout(()=>
+{
+reolsve("hii")
+},2000)
+}
+*
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Typescript interview questiosn
+
+Null and undefined
+*null represent the absence of the vlue
+*var name:null=null
+*var item="" here item has mpty value but null represent no value
+*---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. What is TypeScript? How is it different from JavaScript?
+*peScript = statically typed (compile-time type checking).
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2. What are the benefits of using TypeScript?
+
+Answer:
+
+Type safety.
+
+Better tooling (IntelliSense, auto-completion).
+
+Detect errors at compile-time.
+
+Supports modern JS features + OOP (interfaces, inheritance, etc.).
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3.3. What are the different data types in TypeScript?
+*Answer:
+
+1.Primitive types: string, number, boolean, null, undefined, symbol, bigint.
+2.Special types: any, unknown, never, void.
+3.Complex types: array, tuple, enum, object.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Diffrenec between any,never ,unknown
+
+1.1. any
+*Disables type checking → can hold any type.
+*Useful when migrating JS → TS, but not safe.
+
+let value: any = 42;
+value = "hello";   // ✅ allowed
+value = true;      // ✅ allowed
+console.log(value.toUpperCase()); // ✅ no error, but might fail at runtime
+✅ no error, but might fail at runtime
+
+
+
+2.2unknown
+*Similar to any, but safer.
+*Must perform a type check before using.
+let input: unknown = "TypeScript";
+
+if (typeof input === "string") {
+  console.log(input.toUpperCase()); // ✅ safe
+}
+
+let unsafe: string = input; // ❌ Error: unknown not assignable to string
+
+
+3.33. never
+
+Represents values that never occur.
+
+Used for functions that throw errors or never finish.
+
+function fail(msg: string): never {
+  throw new Error(msg);  // never returns
+}
+
+function infiniteLoop(): never {
+  while (true) {}
+}
+
+
+
+4.4
+. void
+
+Represents no return value.
+
+Used in functions that don’t return anything.
+
+function logMessage(msg: string): void {
+  console.log(msg); // no return
+}
+
+let result: void = logMessage("Hello TS"); 
+console.log(result); // undefined
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+5. What are TypeScript interfaces?
+*Definition
+
+An interface in TypeScript defines the shape (structure) of an object.
+
+It describes properties & methods that an object must have.
+
+It does not contain implementation — just the contract.
+
+1.Basic interface
+interface User {
+  id: number;
+  name: string;
+  isAdmin?: boolean; // optional property
+}
+
+const u1: User = { id: 1, name: "Neha" };       // ✅ ok
+const u2: User = { id: 2, name: "Raj", isAdmin: true }; // ✅ ok
+
+
+2.Methods inside interface
+interface Person {
+  name: string;
+  greet(): string;
+}
+
+const p: Person = {
+  name: "Alice",
+  greet: () => `Hello, ${p.name}`
+};
+
+console.log(p.greet()); // Hello, Alice
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Some important java questions
+Pojo class
+*A POJO class stands for Plain Old Java Object.
+*It’s a simple Java class that:
+
+Doesn’t extend any special classes (like HttpServlet, EJB, etc.)
+
+Doesn’t implement any special interfaces (like Serializable, Remote, unless required)
+
+Doesn’t use any special annotations from Java frameworks
+
+Key Points
+
+POJOs are not bound to any framework → just pure Java.
+
+They help in decoupling application logic from frameworks.
+Often used to represent data (like rows from a database, JSON objects, etc.).
+
+
+In interviews, if they ask:
+
+POJO vs JavaBean → A JavaBean is a special type of POJO that must have a no-arg constructor, be serializable, and use getters/setters to access properties.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Diamond Problem and Solution
+*If a class inherits from two classes that have the same method, the compiler won’t know which one to use.
+Java doesn’t allow multiple inheritance with classes because of this.
+*olution: Interfaces (with default methods, we can resolve conflicts explicitly).--importnat
+*interface A {
+    default void show() {
+        System.out.println("A");
+    }
+}
+interface B {
+    default void show() {
+        System.out.println("B");
+    }
+}
+class C implements A, B {
+    // Must override to solve ambiguity
+    public void show() {
+        A.super.show(); // or B.super.show();
+    }
+}
+
+
+Methods in Interface
+*All fields in an interface are by default:
+public, static, final (constants).
+*Methods in Interface
+
+Before Java 8 → Only abstract methods allowed.
+
+Java 8 onwards → default, static methods.
+
+Java 9 onwards → private methods also.
+
+interface Vehicle {
+    void start();              // abstract method
+    default void honk() {      // default method
+        System.out.println("Beep!");
+    }
+    static void stop() {       // static method
+        System.out.println("Stopped.");
+    }
+    private void checkEngine() {   // private helper (Java 9+)
+        System.out.println("Engine checked.");
+    }
+}
+
+
+
+
+
+*🔹 Abstract Class Vs Interface
+Feature	Abstract Class	Interface
+Methods	Can have abstract + concrete methods	Before Java 8 → only abstract; Java 8+ → default, static, private
+Fields	Can have instance + static variables	Only public static final constants
+Constructors	Can have constructors	Cannot have constructors
+Inheritance	Single inheritance	Multiple inheritance
+Use Case	"is-a" relationship (base class)	"contract" relationship
+
+
+1Default methods
+.interface Music {
+    default void play() {
+        System.out.println("Playing music...");
+    }
+}
+class Song implements Music {}
+public class Test {
+    public static void main(String[] args) {
+        new Song().play();  // uses default implementation
+    }
+}
+
+
+2.Static method 
+interface Calculator {
+    static int add(int a, int b) {
+        return a + b;
+    }
+}
+public class Test {
+    public static void main(String[] args) {
+        System.out.println(Calculator.add(5, 3));
+    }
+}
+
+
+3.Functional Interface
+
+An interface with exactly one abstract method.
+
+Can have many default or static methods.
+
+Annotated with @FunctionalInterface.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Anonymous Class in Java
+*An anonymous class is a class without a name.
+*It’s declared and instantiated at the same time, usually inside a method.
+*Mostly used when you need a one-time use class (like implementing an interface or extending a class).
+
+interface Greeting {
+    void sayHello();
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Greeting g = new Greeting() {   // anonymous class
+            public void sayHello() {
+                System.out.println("Hello from Anonymous Class!");
+            }
+        };
+        g.sayHello();
+    }
+}
+
+
+
+class Animal {
+    void sound() {
+        System.out.println("Some sound...");
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Animal dog = new Animal() {   // anonymous subclass
+            void sound() {
+                System.out.println("Bark");
+            }
+        };
+        dog.sound();
+    }
+}
+
+
+
+public class Test {
+    public static void main(String[] args) {
+        Thread t = new Thread(new Runnable() {
+            public void run() {
+                System.out.println("Thread running...");
+            }
+        });
+        t.start();
+    }
+}
+
+
+Anonymous classes cannot have constructors (since they don’t have a name).
+
+They are created at runtime and compiled into a class file like Test$1.class.
+
+Useful for short-term use instead of writing long separate classes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Funcional interfaces
+*An interface with only one abstract method is called functional interface
+*@functiona interface we can have one abstract method but can have many non abstract method too
+*Now the non sbatract method here can be default or sttaic 
+*Now there are 3ways to implemenst the functionl interface Bird and fly method 
+@FunctionalInterface
+interface Greeting {
+    void sayHello(String name);
+}
+
+1.way is the implemnets 
+
+
+
+class GreetingImpl implements Greeting {
+    public void sayHello(String name) {
+        System.out.println("Hello, " + name + " from Normal Class!");
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Greeting g1 = new GreetingImpl();
+        g1.sayHello("Neha");
+    }
+}
+
+2.anonymonous
+public class Test {
+    public static void main(String[] args) {
+        Greeting g2 = new Greeting() {
+            public void sayHello(String name) {
+                System.out.println("Hello, " + name + " from Anonymous Class!");
+            }
+        };
+        g2.sayHello("Neha");
+    }
+}
+
+
+
+3.lambda expression
+public class Test {
+    public static void main(String[] args) {
+        Greeting g3 = (name) -> System.out.println("Hello, " + name + " from Lambda!");
+        g3.sayHello("Neha");
+    }
+}
+
+
+In lambda we know one method override wht the importance of declaring class and initlizing object jst the override method ()->{
+}
+arg in () what overloaded metod accepts
+
+
+Types of consumer
+*Consumer
+
+here apply accepts but did not return anything
+1. Consumer<T>
+
+Represents an operation that accepts a single input but does not return anything (void).
+
+Method: accept(T t).
+
+import java.util.function.Consumer;
+
+public class ConsumerExample {
+    public static void main(String[] args) {
+        Consumer<String> consumer = (s) -> System.out.println("Hello, " + s);
+        consumer.accept("Neha"); // Output: Hello, Neha
+    }
+}
+
+
+📌 Use case → Logging, printing, updating data without returning anything.
+
+*Supplier
+get does not accpt anything but rerurns 
+import java.util.function.Supplier;
+
+public class SupplierExample {
+    public static void main(String[] args) {
+        Supplier<Double> supplier = () -> Math.random();
+        System.out.println("Random number: " + supplier.get());
+    }
+}
+
+
+
+*Predicate
+acceots one and returns the Booleans 
+🔹 3. Predicate<T>
+
+Represents a boolean-valued function of one argument.
+
+Method: test(T t) → returns true or false.
+
+import java.util.function.Predicate;
+
+public class PredicateExample {
+    public static void main(String[] args) {
+        Predicate<Integer> isEven = (n) -> n % 2 == 0;
+        System.out.println(isEven.test(10)); // true
+        System.out.println(isEven.test(7));  // false
+    }
+}
+
+
+📌 Use case → Filtering collections, validation, conditions
+
+*Function
+Represents a function that takes one argument and returns a result.
+
+Method: apply(T t) → returns R.
+
+import java.util.function.Function;
+
+public class FunctionExample {
+    public static void main(String[] args) {
+        Function<String, Integer> lengthFunc = (str) -> str.length();
+        System.out.println(lengthFunc.apply("Neha")); // 4
+    }
+}
+
+
+📌 Use case → Transforming data (String → Integer, Object → DTO, etc.).
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+java reflection
+*Every Java object’s metadata (name, methods, fields, constructors, etc.) is stored in a special class called java.lang.Class.
+*for each type a class object is created
+
+class Student {}
+public class Test {
+    public static void main(String[] args) throws Exception {
+        Class<?> cls1 = Class.forName("Student"); // by name
+        Class<?> cls2 = Student.class;           // using .class
+        Class<?> cls3 = new Student().getClass();// using object
+
+        System.out.println("Class Name: " + cls1.getName());
+    }
+}
+Thsese are the 3 methods
+*2. What is the "Class" class which JVM creates at runtime?
+
+Every Java object’s metadata (name, methods, fields, constructors, etc.) is stored in a special class called java.lang.Class.
+
+JVM automatically creates a Class object for each type when loaded.
+
+class Student {}
+public class Test {
+    public static void main(String[] args) {
+        Class<?> cls = Student.class;  // way 1
+        System.out.println(cls.getName()); // output: Student
+    }
+}
+
+🔹 3. How to Reflect Classes and access its metadata
+class Student {}
+public class Test {
+    public static void main(String[] args) throws Exception {
+        Class<?> cls1 = Class.forName("Student"); // by name
+        Class<?> cls2 = Student.class;           // using .class
+        Class<?> cls3 = new Student().getClass();// using object
+
+        System.out.println("Class Name: " + cls1.getName());
+    }
+}
+
+🔹 4. How to Reflect Methods and access its metadata
+import java.lang.reflect.*;
+
+class Student {
+    public void study() {}
+    private void sleep() {}
+}
+
+public class Test {
+    public static void main(String[] args) throws Exception {
+        Class<?> cls = Student.class;
+
+        Method[] methods = cls.getDeclaredMethods();
+        for (Method m : methods) {
+            System.out.println("Method: " + m.getName() + 
+                               ", Return Type: " + m.getReturnType());
+        }
+    }
+}
+
+🔹 5. How to Invoke Methods using Reflection
+import java.lang.reflect.*;
+
+class Student {
+    public void study(String subject) {
+        System.out.println("Studying " + subject);
+    }
+}
+
+public class Test {
+    public static void main(String[] args) throws Exception {
+        Student s = new Student();
+        Method m = Student.class.getMethod("study", String.class);
+        m.invoke(s, "Math"); // Output: Studying Math
+    }
+}
+
+🔹 6. How to Reflect Fields and access its metadata
+import java.lang.reflect.*;
+
+class Student {
+    public String name;
+    private int age;
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Field[] fields = Student.class.getDeclaredFields();
+        for (Field f : fields) {
+            System.out.println("Field: " + f.getName() + ", Type: " + f.getType());
+        }
+    }
+}
+
+
+
+✅ Throw exception inside constructor if an instance already exists.
+
+class Singleton {
+    private static Singleton instance;
+    private Singleton() {
+        if (instance != null) {
+            throw new RuntimeException("Use getInstance() method");
+        }
+    }
+    public static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+
+
+Now Reflection will throw RuntimeException instead of creating a new object.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+✅ Recap
+
+Annotations = metadata.
+
+Pre-defined: @Deprecated, @Override, @SuppressWarnings, @FunctionalInterface, @SafeVarargs.
+
+Meta-annotations: @Target, @Retention, @Documented, @Inherited, @Repeatable.
+
+Custom annotations let us add our own metadata and process it with Reflection.s
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Exception handling in java 
+*It is an event that occur during the execution of programme
+*So if exception happens then the exception onject is created
+*this exceptioncontains the message exception and stack trace
+*Runtimesystem takes this exception object and find which class can handle this
+*if not found program will stop immediately printing the stack trace
+*thowable i sparnet class
+*It has Errr class which we cant hanel or not in our hands to handle
+*So we have in error outofmemoryerror and stack verfloe error
+*Eeror we have certain control
+*Exception we have check and unchecked
+*check exception comipier ask us to handle it/compiler time->io exception,sql exception,class not found exception
+*unchecked->null pointer exception,arrayindexoutof bound,arithmetic exception
+
+
+
+1.Unchecked exception
+*comiler does not force to handle them
+*Null poinre exception
+*Tring val=null
+null.cahartat(0)//null pointre exception
+*no red line means runtime
+
+2.Chcek exception
+*Note:catch can handle exception which is thrown by the try block
+*suppose try throws the classnotfound,sql excpetion
+*then one catch of sql
+*other of the classnot found
+if try had method which throw throws these 2 than alos catch only catch what thrown by trt
+*public class MultipleExceptionDemo {
+
+    // method1 declares it can throw two exceptions
+    public static void method1() throws ClassNotFoundException, InterruptedException {
+        // Simulate some condition
+        if (Math.random() > 0.5) {
+            throw new ClassNotFoundException("Class not found!");
+        } else {
+            throw new InterruptedException("Thread was interrupted!");
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            method1();
+        } 
+        catch (ClassNotFoundException e) {   // specific handling for ClassNotFoundException
+            System.out.println("Handled ClassNotFoundException: " + e.getMessage());
+        } 
+        catch (InterruptedException e) {     // specific handling for InterruptedException
+            System.out.println("Handled InterruptedException: " + e.getMessage());
+        }
+        catch (Exception e) {   // (optional) fallback for any other exception
+            System.out.println("Handled General Exception: " + e.getMessage());
+        }
+
+        System.out.println("Program continues after handling exception...");
+    }
+}
+
+Note:so put first very specific than the generic
+*Reverse than error at compile time
+*we can hnald emultiple exception in one catch usinh pipe |
+*
+
+
+Finally block
+*It runs after the try or catch block
+*It runs even when we return something from try or catch
+*At most we have one finally block
+*if out of memory erro than finally will not run
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Collections in java
+*what is java collection framework
+1.Collections are nothing but the group of objects
+*Prseenet in java.util pacakage
+*Presenet in 1.2 version
+*Frameowrk is something that provide architecture to manage these objects and to the top of it we can build or our customization
+*need for it array befoe these we have araray and vector for accessing elements in arary we access by index and put by index and in vector add method,so remembering them became much more difficult
+*Iteable we have one interface
+*map is one interface
+*collection extends the itearble interface
+*List,queue ,set then extends the collection interface
+*
+
+1.iterable
+*Its is used to traverse the collections
+various methods in it are the :
+*itearator()->return the iterator oject which provide the methods
+hasnect if have more elements
+*next
+*return the next elemenst in iteration
+*reove->removes the last elemenst returned by iterator
+*second is for each loop and for each method 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class IterableExample {
+    public static void main(String[] args) {
+        // Create a collection
+        List<String> names = new ArrayList<>();
+        names.add("Alice");
+        names.add("Bob");
+        names.add("Charlie");
+        names.add("David");
+
+        // 1️⃣ Using Iterator
+        System.out.println("Using Iterator:");
+        Iterator<String> iterator = names.iterator();
+        while (iterator.hasNext()) {
+            String name = iterator.next();
+            System.out.println(name);
+
+            // Example: remove "Bob"
+            if (name.equals("Bob")) {
+                iterator.remove(); // removes safely
+            }
+        }
+        System.out.println("List after remove: " + names);
+
+        // 2️⃣ Using Enhanced For-Each Loop
+        System.out.println("\nUsing For-Each Loop:");
+        for (String name : names) {
+            System.out.println(name);
+        }
+
+        // 3️⃣ Using forEach() Method (Java 8+)
+        System.out.println("\nUsing forEach() Method with Lambda:");
+        names.forEach(n -> System.out.println(n));
+
+        // Can also use Method Reference (shorter)
+        System.out.println("\nUsing forEach() with Method Reference:");
+        names.forEach(System.out::println);
+    }
+}
+
+Note:for each uses the lambda expression
+
+
+
+
+
+2.Collections :
+size() (Java 1.2)
+✔️ It returns the total number of elements present in the collection.
+
+isEmpty() (Java 1.2)
+✔️ Used to check if collection is empty or has some value. It returns true/false.
+
+contains() (Java 1.2)
+✔️ Used to search an element in the collection, returns true/false.
+
+toArray() (Java 1.2)
+✔️ It converts collection into an Array.
+
+add() (Java 1.2)
+✔️ Used to insert an element in the collection.
+
+remove() (Java 1.2)
+✔️ Used to remove an element from the collection. by using index or element
+
+addAll() (Java 1.2)
+✔️ Used to insert one collection in another collection.
+
+removeAll() (Java 1.2)
+✔️ Remove all the elements from the collections, which are present in the collection passed in the parameter.
+
+clear() (Java 1.2)
+✔️✔️ Remove all the elements from the collection.
+
+equals() (Java 1.2)
+✔️ Used to check if 2 collections are equal or not.
+
+stream() and parallelStream() (Java 1.8)
+✔️ Provide effective way to work with collection like filtering, processing data etc.
+
+iterator() (Java 1.2)
+✔️ As Iterable interface added in Java 1.5, so before this, this method was used to iterate the collection and still can be used.
+
+*--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+list extens collectional interface
+*Array list is an class which implements the lisy interface
+*so it is ued when we want to store elements and we dont want to store in order they are inserted and duplicates allowed
+*ArrayLis=new Arraylist()//so by default number of locatiosn created are 10
+*and if we dd more it become growable
+*as when we create like upper it will store heterogenous kind of data
+*to store homogenous we have the ArrayLis<String>=new Arraylist()
+*various methods are as follows
+1.add(element)
+2.add(index,element)
+3size
+4.remove(index)
+5.remove(elements)
+5.get(index)
+6.set(index,ele)
+7.contains()
+8.Collectons.sort(el)
+9.Collectons.sort(el,Colections.reverserder())
+*for(String s:el)
+{
+}
+*----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+LinkedList
+*so linkedlist implements methods from the list interface and queue interface
+*Note:please gof orl array list when we have the more retrieveing operations
+*But when we have the mer insertin or ddleeteion than in teh arrayblist e need to reshift which takes time so for thst move to the linkedlist
+*LinkedList is based on the doubly linked list
+*elemensta re nt storedin continuous order
+*so it has all method from teh array list and addition to that we have other methods too
+*addFirst()
+*addLast()
+*removeFirst90
+*removeLast()
+*getFirst()
+*getLast()
+*
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Set interface
+*Now hashset is class that implemenst the set interface
+*So in hashset the insertion order is not preserved along with dupliactes notallowed and they uses the concept of hashcode
+*So here the index will not be there and there will be the hashcode concept
+*Note:use it when we have the many serach operations
+*Hasset h=new Hashset()
+*by default the number of location is 16
+*and the fill ratio is 0.75 or load factor is 0.75
+*so in array list after 10 location a new array is crated and elemenst were copied wher as i hasset as the 75 of 16 completed new colllecion is mad and elemnst copied
+*But we can control the load factor byHasset h=new Hashset(100,0.95)
+*Hre varius methods provide are the 
+add
+addall
+remove(el)
+removeall
+contains
+*Note:here we cant sort the elmenst we need to convert it into arra and then sort
+*--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Lnkedhasset we hav ethe insertion order maintains
+*here dupliactes not allowed
+*here base structure ishastable and linkeldist
+*--------------------------------------------------------------------------------------------------------------------------------------------------------------------Q
+Hahmap internal working
+*S in hashmap we have the key value pairs and here the key must be unique and values can be duplicates
+*map is a interface 
+*lets start with class hashmap that implemenst the map interface and has the methods as the get(key) and put(key,value)
+*hashmap interface has the sub interface entry <k,v> which is implement by node<k,v>
+*in node k,v we have the hash,key,value,next
+*so in hashmap we have an array of node<k,v>
+* and the default size is 16
+*now the thing is that the when we put any key value then the first step is it get hash by any hashing alogithm and then mod of then table size which will give index wthin size where we can put
+*now suppose hash(1) give 123456%3=0 and hash(2 give )  1 so here collision happens o what we first check the 10 does it exeist if not then taht node next will point to the new node
+*and if node present than update
+*next we have get(1) so here hash of this we will find in tbale and once find iterate over the linked list created out of it
+*There is a contact between the hastcode and equals
+*if(obj1===obj2) then tehir hashcode must also be same that menas suppose i put(5,"1") so get hash so on putting same object everytime you get same hash
+*second says that we have the same hash does not show equal object
+*here time complexity will be o(1)
+*worst time complexity will be o(n)
+*so here we can can increase the isze by load factor
+
+*and in liked list we have default size as 8 after 8 if collision still happen than convert it to tree and time complexity will be o(logn)
+*o worts case will be o(n) or o(logn)
+*for itearing over hashmap write
+*hashmap<string,integer>h=new hashmap<>();
+for(Mp.entry<String,Integer>:h.entrySet())
+{
+Integer value=h.getkeyvalue()
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+LinkedHashmap
+*In hashmap values were not inserted in the order so lin linkedhshmap values re inserted in the order that are in array
+Treemap
+Here jeys are in the order means sored order
+*
+
+
+
+
+*----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Streams
+*Strea is a pipeleine through which collection data nase
+*adinside stream there are many operatoions
+
+Variosu steps are
+*From collections create stream
+*tehn ad operation such that operation take stream and returns another new stream(means new collection) ,please note that operations are lazy in nature means they get executed only when *terminal operation is invoked
+*Terminal operation once invoke we will get the reults terminal operators are reduce,collect,and close the tream
+*
+
+
+public class SalaryCountDemo {
+    public static void main(String[] args) {
+        int[] salaries = {2500, 4000, 3200, 2800, 5000, 1500};
+        
+        int count = 0;
+        for (int salary : salaries) {
+            if (salary > 3000) {
+                count++;
+            }
+        }
+        
+        System.out.println("Salaries > 3000 (using loop): " + count);
+    }
+}
+
+import java.util.Arrays;
+
+public class SalaryCountStreamDemo {
+    public static void main(String[] args) {
+        int[] salaries = {2500, 4000, 3200, 2800, 5000, 1500};
+        
+        long count = Arrays.stream(salaries)  // open stream from array
+                           .filter(sal -> sal > 3000) // intermediate operation
+                           .count(); // terminal operation
+        
+        System.out.println("Salaries > 3000 (using stream): " + count);
+    }
+}
+
+
+How to open stream for collection 
+names.stream()     
+Array.steam(arr)//for array
+
+Some intermediate operation
+filter
+map
+sorted
+
+Note:why intermediate operation are lazy
+*Sorted()INTERMEDIATE operatio want whole collection data than ony work rest work with one and send at bottom
+
+
+Termianl operatorions are
+reduce
+count
+collect
+foreach
+
+Note:one teh teminal operation is close we can resume stream
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Multthreading and concurrency
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Why multithreading is important
+*Multithreading helps to do many task concurrently which improves the overall performance of the programme so if we want to take inut at same tiem query the db ,so we dont wait user than db query we want at same time
+*with multithreading we can use the processor at its maximum
+*processor can be utilized at its maximum
+*It helps to do async task menas without blocking main thread other thread can continue their work
+*It helps to make ui reposnive
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Diffrenet ways of creating the thread
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Thread
+Ways of creating the thread
+1.extending the thread clas and ovvreiding the run method 
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Thread is running: " + Thread.currentThread().getName());
+    }
+}
+
+public class ThreadDemo1 {
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread();
+        t1.start(); // start thread
+    }
+}
+
+*Its bad because we cant extend any other other class now
+*secondly we create the new object every time for each thread
+
+2.makig class tht impelemns runnable
+class MyRunnable implements Runnable {
+    public void run() {
+        System.out.println("Runnable thread running: " + Thread.currentThread().getName());
+    }
+}
+
+public class ThreadDemo2 {
+    public static void main(String[] args) {
+        Thread t2 = new Thread(new MyRunnable());
+        t2.start();
+    }
+}
+
+*Here we dont create object everytime each thread share the same object
+*
+
+3.Creating anonymous class
+
+4using lambda expression
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Daemon thread
+*Daemon thread are the low priority threads tahn run in bacakground that support the non daemon thread or the user thread
+*we need to call the setdeamon() methid befor thread start otherwise exception will be throen
+*Daemon thread will automatically terminate when all non daemon thread are have completed
+*where as non daemon will continue until they complete
+*main diffrenec is thet jvm will not wait for deamon thread to complete but it will wait for user thread to complete
+*package com.comviva.roadmap.service;
+
+public class Test {
+    public static void main(String args[])
+    {
+        Thread t1=new Thread(()->{
+            for(int i=0;i<10;i++)
+            {
+                System.out.println("Thraed1"+i);
+            }
+
+        });
+        Thread t2=new Thread(()->{
+            for(int i=0;i<10;i++)
+            {
+                System.out.println("Thraed2"+i);
+            }
+        });
+        t1.start();
+        t2.start();
+    }
+
+}
+here both are user thread so jvm willwait till both are completed
+*but if we inridced some daemon thread nd ask it to sleep
+package com.comviva.roadmap.service;
+
+public class Test {
+    public static void main(String args[])
+    {
+        Thread t1=new Thread(()->{
+            for(int i=0;i<10;i++)
+            {
+                System.out.println("Thraed1"+i);
+            }
+
+        });
+        Thread t2=new Thread(()->{
+            for(int i=0;i<10;i++)
+            {
+                System.out.println("Thraed2"+i);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        t1.start();
+        t2.setDaemon(true);
+        t2.start();
+    }
+
+}
+here for thead 1 jvm executes but for thread 2levaveit at 0
+*
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Race coditon
+*when many thread access the same resorce,and the result is depending the timing order of theradexecuion is alled race condition
+*and which leads the inconsistency
+*Thre are 2types of race conditios
+1.read modifyand write
+2.check and act
+
+so order oftherad execution dpends on the os and scheduling algorihm so toperevent the race codition we need o write the thread sfe code
+*so lets take example of the raed modufy write suppose we have the 2 thread has the access of avraibae count =5
+*nowthe 1 read modify and then ++ and sleep
+*thread b raeds modify and selppe 
+*thread a come write as 6
+*another thrad b updatss 6 
+*so its a race condition ki on oder of eeceution one is modify so its not atomic operation the operation which happens i one go it will done or not start not in intermediate state
+*
+
+2.check and act
+*since both the thread can satisfies the check conditions they will both modify the code inside the condition or can modify the critical section
+*
+
+
+Lets implements the read modify and write
+*package com.comviva.roadmap.service;
+
+public class RacCondition {
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount() {
+       count++;
+    }
+
+    int count=1;
+
+
+}
+
+*package com.comviva.roadmap.service;
+
+public class Test {
+    public static void main(String args[]) throws InterruptedException {
+        RacCondition r=new RacCondition();
+        Thread t1=new Thread(()->r.setCount());
+        Thread t2=new Thread(()->r.setCount());
+
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+        System.out.println(r.getCount()+"count");
+
+    }
+
+
+}
+here output is 2 so its race condition
+*Now lets impelemnst the check and act
+*suppose we have  2 person modifying the same resource condition if balabce fgrarer than 0 than only modidfy but since both are runnibg concurrent and both will be access to satidy the same condition due to which data inconsistency will be tehere
+
+package com.comviva.roadmap.service;
+
+public class Test {
+    public static void main(String args[]) throws InterruptedException {
+        RacCondition r=new RacCondition();
+        Thread t1=new Thread(()->r.accaessbalance());
+        Thread t2=new Thread(()->r.accaessbalance());
+
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+        System.out.println(r.getBalance()+"count");
+
+    }
+
+
+}
+package com.comviva.roadmap.service;
+
+public class RacCondition {
+
+
+    public void accaessbalance() {
+       if(balance>=100)
+       { System.out.println("therad"+Thread.currentThread().getName());
+           balance=balance-100;
+
+       }else {
+           System.out.println("therad not able to withdrawn balance rlow"+Thread.currentThread().getName());
+           return;
+       }
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    int balance=100;
+
+
+}
+Here ideal condition must be that the in balance reaches to 50 another thread cant withdrawn but since both are accessig at same time
+
+*So to solev this problem we can make use of the synchronized this block
+*
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Synchronised block and synchronized the metod
+*so to give thread safety and prevent the race condition
+*synchronization block allows us to do synchronization on a particular block in amethod
+*This is done so that multiple thread does not alter the shared resource concurrently
+*synchronized metod means sync on whole method
+*synchronized emasn one thread can have access at atime
+*
+
+Synchronised method
+*Here synchronized keyword along with the lock object
+*Provide more control over synchronization
+*Allows synchronization on different locks objects  for diffrente methods
+*Multiple block can execute concurrently if diffrenet lock objects are allowed
+*above the synchronization on critical section where as non crirtical section can run concurrently
+
+
+Synchronised method
+*Here synchronise before method
+*Orovide less control
+*Here lock is associated with one object andthat is of class
+*Onle one thread can execute the method ata time with lock of the class object 
+*synchronize the whole method
+
+
+Note:Please find that here we make the class and 2 thread accessing to 2 methods depost and withdraw make them both synchronized and then synchronized this
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What is deadlock
+*Deadlock is a situation that happens when the 2 or more threads ae bocked forever
+*each waiting for other to release lock
+*Its commn analogyis 2 cars are styuck at intersection and unable to move
+*It occurs when the diffrenet thrad want to access the same lock but in different order
+*
+class DeadlockExample {
+    private final Object lockA = new Object();
+    private final Object lockB = new Object();
+
+    public void method1() {
+        synchronized (lockA) {
+            System.out.println("Thread 1: Locked A");
+
+            try { Thread.sleep(100); } catch (InterruptedException e) {}
+
+            synchronized (lockB) {
+                System.out.println("Thread 1: Locked B");
+            }
+        }
+    }
+
+    public void method2() {
+        synchronized (lockB) {
+            System.out.println("Thread 2: Locked B");
+
+            try { Thread.sleep(100); } catch (InterruptedException e) {}
+
+            synchronized (lockA) {
+                System.out.println("Thread 2: Locked A");
+            }
+        }
+    }
+}
+*Now to see the deadlock using tools write the jcmd pid Thread.print
+*jstack pid also
+*Condition fro deadlock
+1.Mutual exclusion:only one thread can access a particular resource at atime
+2.Hold and wait:A thread holds one lock and wait for other
+
+
+How to detect deadlock:
+*taking thread dump analysis
+*uses of jconsoles or visual vm
+*
+
+
+How to resolve deadlocks
+*avoid nested locks:while holding one never try to acquire another
+*try to lock after some time called as timeout locks 
+*Always acquire lock in same order
+*use the concurrent pacakges called reeterant  lock
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Executor framework
+*It is part of java.util.concurrent package
+*It manages the thrad lifecycle itself
+*Example like we have restuarnt consider it as framework many dishes comig together than its duty of the framework to assign these f=dishes ti many worker threads at same time
+*Core componnets
+1.Exceutor:its main interface
+*that represent an object is cpacakble of doing tasks or not
+*its has method as void execute(Runnable task)
+*
+2.Exceutor service is another method that extends the Exceutor
+*parat from execute provided by the executor
+*it provide many higher level api like task submission ,termination
+
+3.ThraedPollExeceutor class
+*It is class that implemenst the Executorservice
+*Manages a pool of worker thread for executing tasks
+*Alows the customization methods like thread pool size
+*
+
+4.Exceutors class
+*A utility class that provides various factory methods for creating the diffrenet type of executorservice instances
+
+Lifecycle of executor class
+*submit:tasks are submitted to the xecutorservice
+*task queuing:tasks are stored in a queue until and unless there are worker thrads available
+*thread execution:task are executed by worker threads concurrently
+*thread teremination
+if task completed hread wll go to worker thread for moer task
+
+
+Why thread pools
+*so intseda of creating new thread for each task
+*and no way of reusing
+*threadpol is collection of preinitilized thread or worker thread that are ready to execute the taks and once task is completes thread goes to thread pool to give more task
+
+
+Why do we needs
+*so creating the new thread everytime takes time whereas in threadpool threads are already created
+*so we have control over thread taht will do task not its like creating thread which are not active so resource usage is good
+*Simplify the thradcycle management
+*Can adapt to the extra workload teh dyanmaicly changing thepool size
+
+Utilized in web servers
+*Note that the execute method returns the void
+*and submit returns the Future
+*
+*We are given the task of the generic concurrent file reader programme using the thread pool exector class and Exector service
+*package Threads;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ConcurrentFileReaderWithThreadPool {
+
+    public static void main(String[] args) {
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        String[] filePaths = {
+                "/Users/vd056735/samplelogs1.txt",
+                "/Users/vd056735/samplelogs2.txt",
+                "/Users/vd056735/samplelogs3.txt"
+        };
+
+        for(String filePath : filePaths){
+            executorService.execute(() -> readFile(filePath));
+        }
+
+        executorService.shutdown();
+
+    }
+
+    private static void readFile(String filePath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                Thread.sleep(4000);
+                System.out.println("file path =" + filePath + " " + Thread.currentThread().getName() + ": reads line " + line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+*
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Callable and Future
+*Cllable is an function al interface in java
+*It represent a task that can be run async and returns the result
+*Like runnable it represent a unit of work but it can return a result or throw an execption
+*Callable task are usully submitted to ExecutorService for submission
+*Ehen submitted it return Future objects through which we can get the result or throw an execption
+*
+
+Why should we use Callable not Runnable
+*callable returns a result where as runnable not,This is crucial as we want the result of the task like the result of database query and reult of the network request
+*callable can throw the checked excpetion wheras the runnable cantthrow the check exception
+*So we have many tasks that should run concurrently and you want to collect their results than use the callable
+*
+
+
+Futute
+*It is an interface and it represents the result of async operation which is not available immediately
+*Typicaly returned when submitting callable task to exector service
+*Various methods are 
+*get():block the main thread until gets the results
+*isDone():check if the tasks are completed or not or not
+
+
+Real world secnarios
+:Usr ExecutorServive to execute the multiple  callabae tasks to fetch the stock prices from db concurrently and returns the results
+*package Executors.CallableFuture;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.*;
+
+//Implement a program that uses the ExecutorService to invoke multiple Callable tasks
+// and obtain their results as a list of Future objects.
+public class CallableFutureRealWorldProblem {
+    public static void main(String[] args) {
+        List<String> symbols = List.of("ABC", "PQR", "TFGF", "YEDS", "PFS");
+        List<Future> futures = new ArrayList<>();
+
+        ExecutorService executorService = Executors.newFixedThreadPool(1);
+
+        for (String symbol : symbols) {
+            Callable<Double> stockSymbolTask = new StockPriceFetcher(symbol);
+            System.out.println("submitting for "+symbol);
+            Future<Double> future = executorService.submit(stockSymbolTask);
+            System.out.println("Future = "+future);
+            futures.add(future);
+        }
+        executorService.shutdown();
+
+        
+
+    class StockPriceFetcher implements Callable<Double>{
+        private String stockSymbol;
+        public StockPriceFetcher(String stockSymbol) {
+            this.stockSymbol = stockSymbol;
+        }
+
+        @Override
+        public Double call() throws Exception {
+            Thread.sleep(5000);
+            return Math.random() * 100;
+        }
+
+}
+*Now to get the results run for loop and from list of future future.get(i)->retrn the future object
+*future.get(i).get()
+*But thet get() method is the blocking
+* for(int i = 0 ;i<5;i++){
+            try {
+                System.out.println("Stock from " + symbols.get(i) + " price = " + futures.get(i).get() + " future status " + futures.get(i));
+
+            } catch(InterruptedException | ExecutionException e){
+                System.out.println(e);
+            }
+        }
+    }
+*Note://                while(!futures.get(i).isDone()) {
+//                    Thread.sleep(1000);
+//                    System.out.println("Waiting ");
+//                }
+here use this when we are that while bloacking code shoud not blocks
+*
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Internal working of the CopyonArraylist
+*Array list and linked list are not thread safe
+*They can get the concurrentmodidfication exception
+*So there can be many option like vectors or Collection.synchronisedlist()
+*But with the vector legacy is slow as the entire list is lock for each operation
+*same with Collections.synchronizedList()
+*so the copyonaary list are thread safe and high performance
+*copyonwrite aray list does not applies lock for read operations instead it worsk on the snapshot of original array without locks
+*Ths allows to access the list by many thread concurrently without sycnhronixzation
+*However for the write operation it uses the lock internally
+*So that multiple thread cant have access to list at same time
+*
+
+
+Internal working
+*it uses the reiternt lock
+*when adding an element
+*acquire the lock to ensure exclusive access
+*creates the new array one element larger than the original
+*copy elements from original to copy array
+*addd the new element to end of copy array
+*updates the refernce to new array and release the lock
+So read is happening on original and write on copied so we are appliging lock on the write 
+
+Performance tradefoof with arraylist
+*Here in copyonwrite array list the mmeoty overhead is high due to copy of array in write due to which write is slower but read is faster
+*It is best used when we want concurrent read on the list and dont want to face the concurrentmodidfication exception
+*It can be used in gui frameowke where the read is frequent 
+*----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Internal working of the concurrent hashmap
+*So to overcome the race condition and concurrentmodification exception is hashmap the concurrent hashmap was introduced
+*so we have the map as an interface than we have the concurrent map which extends the map interface and itself is an interface
+*then we have the concurrentnavigablemap which extends the concurrent map interface and itself its an interface
+*concurrenthasmpa implements the concurrentnavigable map interface and the serilizable
+*package ConcurrentCollections;
+import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ConcurrentHashmapDemo {
+    private static final int NUM_THREADS = 5;
+    private static final int NUM_INSERTIONS = 100;
+
+    private static ConcurrentHashMap<String, Integer> hashMap = new ConcurrentHashMap<>();
+
+
+    public static void main(String[] args) throws InterruptedException {
+        ExecutorService executorService = Executors.newFixedThreadPool(NUM_THREADS);
+
+        for (int i = 0; i < NUM_THREADS; i++) {
+            executorService.execute(insertRecord());
+        }
+
+        executorService.shutdown();
+
+        if (!executorService.isTerminated()) {
+            Thread.sleep(1000);
+        }
+
+        System.out.println("Size of the hashmap = " + hashMap.size());
+    }
+
+    private static Runnable insertRecord() {
+        return () -> {
+            for (int i = 0; i < NUM_INSERTIONS; i++) {
+                hashMap.put(i + Thread.currentThread().getName(), i);
+            }
+        };
+    }
+}
+*Here we will get the correct output as 500
+*  public static void main(String[] args) {
+            Map<String, Integer> map = new ConcurrentHashMap<>();
+            map.put("one", 1);
+            map.put("two", 2);
+            map.put("three", 3);
+
+            Iterator<Map.Entry<String, Integer>> iterator = map.entrySet().iterator();
+
+            // Attempt to modify the map while iterating
+            while (iterator.hasNext()) {
+                Map.Entry<String, Integer> entry = iterator.next();
+                if (entry.getKey().equals("two")) {
+                    map.put("four", 4); // This will throw ConcurrentModificationException
+                }
+            }
+
+        System.out.println(map);
+        }
+    }
+*Changed it to the concurentthen no such exceptions
+*Now internal working
+*So its used the segmented or bucket level or fine grained locking
+*It has an array of the segment or partition which itself is an hashtable
+*ReAD OPERATIOSNare fully concurrent means many thread can access the map concurrently
+*write operation are synchrnosized by applying lock on each segmenst so multiple thread cant access 
+*Diffrenec between Synchronized and concurrent
+Conurrent
+*designed ofr high concurreny
+*Here lock is on write operation where lock is applied to segment
+*It has grain level locking
+*During itearyion it cant give the concurrentmodidfication exception
+*
+
+Collections.synchronizedmap()
+*Here for low concurrency
+*It uses the lock on all operation
+*corase level locking
+*It can give concurrentmodidfication exception
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Interview question on thread methods
+*wait method:Thraed immediately release the lock and will be in waiting state
+*notify:notifies a single thread in waiting state to wake up arbiraily
+*notifyall:wakeup all thread in waiting state
+
+🧩 First, the story
+
+Imagine a box where we can put only one item at a time.
+
+Producer = person who puts an item in the box.
+
+Consumer = person who takes the item out of the box.
+
+Rules:
+
+Producer must wait if the box is already full.
+
+Consumer must wait if the box is empty.
+
+Once producer/consumer finishes, they notify others to continue.
+
+🧩 Code Example (Simple)
+class Box {
+    private int item;
+    private boolean hasItem = false;
+
+    // Producer puts item in box
+    public synchronized void put(int value) {
+        while (hasItem) { // If box already has item, wait
+            try {
+                wait(); // producer waits
+            } catch (InterruptedException e) {}
+        }
+
+        item = value;
+        hasItem = true;
+        System.out.println("Produced: " + item);
+
+        // notify a consumer that item is available
+        notify();
+    }
+
+    // Consumer takes item from box
+    public synchronized void get() {
+        while (!hasItem) { // If box empty, wait
+            try {
+                wait(); // consumer waits
+            } catch (InterruptedException e) {}
+        }
+
+        System.out.println("Consumed: " + item);
+        hasItem = false;
+
+        // notify all producers waiting that box is empty now
+        notifyAll();
+    }
+}
+
+public class WaitNotifyExample {
+    public static void main(String[] args) {
+        Box box = new Box();
+
+        // Producer thread
+        Thread producer = new Thread(() -> {
+            for (int i = 1; i <= 5; i++) {
+                box.put(i);
+                try { Thread.sleep(500); } catch (InterruptedException e) {}
+            }
+        });
+
+        // Consumer thread
+        Thread consumer = new Thread(() -> {
+            for (int i = 1; i <= 5; i++) {
+                box.get();
+                try { Thread.sleep(1000); } catch (InterruptedException e) {}
+            }
+        });
+
+        producer.start();
+        consumer.start();
+    }
+}
+
+🧩 What happens step by step
+
+Producer puts 1 → Box has 1 → Producer calls notify() (so consumer wakes up).
+Output: Produced: 1
+
+Consumer takes 1 → Box is empty → Consumer calls notifyAll() (so producer wakes up).
+Output: Consumed: 1
+
+Producer puts 2 → notifies consumer → consumer consumes 2 → notifies producer…
+And this continues.
+
+So output looks like:
+
+Produced: 1
+Consumed: 1
+Produced: 2
+Consumed: 2
+Produced: 3
+Consumed: 3
+...
+Ques:What happen when we have many thread waiting for notification,which thread willbe executed when notify is called
+*Ans:It is notpossile odetermine 
+*
+
+Ques:why to call notifyall when we have only one thaed to eecute
+*aswe knw when we callnotify then the we kdont know which thread illbe notified ,i miht wake up thead which is waitig for other condition
+*bu when call notify all all thread collectively decide which thread tocall 
+
+Ques:Diffrenec between wait and sleep
+*wait is to on bais of some condition thrd pause or wait
+*in sleep Intenstion delay in haed sothati can execute quickly
+*Now the ting s that the in wait the lock of object on the method called is release but in the sleep lock isn't released
+*wait is thread is waken when notify is called where sleep id=s awakened whne certain time has elapsed
+*
+
+Diference between the wait(timeout) and wait() is that in tmeout it tells what is maximum duration it can wait before automatically resuming the execution
+*whereas in wait is wakenup when notified
+*---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Producer consumer problem
+*so here the main enetities are producer whoc produced the data and add items in buffer
+*think of buffer as the shopping mall
+*consumer is person who consumes it by removing from buffer
+*Producer consumer problem is the multithreading synchronized problem 
+*So we need to ensure consumer and producer both must work in sysnchronised manner without race condition and dead lock
+*
+
+what are constraints
+*First of all that if buffer is empty than consumer shuld not attempt cant remove items
+*when buffer is full than the producer should not attempt to add the items
+*These types of problesm we see in the job scheduling tasks 
+*we see in apache kafka
+*Possible solutions to problem 
+1.in lower level synchrnization we use  wait notify
+2.using highr level abstraction we use the blocking queue where we use the use the put method in producer and take in consumer
+3.Exceuto framework
+for multiple producer and consumer we will use the arrayblocking queue to represent the shared buffer
+*Executorservice is used to manage the consumer and the producer thread
+public class ProducerConsumerDemo {
+    public static void main(String[] args) {
+        Queue<Integer> buffer = new LinkedList<>();
+        int maxSize = 5;
+
+        Thread producerThread = new Thread(() -> {
+            for(int i = 0; i< 10; i++){
+                synchronized (buffer){
+                    //overflow check
+                    while(buffer.size() == maxSize){
+                        try {
+                            System.out.println("buffer is full, so waiting");
+                            buffer.wait();
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    buffer.add(i);
+                    System.out.println("Produced "+i);
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    buffer.notifyAll();
+                }
+            }
+        }, "Producer");
+
+        Thread consumerThread = new Thread(() -> {
+            for(int i = 0; i< 10; i++){
+                synchronized (buffer){
+                    //underflow check
+                    while(buffer.isEmpty()){
+                        try {
+                            System.out.println("buffer is empty, so waiting");
+                            buffer.wait();
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    int val = buffer.remove();
+                    System.out.println("Consumed "+val);
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    buffer.notifyAll();
+                }
+            }
+        }, "Consumer");
+
+        producerThread.start();
+        consumerThread.start();
+
+
+
+    }
+}
+so its using the notify and wait
+2.using the blocking queue
+package Concurrency.ProducerConsumer;
+
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+
+public class ProducerConsumerExample {
+    public static void main(String[] args) {
+        BlockingQueue<Integer> buffer = new ArrayBlockingQueue<>(5);
+
+        Thread producerThread = new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    buffer.put(i); // This will block if the buffer is full.
+                    System.out.println("Produced " + i);
+                    Thread.sleep((long) (Math.random() * 5000));
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }, "Producer");
+
+        Thread consumerThread = new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                try {
+
+                    int value = buffer.take(); // This will block if the buffer is empty.
+                    System.out.println("Consumed " + value);
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }, "Consumer");
+
+        producerThread.start();
+        consumerThread.start();
+    }
+}
+
+
+3.using executor framework 
+package Concurrency.ProducerConsumer;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.Executors;
+
+public class ProducerConsumerMultiple {
+        public static void main(String[] args) {
+            BlockingQueue<Integer> queue = new LinkedBlockingQueue<>();
+
+            ExecutorService executorService = Executors.newFixedThreadPool(5);
+
+            for (int i = 1; i <= 2; i++) {
+                executorService.submit(new Producer(queue, i));
+            }
+
+            for (int i = 1; i <= 2; i++) {
+                executorService.submit(new Consumer(queue, i));
+            }
+
+            executorService.shutdown();
+        }
+    }
+
+class Producer implements Runnable {
+    private BlockingQueue<Integer> queue;
+    private int producerId;
+
+    public Producer(BlockingQueue<Integer> queue, int producerId) {
+        this.queue = queue;
+        this.producerId = producerId;
+    }
+
+    @Override
+    public void run() {
+        try {
+            for (int i = 0; i < 5; i++) {
+                int value = produce(producerId) + i;
+                queue.put(value);
+                System.out.println("Producer " + producerId + " produced: " + value);
+                Thread.sleep(1000); // Simulate some work
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    private int produce(int i) {
+        return (int) ( i * 100);
+    }
+}
+
+class Consumer implements Runnable {
+    private BlockingQueue<Integer> queue;
+    private int consumerId;
+
+    public Consumer(BlockingQueue<Integer> queue, int consumerId) {
+        this.queue = queue;
+        this.consumerId = consumerId;
+    }
+
+    @Override
+    public void run() {
+        try {
+            while (!queue.isEmpty()) {
+                int value = queue.take();
+                System.out.println("Consumer " + consumerId + " consumed: " + value);
+                Thread.sleep(2000); // Simulate some work
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Semaphors it also provides the synchrozation to stop the rac condition but here it runs on the counter feature
+*for this counter feature we have the permits basically to increment and decrement the value
+*so when thread want to access the resource than they are given permits if exists  and its counrer value decreased  decreased
+*acquire()->permits exist decrement counter
+*release():return permit and increase the counter
+*if all permist exhauseted and counter is 0 then acquire called than current thread gets blocked until gets the permit
+
+Binary semaphors
+*so if we have the counter value as 0 no permits available and 1 then 1 permit available
+*allows only one thrad to access the critical section 
+  private static final Semaphore semaphore = new Semaphore(1); 
+Note:here counter value is 1 always
+
+
+Counter semaphors
+*counter value is greater than 1
+*  private static final Semaphore semaphore = new Semaphore(3); 
+
+
+Lock interface 
+*Alternative to synchronized keywork
+*locks() if reourec availabl else block the thread until released
+*unlock to release the resource
+
+Reitterant lock
+*It implements the lock interface
+*So its used to reaquire a locks
+*hre also lock()->then increment the counter
+*unclock ->release then decrease the counter
+*if locked 2 times than unlock 2 times
+*So its useful in nested locks
+*lock is release when the counter is 0
+import java.util.concurrent.locks.ReentrantLock;
+
+class ReentrantLockExample {
+    private final ReentrantLock lock1 = new ReentrantLock();
+    private final ReentrantLock lock2 = new ReentrantLock();
+
+    public void method1() {
+        while (true) {
+            boolean gotLock1 = lock1.tryLock();
+            boolean gotLock2 = lock2.tryLock();
+
+            if (gotLock1 && gotLock2) {
+                try {
+                    System.out.println(Thread.currentThread().getName() + " acquired both locks");
+                    break; // work done
+                } finally {
+                    lock2.unlock();
+                    lock1.unlock();
+                }
+            }
+
+            // Release if partially acquired
+            if (gotLock1) lock1.unlock();
+            if (gotLock2) lock2.unlock();
+
+            // Back off before retry
+            try { Thread.sleep(50); } catch (InterruptedException e) {}
+        }
+    }
+
+    public static void main(String[] args) {
+        ReentrantLockExample example = new ReentrantLockExample();
+
+        Thread t1 = new Thread(example::method1, "Thread-1");
+        Thread t2 = new Thread(example::method1, "Thread-2");
+
+        t1.start();
+        t2.start();
+    }
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Linkedinhadhmap
+*BASD ON BOTH hashtable and linkedlistq
+*Elemenst re stored in the order of insertion
+*It implemenst the map interface and extends the hashmap class
+*It help the access of elemnst in insertion order as well as the access order
+*So its used the doubly linkedlist
+*In access order means most accessed elemenst is put at the last at the end of iteration order
+*It does not allow duplicate key
+*It may one one null key and multiple null values
+It is non synchronized
+*
+
+So here entry<k,> extends the hashmap.entry<k,v> and we have here key,value,after,before
+*here we have the constructor that take the default capacity of 16 and the load factor of 0.75
+*constructir(int capacity) that takes the default load factor as 0.75 and capacity=capacity
+*constructor(int capacity,load factor,accessorder)//by default access order is false if true than inserton rder will not be there but access order will be there
+*Note:Now this access order is used in the lru where lru elemenst is being removed and most recently used is places at the end
+*
+
+Linkedhashmap structural modidfication:
+*so in access order linkedhashmap any changes such that it changes the iteration order is called the structural modidfication
+*so get() in access order linkedhashmap is the structural modification
+*changing value of key is not structure modidfication
+*removeeledestentry() to remove the oldest elemnst from map and that can be done by ovverididng 
+*
+
+Comparison between linkedhashmap and the hashmap
+*hashmap have the implemensted hashtable
+*and linkedgasmap implemensted the map interface and extended the hashmap class
+*hashmap has 0(1) operations for get and put but in linkedhashmap additional overhead of the linkelist
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Scheduled executor service
+*Here scheduled executor service extends the executor service
+*It is used to execute  a atsk after a specific period of time
+*various methods are the :
+1.schedule():It is used t basically schedule a task for a period of time and returns a task object through which we can check the execution and cancel the execution
+2.Schdeuleatfixedrate()
+* public static void main(String[] args) {
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(3); //Creating a ScheduledExecutorService with 3 threads
+
+
+//        scheduler.scheduleAtFixedRate(() -> {
+//            long currentTimeSeconds = System.currentTimeMillis() / 1000; // Convert milliseconds to seconds
+//            System.out.println("Task with fixed rate executed at: " + currentTimeSeconds + " seconds");
+//            try {
+//                Thread.sleep(4000); // Simulating task execution time
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }, 0, 3, TimeUnit.SECONDS);means after every 3 seconds execeute task if the einnre execution is greate then periodic than inner execeution is given priroty
+
+
+
+
+
+        scheduler.schedulewithFixedRate(()->{
+            long currentTimeSeconds=System.currentTimeMillis()/1000;
+            System.out.println("Task with fixed delay executed at:"+currentTimeSeconds+" seconds");
+            try{
+                Thread.sleep(2000);
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
+        },3,3,TimeUnit.SECONDS);//means inner +periodic that how it works means after 5 sec taks will be executed
+
+        //keep the program running for a while to observe the periodic execution
+        try {
+            Thread.sleep(20 * 1000); //run for 20 seconds
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        //shutdown the scheduler when done
+        scheduler.shutdown();
+    }
+
+Where it is used:
+*Periodic cleanup like db cleans up
+*And then the send notification at regular intervals
+*Reports generation
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*As we know we used the synchronized keyword to avoid the race condition but it can lead to the wait time for anotger thread and performance is low
+*as we know wehen volatile keyword i applied to any field that means it vaues is taken from the main meory instead of taking it from local cache 
+*So it helps in providing the visisby to variable across many thread but it does allow many threads o modidfy the variable simultaneously
+
+
+When to use:
+*when we have one variable ccess bby many thread and we want any change in it should be vissble to other thread without explicity using lock mechanism
+*when its read frequently and write infrequently
+*when i dont want to use the synchronized keyword
+*when the value of variable doesnot depend on previous value
+
+So basically we have the synchronied keyword will give teh atomicity but volatile keyword doesn't give the atomicicty
+*so we have shred variable ,compunt operation nd atomiticty than the use the atomic interger
+*package Threads;
+
+import java.util.concurrent.atomic.AtomicInteger;
+public class AtomicIntegerExample {
+    private static AtomicInteger atomicCounter = new AtomicInteger(0);
+    public static void main(String[] args) {
+        // Creating multiple threads to increment the atomic counter
+        Runnable atomicTask = () -> {
+            for (int i = 0; i < 10000; i++) {
+                atomicCounter.incrementAndGet(); // Atomic increment operation
+            }
+        };
+        Thread thread1 = new Thread(atomicTask);
+        Thread thread2 = new Thread(atomicTask);
+
+        thread1.start();
+        thread2.start();
+
+        try {
+            thread1.join();
+            thread2.join();
+            System.out.println("Atomic Counter: " + atomicCounter.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------Completable Future
+*as when getting Future on calling get it block the main thred and there was no such thing as chainging
+*so the thing that came is CompletableFuture
+*supplyasync return  a value and runasync does not 
+*  CompletableFuture<Integer> future1 = CompletableFuture.supplyAsync(() -> {
+            // Simulate a long-running computation
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return 10;
+        });
+
+        // Use the result of the CompletableFuture
+        future1.thenAccept(result -> System.out.println("Result: " + result));
+
+        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+            //Simulate a long-running task
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Task completed");
+        });
+
+        future.thenRun(() -> System.out.println("Callback after task completion"));
+
+
+
+*thenapply:it applies function to the result of the completable future and retrn the new completed future based on the result,it means transformation on the result once result is completed
+*thencompose :when we have chain of async dependent operations and you need to chain together
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Thread lifycle
+*New:means thread object is created but not yet started
+*Runnbale:when start method iscalled thread become runnable waiting for cpu
+*Running:when its exceuting
+*Waiting:wait for another thread to get executed or just sleeping
+*Terminated:Thread finished executing
+
+*Note:t.join()means on which tread is running will wait for it to execute and main method (caller will continue)
+*
+
+
+Thread methods
+*start()
+*thread sleep for 1000 s
+class MyThread extends Thread {
+    @Override
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println(Thread.currentThread().getName() + " → Iteration: " + i);
+            try {
+                Thread.sleep(1000); // sleep for 1000 ms = 1 sec
+            } catch (InterruptedException e) {
+                System.out.println("Thread interrupted!");
+            }
+        }
+        System.out.println(Thread.currentThread().getName() + " finished.");
+    }
+}
+
+public class ThreadSleepDemo {
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread();
+        MyThread t2 = new MyThread();
+
+        t1.setName("Worker-1");
+        t2.setName("Worker-2");
+
+        t1.start();
+        t2.start();
+    }
+}
+
+*t1.join()
+
+it outer thread wait for it to execute than take controles and run
+class MyThread extends Thread {
+    @Override
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println(Thread.currentThread().getName() + " → Iteration: " + i);
+            try {
+                Thread.sleep(1000); // sleep for 1000 ms = 1 sec
+            } catch (InterruptedException e) {
+                System.out.println("Thread interrupted!");
+            }
+        }
+        System.out.println(Thread.currentThread().getName() + " finished.");
+    }
+}
+
+public class ThreadSleepDemo {
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread();
+        
+        
+        
+
+        t1.start();
+t1.join()//
+
+System.ot.println()//prints after the 5s
+        
+    }
+}
+
+*we can add the name to thread by passing the name in contsryctor an super(nae)
+*t1.interrupted()means what its doing interrupt it there if sleep stop there wait than stop
+*t.yield() its aying this thread is saying you can give change to other thread
+*user thread are one throught which we rea doing work so the jvm wait till it execeute but dfor daemond thread jvm doesn not wait 
+*class Counter {
+    private int count = 0;
+
+    public void increment() {
+        count++; // not synchronized → race condition possible
+    }
+
+    public int getCount() {
+        return count;
+    }
+}
+
+class WorkerThread extends Thread {
+    private Counter counter;
+
+    public WorkerThread(Counter counter) {
+        this.counter = counter;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 100; i++) {
+            counter.increment();
+            try {
+                Thread.sleep(1); // just to magnify the race condition
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+public class RaceConditionDemo {
+    public static void main(String[] args) throws InterruptedException {
+        Counter counter = new Counter();
+
+        WorkerThread t1 = new WorkerThread(counter);
+        WorkerThread t2 = new WorkerThread(counter);
+
+        t1.start();
+        t2.start();
+
+        t1.join();
+        t2.join();
+
+        System.out.println("Final Count (expected 200): " + counter.getCount());
+    }
+}
+so its gives less than 2000 values he value may vary, but usually it’s less than 200 because both threads update count simultaneously.
+*🔹 Fixing with synchronized
+class Counter {
+    private int count = 0;
+
+    public synchronized void increment() {
+        count++; // synchronized → only one thread can enter at a time
+    }
+
+    public int getCount() {
+        return count;
+    }
+}
+
+public class RaceConditionFixed {
+    public static void main(String[] args) throws InterruptedException {
+        Counter counter = new Counter();
+
+        Thread t1 = new Thread(() -> {
+            for (int i = 0; i < 100; i++) {
+                counter.increment();
+                try { Thread.sleep(1); } catch (InterruptedException e) {}
+            }
+        });
+
+        Thread t2 = new Thread(() -> {
+            for (int i = 0; i < 100; i++) {
+                counter.increment();
+                try { Thread.sleep(1); } catch (InterruptedException e) {}
+            }
+        });
+
+        t1.start();
+        t2.start();
+
+        t1.join();
+        t2.join();
+
+        System.out.println("Final Count (expected 200): " + counter.getCount());
+    }
+}
+
+🔹 Sample Output (With Synchronization)
+Final Count (expected 200): 200
+
+
+✅ Key Takeaway:
+
+*
+
+Without synchronized, two threads may read & write the same variable simultaneously → lost updates (race condition).
+
+With synchronized, only one thread at a time executes the increment → no race condition.
+
+
+There are 2 types of locks :
+1.Intrinsic :These are automatic and used in every object when we use synchronisd we are usig them
+Extrinsic:Here we tell when to lock and when to unlock
+
+*Needs of exeplicit lock comes
+suppsie in class w add synchroise and sleep used another thread is waiting but its sleeping
+*import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.TimeUnit;
+
+class SharedResource {
+    private final ReentrantLock lock = new ReentrantLock();
+
+    public void accessResource(String threadName) {
+        try {
+            // Try to acquire the lock for up to 2 seconds
+            if (lock.tryLock(2, TimeUnit.SECONDS)) {
+                try {
+                    System.out.println(threadName + " acquired the lock.");
+                    
+                    // Simulating some work
+                    for (int i = 0; i < 5; i++) {
+                        System.out.println(threadName + " is working... step " + (i+1));
+                        Thread.sleep(500);
+                    }
+                    
+                    System.out.println(threadName + " completed the task.");
+                } finally {
+                    // Must release the lock
+                    lock.unlock();
+                    System.out.println(threadName + " released the lock.");
+                }
+            } else {
+                System.out.println(threadName + " could NOT acquire the lock.");
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.out.println(threadName + " was interrupted.");
+        }
+    }
+}
+
+public class TryLockExample {
+    public static void main(String[] args) {
+        SharedResource resource = new SharedResource();
+
+        Runnable task1 = () -> resource.accessResource("Thread-1");
+        Runnable task2 = () -> resource.accessResource("Thread-2");
+
+        Thread t1 = new Thread(task1);
+        Thread t2 = new Thread(task2);
+
+        t1.start();
+        t2.start();
+    }
+}
+
+
+executor framework
+*executor
+*exector service
+*scheduled executor service
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Lock free mechanism
+*so optimistic is lock free
+*so in lovk free compare and swap its low level measn maintainer by cpu
+*It atomic
+*It has 3 main parameters
+*main meoert eman load data
+*expected value measn compare and if its equal
+*tahn update the newvalue
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Thread pool
+Advantages of thread pool
+*here the thread need not be created agina ngain meas memeory savae of heap
+*Overhead of thread lifeceycle removed
+*we hva ethe executor interface which is extended by executorservice
+*
+and there are child classs of executor service
+*Lifecycel of thread pool executor
+*running->measn we can call submit method here means ready to take more task
+*shutdown not eady to take the more tasks and let task in queue to process
+*stop is forced shutdown sayin not take new task along with it not process the task in queue
+*
+*
+*----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Collcetions
+*
+
+

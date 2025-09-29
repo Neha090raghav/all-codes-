@@ -1,0 +1,2971 @@
+what is virtualization
+*virtualization is the virtula environment that we create but the final output from virtualized env and real time env is same
+*it is  a technique to split the physical resource or join the resource into the as many logical resource as we can 
+*logical we cant touch
+*it is a technique to convert the hardware to software
+*requirement hai ki we want 4 gb ke 10 server
+*but 1 sever hi g4 gb ka atta hsi to ese 10 lne hnge cot increase
+*so server->hyprserve wjcih is the virtual software and on that now we can have th 10 vm of 4 gb each and hence cost cutting 
+*it depends on the characterstics of the parent server that the vm will behave differently
+*so earlier  first hardware than hyperviser than window vm
+*so in the hardware we have 1 server 1 app and in the virtual env we have 1 srver n applications
+*measn earlier on one hardware we have the one os and now on the 1 hadware we can have the multiple os measn many window means many vm
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+https://chatgpt.com/share/68a75062-8f64-8013-9105-99c236237389
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*hypervisor is software or firmware that creates and run vm
+*it is also called the virtual machine manager
+*It is of 2 type 
+*type 1 -bare metal hyperviser or native hyperviser
+*type 2 hyperviser or hosted hyperviser
+*type 1 mostly used in companies and type 2 mainly uses in learning purposes and 
+*in type 1 on the hardware we install the hypervisor then which create and run diffrenet vm an on each vm we can run our different os like windows,ubuntu
+*vm ware esx is the type1 hypervisor
+*as its directly on hardware called firmware
+*
+
+
+
+
+*where is in the type 2 first hadware which is host then the os called host os than the hypervisor
+*as its not on hadware called the software here
+*
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------what is docker
+*
+*we cant share the whole app+os+dependency to testing team as before the os sharing was not possible
+*but now we can share the os with the help of virtual machine by creating iamge of the vm
+*now testing tea can start the iamge and see the application running
+*Docker is advanced version of the virtualizations
+*means docker do the containerization,so containerization is advanced version of the virtualizations
+*so problems with the virrtualizations is that fir each vm we need to have the os means licens for each os ,and another was wastag of resource as each vm takes the storage irrespective its using or not
+*so on the dockerization we have the dockr engine above gardware inplace of the hyperviser and the in place of vm we have the container which does not have os 
+*these docker does not have os they share it with host os
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+VMware
+*first the hadware
+*tehn esx hyperviser
+*tehn vm
+*then on each vm we need to have os
+*this os needs some ram permanently 
+*when we allocate resource from the hadware we allocate permanently no mattesr you are using it or not
+*so wee need taht ram stay with the hadware and some vm needs they take it so the aws ec2 solve
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+aws ec2 
+*first the hadware
+*then xen/nito hypervisor 
+*then the ec2 instance
+*these ec2 have os 
+*this os needs some ram permanently 
+*when we allocate resource from the hadware we take it from hardware when we are using but cost increase
+*noew each ec2 value depends on the ram,hdd,cpu core  each ec2 takes 
+*so thay can atke from the source hardware but the price increase
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+docker
+**first the hadware
+*tehn os
+*tehn docekr engine
+*tehn teh conatinr
+*these container dont have their os tehy take from the host os
+*and resource from the source hadware which when needed
+*all the dependency are stored in docker hub
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in docker the creating vm is easy as we need to run tehn from docker hub extract the windows and run on container to give os and the ram
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*first of of all we will create aws machine access through putty
+*first of all we will install docker
+*and write yum install doker -y
+
+
+
+
+
+*To see all images present in your local machine or dockr engine
+*docker images 
+
+
+*to search for all images related to any windows or ubuntu in dockerhub write
+*docker search ubuntu
+
+*to download images from the dockerhub to docker engine or local run
+*docker pull Jenkins
+
+
+To create  container
+
+*to create and give name to container 
+docker run -t name neha ubuntu /bin/bash 
+where ubuntu is the image that we want from the dockerhub
+
+*to see if the docker engine is running or nt
+service docker status
+
+*to start container
+docker start neha
+
+*to go inside container
+docker attach neha
+
+*to see all containers
+docker ps -a 
+*to see all running conatiners
+docker ps
+*to stop containr
+docker stop neha
+*to delte container
+docker rm neha
+
+here in the console all services then the e2c instance 
+*running
+*launch instance
+*then ami take whichhasdocker
+*move to next instance must be 1
+*then next
+*configure security group mei give the http and ssh withs ourec anywhere
+*then review and launch
+*make new key pair
+*and download
+*after downloading then launch
+*then viw instances
+*tehn we need to connect through the putty
+*so copy the public ip
+
+
+
+
+*then there is in our system 
+*open putty key generator 
+*then load the download key pairs key
+*save private key in any document ,taht will be saved as .ppk
+*then open putty
+*give hostname as ip we copied
+*then auth ssh then broswse and that key ..pk
+*then open yes
+*then login as ec2-user
+*sudo su so we will be the root user
+*then yum update --y
+*um install docker --y
+*ctrl+l to clear screen
+*service docker status
+*service doxker start
+*dockr images
+*now suppose i want the ubuntu image which is not presented locally so docker run -t ubuntu bin/bash
+*with this image download image and created the containr and we are inside container
+note:images is basically os 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+System design
+*we opened a shop
+*now we have 1 chef
+*now we want to optimize the process and increase the throughput-vertical scrolling
+*now to optimize we can think of the making base earliest
+*now we can have the one more chef for backup called master and slave
+*and another is the we can increase the number of chef called the horizontal scaling
+*now we can have microservice so basically we can make a group of chef one for garlic brea such that each microservice is isolated form surrounding env
+*suppose the lectricity runs out then failure so we will not put all chfs in one shop we can have another shop which can deliver the pizzas if the shoop is closed and this process is called the distributed sytsem
+*than there must be some central machine which routes request to diffrente shops based on the distance and manages request so its called the load balancer
+*now we can have differnational concerns so that we can handle the diffremetsystem efficiently called decoupling
+*if oven is falutlty or delivery agent bike is fault we want to log everything and that called the logging
+*then or system must be extensible so that we need not to write the code again and again
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+horizontal vs vertical scaling
+*suppose we have the computer which has the some code that takes the request and gives the response and it has the db connected
+*now the some some one is impressed and wants or code and they will give the money
+*so we will expose this through a protocol on the internet
+*the diffrenet between the desktop and cloud is that the the in cloud we are provided many desktops to reduce teh computation
+*we need to host our service on cloud means hosting on  a desktop we dont know
+*now suppose many users areaccessing the this desktop
+*now to handle these we need to buy big machine or many machines
+*and this ability to handle multiple requests is called the scaling
+*when we but one bigger machines its called the vertical scaling
+*and when we buy many machine its called the horizontal scaling
+
+Horizontal
+*load balancing required
+*if one desktop or server faild we can pass it to there hence resilient
+*diffrente server connect throught the network calls
+*here data consistency is real issues
+*scales well
+
+Vetical
+*no load balancing
+*interprocess communication
+*dta is consistnet
+*single point of failuyre
+*hardware limits
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What is load balancing
+*suppose we have one server who serves the fw request weel
+*now the many request comes our one server cant handle so we took n more server
+*now someone makes request now this request should be gone to which server there must be something which can maintain the load of request on each server
+*Note :so we want to evelny distribute the load on each server
+*for that corresponding to each request we get some request id 
+*suppoise we have got M request so request id is from 0 to M-1
+*take some request id r1 hash it and we get number  m1 than find the index by m1%n where n is the number of server and that request go to taht particular inex servers
+*now the thing is thet the if the number of server change than mapping changes and a big cost
+*every reqst id has user id so if user id is same the hash same then why should we do the databses ccess every time just store it in cache
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Consistent hashing
+*suppose we hash the request and map to some position in ring
+*similarly we hashed the teh server id but now modulo with m request
+*now map both the value to on rings
+*now rings moves on the clockwise so the reqyest that comes first is servedby nearest hashed mapped server id
+*this architecture is good here as here also load is 1/n but thing is taht here if server is added thn mapping doesn not change and nor does load increases
+*1. What is Consistent Hashing?
+
+Consistent hashing is a hashing technique used to distribute data across multiple servers or nodes in a way that minimizes data movement when nodes are added or removed.
+
+Normal Hashing Problem: If you use
+hash(key) % numberOfServers,
+then adding/removing a server changes the modulus and redistributes almost all keys → big data movement.
+
+Consistent Hashing Benefit: When a server is added/removed, only a small portion of keys are remapped.
+
+2. Where is it used?
+
+Distributed caching (e.g., Memcached, Redis clusters)
+
+Load balancers for server mapping
+
+Distributed databases (e.g., Cassandra, DynamoDB)
+
+Sharding data across nodes in scalable systems
+*import java.security.MessageDigest;
+import java.util.*;
+
+public class ConsistentHashing<T> {
+    private final int numberOfReplicas;
+    private final SortedMap<Integer, T> circle = new TreeMap<>();
+
+    public ConsistentHashing(int numberOfReplicas, Collection<T> nodes) {
+        this.numberOfReplicas = numberOfReplicas;
+        for (T node : nodes) {
+            add(node);
+        }
+    }
+
+    private int hash(String key) {
+        return key.hashCode() & 0x7fffffff; // simple hash
+    }
+
+    public void add(T node) {
+        for (int i = 0; i < numberOfReplicas; i++) {
+            circle.put(hash(node.toString() + i), node);
+        }
+    }
+
+    public void remove(T node) {
+        for (int i = 0; i < numberOfReplicas; i++) {
+            circle.remove(hash(node.toString() + i));
+        }
+    }
+
+    public T get(String key) {
+        if (circle.isEmpty()) {
+            return null;
+        }
+        int hash = hash(key);
+        if (!circle.containsKey(hash)) {
+            SortedMap<Integer, T> tailMap = circle.tailMap(hash);
+            hash = tailMap.isEmpty() ? circle.firstKey() : tailMap.firstKey();
+        }
+        return circle.get(hash);
+    }
+
+    public static void main(String[] args) {
+        List<String> servers = Arrays.asList("Server1", "Server2", "Server3");
+        ConsistentHashing<String> ch = new ConsistentHashing<>(3, servers);
+
+        System.out.println("Key1 is on " + ch.get("Key1"));
+        System.out.println("Key2 is on " + ch.get("Key2"));
+
+        System.out.println("Adding Server4...");
+        ch.add("Server4");
+
+        System.out.println("Key1 is now on " + ch.get("Key1"));
+        System.out.println("Key2 is now on " + ch.get("Key2"));
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+https://www.youtube.com/playlist?list=PL6W8uoQQ2c61X_9e6Net0WdYZidm7zooW-lld
+https://www.youtube.com/playlist?list=PL6W8uoQQ2c63W58rpNFDwdrBnq5G3EfT7--hld
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+LLD Topics 🔥 🔥 :
+
+S.O.L.I.D Principles
+Strategy Pattern
+Observer Pattern
+Design Notify-Me Button Functionality
+Decorator Pattern
+Design  Pizza Billing System
+Factory Pattern
+Design  Parking Lot
+Abstract Factory Pattern
+Design  Snake n Ladder game
+Chain of Responsibility Pattern
+Design Elevator System
+Proxy Pattern
+Design Car Rental System
+Null Object Pattern
+Design Logging System
+State Pattern
+Design Tic-Tac-Toe game
+Composite Pattern
+Design BookMyShow & Concurrency handling
+Adapter Pattern
+Design Vending Machine
+Singleton Pattern
+Design ATM
+Builder Pattern
+Design Chess game
+Prototype Pattern
+Design File System
+Bridge Pattern
+Design Splitwise
+Façade Pattern
+Splitwise Simplify Algorithm / Optimal Accounting Balancing 
+Flyweight Pattern
+Design CricBuzz / CricketInfo
+Command Pattern
+Design True Caller
+Interpreter Pattern
+Design Car Booking Service like Ola, Uber
+Iterator Pattern
+Design Online Hotel Booking System
+Mediator Pattern
+Design Library Management System
+Memento Pattern
+Design  Traffic Light System
+Template Method Pattern
+Design Meeting Scheduler 
+Visitor Pattern
+Design Online Voting System
+Design Inventory Management System
+Design Cache Mechanism
+Design LinkedIn 
+Design Amazon 
+Design Airline Management System 
+Design Stock Exchange System
+Design Learning Management System
+Design a Calendar Application
+Design (LLD) Payment System
+Design (LLD) Chat based system
+Design Food delivery app like Swiggy and Zomato
+Design Community Discussion Platform
+Design Restaurant Management System
+Design Bowling Alley Machine 
+Design (LLD) Rate Limiter
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+HLD topics 🔥 🔥 :
+-----------------------------
+Learn About Network Protocols (TCP, Websocket, HTTP etc.)
+Client-Server Vs Peer 2 Peer Architecture
+C.A.P Theorem
+Microservices Imp. Design Patterns (SAGA pattern, Strangler Pattern)
+Scale from 0 to Million Users
+Design Consistent Hashing
+Design URL Shortening
+Back of the Envelope Estimation
+Design Key-Value Store
+SQL vs NoSQL, When to Use Which DB
+Design WhatsApp
+Design Rate Limiter
+Design Search Autocomplete System / Typeahead System
+Understand Message Queue , Kafka etc.
+What is Proxy Servers
+What is CDN
+Storage types: 
+(Block Storage, File Storage, Object Storage (S3) , RAID)
+File System 
+(Google File System, HDFS)
+Bloom Filter
+Merkle Tree , Gossiping Protocol
+Caching
+(Cache Invalidation, Cache eviction)
+How to Scale Database
+Sharding (Horizontal and Vertical)
+Partitioning
+Replication, Mirroring
+Leader Election
+Indexing etc.
+Design Notification System
+Design Pastebin
+Design Twitter
+Design Dropbox
+Design Instagram
+Design YouTube
+Design Google Drive
+Design Web Crawler
+Design Facebook News Feed / Newsfeed System 
+Design Ticket Master
+Design NearByFriends or Yelp
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+lld
+solid principles
+*suppose we have house and one wireis fused we need to find that particular faulted wire
+*suppose we created the classes and they are tightly coupled
+*the problem a developer face is 
+1.code maintainaibility means new featre can be integrated easily without hampering the rest code
+2.readibility means one can esily understand code without much time
+3.bugs 
+
+
+*solid principle full form is 
+*s stands for single responsibility principle
+*o stand for open close principle
+*l stands for liskosv principle
+*i stands for interface segregation principle
+*d stands for the dependency inversion principle
+
+
+*single responsibility principle means the one class should have one responsibility or should do one thing
+*for example  atv remote should control tv not the refrigerator
+*suppose we have the the 2 classes one product with product name and price
+*one we have the class shopping cart this shopping cart contains many product so we represt it by <-1**
+*import java.util.ArrayList;
+import java.util.List;
+
+// Product Class
+class Product {
+    private String name;
+    private double price;
+
+    // Constructor
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    // Getters
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+}
+
+// ShoppingCart Class
+class ShoppingCart {
+    private List<Product> products;
+
+    // Constructor
+    public ShoppingCart() {
+        this.products = new ArrayList<>();
+    }
+
+    // Add product to cart
+    public void addProduct(Product product) {
+        products.add(product);
+    }
+
+    // Calculate total price
+    public double calculateTotalPrice() {
+        double total = 0;
+        for (Product p : products) {
+            total += p.getPrice();
+        }
+        return total;
+    }
+
+    // Print invoice
+    public void printInvoice() {
+        System.out.println("Invoice:");
+        for (Product p : products) {
+            System.out.println(p.getName() + " - $" + p.getPrice());
+        }
+        System.out.println("Total: $" + calculateTotalPrice());
+    }
+
+    // Save to DB (dummy method for now)
+    public void saveToDB() {
+        System.out.println("ShoppingCart saved to database!");
+    }
+}
+*+-------------------+
+|     Product       |
++-------------------+
+| - name: String    |
+| - price: double   |
++-------------------+
+| + getName(): String |
+| + getPrice(): double|
++-------------------+
+
+             1
+Product <----------> * ShoppingCart
+                      (has many Products)
+
++----------------------------+
+|       ShoppingCart         |
++----------------------------+
+| - products: List<Product>  |
++----------------------------+
+| + addProduct(p: Product)   |
+| + calculateTotalPrice(): double |
+| + printInvoice(): void     |
+| + saveToDB(): void         |
++----------------------------+
+
+*now this shopping cart class is breaking the solid principle as its handling various things so here we will make use of the composition
+*so the shopping cart class should have the add product and calculate total price method onlt ret2 method we will create other class 
+*import java.util.ArrayList;
+import java.util.List;
+
+// Product Class
+class Product {
+    private String name;
+    private double price;
+
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public String getName() { return name; }
+    public double getPrice() { return price; }
+}
+
+// ShoppingCart Class (Single Responsibility: Manage Products)
+class ShoppingCart {
+    private List<Product> products;
+
+    public ShoppingCart() {
+        this.products = new ArrayList<>();
+    }
+
+    public void addProduct(Product product) {
+        products.add(product);
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public double calculateTotalPrice() {
+        double total = 0;
+        for (Product p : products) {
+            total += p.getPrice();
+        }
+        return total;
+    }
+}
+
+// Invoice Class (Single Responsibility: Print Invoice)
+class Invoice {
+    private ShoppingCart cart;
+
+    public Invoice(ShoppingCart cart) {
+        this.cart = cart;
+    }
+
+    public void printInvoice() {
+        System.out.println("Invoice:");
+        for (Product p : cart.getProducts()) {
+            System.out.println(p.getName() + " - $" + p.getPrice());
+        }
+        System.out.println("Total: $" + cart.calculateTotalPrice());
+    }
+}
+
+// SaveToDB Class (Single Responsibility: Save Cart to DB)
+class SaveToDB {
+    private ShoppingCart cart;
+
+    public SaveToDB(ShoppingCart cart) {
+        this.cart = cart;
+    }
+
+    public void save() {
+        // Dummy DB operation
+        System.out.println("Cart with " + cart.getProducts().size() + " products saved to DB!");
+    }
+}
+*public class Main {
+    public static void main(String[] args) {
+        Product p1 = new Product("Laptop", 1200);
+        Product p2 = new Product("Mouse", 25);
+
+        ShoppingCart cart = new ShoppingCart();
+        cart.addProduct(p1);
+        cart.addProduct(p2);
+
+        // Invoice printing
+        Invoice invoice = new Invoice(cart);
+        invoice.printInvoice();
+
+        // Save to DB
+        SaveToDB save = new SaveToDB(cart);
+        save.save();
+    }
+}
+*+-------------------+
+|     Product       |
++-------------------+
+| - name: String    |
+| - price: double   |
++-------------------+
+
++----------------------------+
+|       ShoppingCart         |
++----------------------------+
+| - products: List<Product>  |
++----------------------------+
+| + addProduct(p: Product)   |
+| + getProducts(): List<Product> |
+| + calculateTotalPrice(): double |
++----------------------------+
+
++--------------------+
+|      Invoice       |
++--------------------+
+| - cart: ShoppingCart |
++--------------------+
+| + printInvoice(): void |
++--------------------+
+
++--------------------+
+|     SaveToDB       |
++--------------------+
+| - cart: ShoppingCart |
++--------------------+
+| + save(): void     |
++--------------------+
+
+Not:so in this wy one class is handling one repsnsibility
+*----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Open close principle
+*this says  classs is open for extension
+*but close for modification
+*so if we want to add any feature then please modify the xisting code
+*suppose we have the savetodb class that has method savetodby which tore data in MySQL
+*i want to add 2 new methods then dont add these to to this existing class
+*so make one class as dbpersistence and make it <<abstarct>>or interface
+*it has the abstract method as save
+*create 3 class as savetomysql,savetomongo,savetofiele which implemenet teh interface
+*these all 3 have the savemetjod which they can implement in their way
+*interface is basically a agrrement between class and client which has metjod but its implemented by another class
+*here bold arro represent that it impelemtfro the abstract class
+*    <<interface>>
+               DBPersistence
+               ---------------
+               + save(): void
+                     ^
+                     |
+        -------------------------------
+        |              |              |
+  SaveToMySQL     SaveToMongo     SaveToFile
+  -------------   -------------   -------------
+  + save(): void  + save(): void  + save(): voids
+*// Interface (the contract)
+interface DBPersistence {
+    void save();   // abstract method
+}
+
+// Class that saves to MySQL
+class SaveToMySQL implements DBPersistence {
+    @Override
+    public void save() {
+        System.out.println("Saving data to MySQL Database...");
+    }
+}
+
+// Class that saves to MongoDB
+class SaveToMongo implements DBPersistence {
+    @Override
+    public void save() {
+        System.out.println("Saving data to MongoDB...");
+    }
+}
+
+// Class that saves to File
+class SaveToFile implements DBPersistence {
+    @Override
+    public void save() {
+        System.out.println("Saving data to File...");
+    }
+}
+
+// Main class to test
+public class PersistenceDemo {
+    public static void main(String[] args) {
+        DBPersistence mysql = new SaveToMySQL();
+        DBPersistence mongo = new SaveToMongo();
+        DBPersistence file = new SaveToFile();
+
+        mysql.save();
+        mongo.save();
+        file.save();
+    }
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Liskos principle
+*the subclass hould be substitionable for the base class
+*means anywhere we are using the base class can be relaced by the subclass still code should work fine
+*as subclass also carries the feature of parent class
+*suppose we have the // Abstract class Account
+abstract class Account {
+    abstract void deposit(double amount);
+    abstract void withdraw(double amount);
+}
+
+// Savings Account
+class SavingAcc extends Account {
+    @Override
+    void deposit(double amount) {
+        System.out.println("Depositing " + amount + " in Savings Account");
+    }
+
+    @Override
+    void withdraw(double amount) {
+        System.out.println("Withdrawing " + amount + " from Savings Account");
+    }
+}
+
+// Current Account
+class CurrentAcc extends Account {
+    @Override
+    void deposit(double amount) {
+        System.out.println("Depositing " + amount + " in Current Account");
+    }
+
+    @Override
+    void withdraw(double amount) {
+        System.out.println("Withdrawing " + amount + " from Current Account");
+    }
+}
+
+// Fixed Deposit Account
+class FixedDepositAcc extends Account {
+    @Override
+    void deposit(double amount) {
+        System.out.println("Depositing " + amount + " in Fixed Deposit Account");
+    }
+
+    @Override
+    void withdraw(double amount) {
+        // ❌ Problem here: FD account normally doesn't allow withdraw
+        throw new UnsupportedOperationException("Withdraw not allowed in Fixed Deposit Account");
+    }
+}
+
+// Client
+public class BankClient {
+    public static void main(String[] args) {
+        Account acc1 = new SavingAcc();
+        acc1.deposit(1000);
+        acc1.withdraw(200);
+
+        Account acc2 = new CurrentAcc();
+        acc2.deposit(5000);
+        acc2.withdraw(1000);
+
+        Account acc3 = new FixedDepositAcc();
+        acc3.deposit(10000);
+
+        // ❌ Breaks LSP
+        acc3.withdraw(2000);  // throws exception at runtime
+    }
+}
+
+LSP says:
+
+If class S is a subtype of class T, then objects of type T should be replaceable with objects of type S without altering the correctness of the program.
+
+Here, FixedDepositAcc is a subtype of Account.
+
+A client expects all Accounts to support both deposit() and withdraw().
+
+But when you substitute Account acc = new FixedDepositAcc(); and call acc.withdraw(…), it throws an exception, breaking the expected behavior of Account
+
+
+*Sp here fd should never the child of account
+*instead we have one abstract class wit method as the 
+*Correct solution is interface Depositable {
+    void deposit(double amount);
+}
+
+interface Withdrawable {
+    void withdraw(double amount);
+}
+
+class SavingAcc implements Depositable, Withdrawable { ... }
+class CurrentAcc implements Depositable, Withdrawable { ... }
+class FixedDepositAcc implements Depositable { ... }  // no withdraw
+
+
+to unbreak the liskov rules
+1.signature
+* where first of all inthis the arg must be same of overridden method and return type sprcifies retur type also called covariance rule means subclass overridden ethod can have the same return type for the as the baseclass or the subclass of the return type but not broader
+
+*exception rule:if checked in the based then same checked or narrower in the subclass and if no in base then can be unchecked i the subclass
+
+2.property rule
+*class invariant rule
+*history constraint
+*so class variant says lest suppose we have the class parent and tis parent follows the some invariant(fact that is always true for parent class) then child class should also follow the invariant or strengthen it
+*suppose we have the class as class Account {
+    protected int balance;
+
+    public Account(int balance) {
+        if (balance < 0) throw new IllegalArgumentException("Balance cannot be negative");
+        this.balance = balance;
+    }
+
+    public void deposit(int amount) {
+        if (amount > 0) balance += amount;
+    }
+
+    public void withdraw(int amount) {
+        if (amount > balance) throw new IllegalArgumentException("Insufficient funds");
+        balance -= amount;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+}
+
+// ❌ Breaks invariant
+class CheatAccount extends Account {
+    public CheatAccount() {
+        super(0);
+        this.balance = -1;  // directly violating invariant
+    }
+}
+
+
+
+*history constraint syas suppose on parent class i put the history constraint that the withdraw should always be used
+*class Account {
+    protected int balance;
+
+    public Account(int balance) {
+        if (balance < 0) throw new IllegalArgumentException("Balance cannot be negative");
+        this.balance = balance;
+    }
+
+    public void deposit(int amount) {
+        if (amount > 0) balance += amount;
+    }
+
+    public void withdraw(int amount) {
+        if (amount > balance) throw new IllegalArgumentException("Insufficient funds");
+        balance -= amount;
+    }
+
+
+}
+
+// Savings Account
+
+// Fixed Deposit Account
+class FixedDepositAcc extends Account {
+    @Override
+    void deposit(double amount) {
+        System.out.println("Depositing " + amount + " in Fixed Deposit Account");
+    }
+
+    @Override
+    void withdraw(double amount) {
+        // ❌ Problem here: FD account normally doesn't allow withdraw
+        throw new UnsupportedOperationException("Withdraw not allowed in Fixed Deposit Account");
+    }
+}
+
+// Client
+public class BankClient {
+    public static void main(String[] args) {
+        
+
+        Account acc3 = new FixedDepositAcc();
+        acc3.deposit(10000);
+
+        // ❌ Breaks LSP
+        acc3.withdraw(2000);  // throws exception at runtime
+    }
+} so here the history constraint is destroyed
+
+
+Note:so immutable class are those which cant be extended ,this is made if we write final infront of any class
+*immmutable methods are those whcuh cant be overriden and is written by writing final before the keyword
+
+
+
+
+3.method rule
+*precondition suppose on parent class methd some perecondition is apllied the child class m1 should also aplly precondition or weaken it but cant strengthen it
+suppo class Prent
+{
+void m1(int num)m>= and m<=5
+{
+if(m<=0|| >=5)
+{
+throw 
+}
+}
+}
+
+class child
+{
+void m1(int num)m>= and m<=10
+{
+if(m<=0|| >=10)
+{
+throw 
+}
+} so it wekane it ,the cleans already knows the constrsiant nd ifits passed child tat constraint is foloweds
+
+
+*postcondition says taht if the then parent class has some method which has some postcondition and child class overridden that method than child class should also follow the postcondition or can strngethen it
+*// Parent class
+class Car {
+    protected int speed;
+
+    public Car(int speed) {
+        this.speed = speed;
+    }
+
+    // Postcondition: speed must decrease
+    public void brake() {
+        if (speed > 0) {
+            speed -= 10; // slow down by 10 units
+        }
+        System.out.println("Car slowed down. Current speed: " + speed);
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+}
+
+// Child class
+class ElectricCar extends Car {
+    private int batteryLevel;
+
+    public ElectricCar(int speed, int batteryLevel) {
+        super(speed);
+        this.batteryLevel = batteryLevel;
+    }
+
+    // Postcondition: must still slow down (invariant preserved)
+    // Additional: battery gets charged
+    @Override
+    public void brake() {
+        super.brake(); // still slows down (parent’s postcondition)
+        batteryLevel += 5; // additional effect
+        System.out.println("Battery recharged. Current battery: " + batteryLevel + "%");
+    }
+
+    public int getBatteryLevel() {
+        return batteryLevel;
+    }
+}
+
+// Client code
+public class Main {
+    public static void main(String[] args) {
+        Car car = new Car(50);
+        car.brake(); // ✅ slows down only
+
+        ElectricCar eCar = new ElectricCar(60, 40);
+        eCar.brake(); // ✅ slows down + recharges
+    }
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Interface segregation principle
+*built many clinet interface instead of one interfaces
+*and client does need to be forced to implement method
+*class shap{
+area()
+}
+*reactangle extends
+*squary extends
+*cyslender extends but it want one more method volume
+*another more structre want volume so we added volume in abstract 
+*but thats wrong as square and the rectangle doesn not need the volume
+*so here we can create 2 interface one for 2 d with area and one with 3d with volume
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------Dependency inversion
+*so it says that the high level module should not directly interact with low level module
+*but there should be some sort of abstraction between them
+*Recap of DIP
+
+High-level modules (e.g., Application) should not depend on low-level modules (e.g., MySQLDB, MongoDB).
+
+Both should depend on abstractions (Persistence).
+
+Abstractions should not depend on details; details should depend on abstractions.
+*// Abstraction (Interface)
+interface Persistence {
+    void save(String data);
+}
+
+// Low-level modules (DB implementations)
+class MySQLDB implements Persistence {
+    @Override
+    public void save(String data) {
+        System.out.println("Saving data in MySQLDB: " + data);
+    }
+}
+
+class MongoDB implements Persistence {
+    @Override
+    public void save(String data) {
+        System.out.println("Saving data in MongoDB: " + data);
+    }
+}
+
+class CassandraDB implements Persistence {
+    @Override
+    public void save(String data) {
+        System.out.println("Saving data in CassandraDB: " + data);
+    }
+}
+
+// High-level module
+class Application {
+    private Persistence persistence; // depends on abstraction
+
+    // Constructor Injection (best practice for DIP)
+    public Application(Persistence persistence) {
+        this.persistence = persistence;
+    }
+
+    public void saveData(String data) {
+        persistence.save(data);  // high-level logic doesn't care about DB type
+    }
+}
+
+// Client
+public class Main {
+    public static void main(String[] args) {
+        // Choose DB at runtime
+        Persistence mysql = new MySQLDB();
+        Application app1 = new Application(mysql);
+        app1.saveData("Order123");
+
+        Persistence mongo = new MongoDB();
+        Application app2 = new Application(mongo);
+        app2.saveData("Order456");
+
+        Persistence cassandra = new CassandraDB();
+        Application app3 = new Application(cassandra);
+        app3.saveData("Order789");
+    }
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Strategy design pattern
+so covered arrow is is arelationship or inheritance
+*and the normal arroeis has a relationship
+*suppose we have the vehicle as base class and has method drive
+*now we have the one car as scorpipn extends the vehicle and override the drive metod to get new feature
+*similarly the scorpip extends vehicle and override and wrte code fordriv but the drive of this class and othe child class is same
+*soits duplicacy
+*and ist not scalable
+*✅ Example in Java
+// Strategy Interface
+interface PaymentStrategy {
+    void pay(int amount);
+}
+
+// Concrete Strategies
+class CreditCardPayment implements PaymentStrategy {
+    private String cardNumber;
+
+    public CreditCardPayment(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    @Override
+    public void pay(int amount) {
+        System.out.println("Paid " + amount + " using Credit Card: " + cardNumber);
+    }
+}
+
+class PayPalPayment implements PaymentStrategy {
+    private String email;
+
+    public PayPalPayment(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public void pay(int amount) {
+        System.out.println("Paid " + amount + " using PayPal: " + email);
+    }
+}
+
+class UpiPayment implements PaymentStrategy {
+    private String upiId;
+
+    public UpiPayment(String upiId) {
+        this.upiId = upiId;
+    }
+
+    @Override
+    public void pay(int amount) {
+        System.out.println("Paid " + amount + " using UPI: " + upiId);
+    }
+}
+
+// Context
+class ShoppingCart {
+    private PaymentStrategy paymentStrategy;
+
+    // Inject the strategy at runtime
+    public void setPaymentStrategy(PaymentStrategy paymentStrategy) {
+        this.paymentStrategy = paymentStrategy;
+    }
+
+    public void checkout(int amount) {
+        if (paymentStrategy == null) {
+            throw new IllegalStateException("Payment method not selected!");
+        }
+        paymentStrategy.pay(amount);
+    }
+}
+
+// Client
+public class StrategyPatternExample {
+    public static void main(String[] args) {
+        ShoppingCart cart = new ShoppingCart();
+
+        // Use Credit Card
+        cart.setPaymentStrategy(new CreditCardPayment("1234-5678-9876-5432"));
+        cart.checkout(1000);
+
+        // Switch to PayPal
+        cart.setPaymentStrategy(new PayPalPayment("user@example.com"));
+        cart.checkout(2000);
+
+        // Switch to UPI
+        cart.setPaymentStrategy(new UpiPayment("neha@upi"));
+        cart.checkout(500);
+    }
+}
+
+✅ Output
+Paid 1000 using Credit Card: 1234-5678-9876-5432
+Paid 2000 using PayPal: user@example.com
+Paid 500 using UPI: neha@upi
+
+🔑 Key Points
+
+Strategy Pattern decouples algorithms (payment methods) from the context (shopping cart).
+
+You can add new strategies (like CryptoPayment) without changing the context.
+
+It follows Open/Closed Principle (OCP from SOLID).
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Observer design pattern
+*observable
+*observer
+*if any stare changes in the onservable will be notified to all the observers
+*Observable class which has a list of all observers
+*method add which add the observer
+*remove to remove the observer
+*notify 
+*and then setdata
+*lets write the class which extends tis class or implemenst this methods
+*so we have observable concrete class
+*class observableconcret
+{
+List<Observer>ob;
+add(){
+ob.add
+}
+notify(){
+for(Observer obj:objs)
+{
+obj.update();
+}
+}
+setdata(t){
+data=t;
+notify()
+
+
+}
+}
+*similary for the observer interface make another class which extends it
+*and there write the update method but here want to know what data has been updated so this extended class can have  has a relationship
+*so it can contains the observableconcret and in constructor make the injection
+*and in update method od the observer intercae extended class we can make use of the obj.getdata()
+
+*package observerpattern;
+
+import java.util.ArrayList;
+import java.util.List;
+
+// 1. Observable Interface
+interface AmazonObservable {
+    void addObserver(NotificationObserver observer);
+    void removeObserver(NotificationObserver observer);
+    void notifyObservers();
+    void setStockData(int newStock);
+    int getStockData();
+}
+
+// 2. Observer Interface
+interface NotificationObserver {
+    void update();
+}
+
+// 3. Concrete Observable
+class StockObservable implements AmazonObservable {
+    private List<NotificationObserver> observers = new ArrayList<>();
+    private int stockCount = 0;
+
+    @Override
+    public void addObserver(NotificationObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(NotificationObserver observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (NotificationObserver obs : observers) {
+            obs.update();
+        }
+    }
+
+    @Override
+    public void setStockData(int newStock) {
+        if (newStock > 0) {
+            this.stockCount = newStock;
+            notifyObservers();
+        }
+    }
+
+    @Override
+    public int getStockData() {
+        return stockCount;
+    }
+}
+
+// 4. Concrete Observer
+class EmailAlertObserver implements NotificationObserver {
+    private String email;
+    private AmazonObservable observable;
+
+    public EmailAlertObserver(String email, AmazonObservable observable) {
+        this.email = email;
+        this.observable = observable;
+    }
+
+    @Override
+    public void update() {
+        int stock = observable.getStockData();
+        System.out.println("Email to " + email + ": Product is in stock! Current stock = " + stock);
+    }
+}
+
+// Another Observer example: Mobile Alert
+class MobileAlertObserver implements NotificationObserver {
+    private String phoneNumber;
+    private AmazonObservable observable;
+
+    public MobileAlertObserver(String phoneNumber, AmazonObservable observable) {
+        this.phoneNumber = phoneNumber;
+        this.observable = observable;
+    }
+
+    @Override
+    public void update() {
+        int stock = observable.getStockData();
+        System.out.println("SMS to " + phoneNumber + ": Hurry! Stock updated = " + stock);
+    }
+}
+
+// 5. Client
+public class ObserverPatternDemo {
+    public static void main(String[] args) {
+        // Create observable
+        StockObservable stockObservable = new StockObservable();
+
+        // Create observers
+        NotificationObserver emailObserver1 = new EmailAlertObserver("neha@example.com", stockObservable);
+        NotificationObserver mobileObserver1 = new MobileAlertObserver("9876543210", stockObservable);
+
+        // Register observers
+        stockObservable.addObserver(emailObserver1);
+        stockObservable.addObserver(mobileObserver1);
+
+        // Stock update → notify all
+        System.out.println("Updating stock...");
+        stockObservable.setStockData(10);
+
+        // Remove one observer and update stock again
+        stockObservable.removeObserver(mobileObserver1);
+        System.out.println("\nUpdating stock again...");
+        stockObservable.setStockData(20);
+    }
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Decorator pattern
+*here we say we have the one base object
+*and we then decorator with more features above that and we get new object
+*ex pizza add the cheese then toppings
+*this is used to avoid class explosion
+*so basically the tooped pizza has the base piiza as well is a pizza
+*// Base component
+abstract class BasePizza {
+    public abstract int cost();
+}
+
+// Concrete components
+class Margherita extends BasePizza {
+    @Override
+    public int cost() {
+        return 100; // base cost
+    }
+}
+
+class VegDelight extends BasePizza {
+    @Override
+    public int cost() {
+        return 150;
+    }
+}
+
+// Decorator base (NO reference here)
+abstract class Topping extends BasePizza {
+    // just marks a topping, no BasePizza reference here
+}
+
+// Concrete Decorator: ExtraCheese
+class ExtraCheese extends Topping {
+    private BasePizza basePizza;  // reference kept only here
+
+    public ExtraCheese(BasePizza basePizza) {
+        this.basePizza = basePizza;
+    }
+
+    @Override
+    public int cost() {
+        return basePizza.cost() + 20; // add cheese cost
+    }
+}
+
+// Another Concrete Decorator: Mushroom
+class Mushroom extends Topping {
+    private BasePizza basePizza;  // reference kept only here
+
+    public Mushroom(BasePizza basePizza) {
+        this.basePizza = basePizza;
+    }
+
+    @Override
+    public int cost() {
+        return basePizza.cost() + 30; // add mushroom cost
+    }
+}
+
+// Test
+public class DecoratorPatternDemo {
+    public static void main(String[] args) {
+        BasePizza pizza = new Margherita();
+        System.out.println("Margherita base cost: " + pizza.cost());
+
+        pizza = new ExtraCheese(pizza);
+        System.out.println("Margherita + Extra Cheese cost: " + pizza.cost());
+
+        pizza = new Mushroom(pizza);
+        System.out.println("Margherita + Extra Cheese + Mushroom cost: " + pizza.cost());
+    }
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+hld
+*Network protocols
+*we have 2 system when they communicate over the network
+*so network protocol defines the rules so that the 2 system can talk over a network
+*so we have in total 7 layer
+*1st is the application layer
+*application layer is agin divided into the client server and peer 2 peer
+*in client server we have the http,ftp,smtp,web sockets
+*and in peer 2 peer we have the web rtc
+*🏗️ Structure
+
+Client
+
+Initiates communication.
+
+Sends requests (e.g., “Give me this webpage”, “Fetch my account details”).
+
+Examples: Web browser, mobile app, desktop application.
+
+Server
+
+Listens for client requests.
+
+Processes requests, applies logic, queries database, and returns response.
+
+Examples: Web server (Apache, Nginx), Application server, Database server.
+
+Communication Protocol
+
+Most common: HTTP/HTTPS, WebSockets, gRPC, FTP, etc.
+
+
+1.1️⃣ HTTP / HTTPS
+
+Full form: Hypertext Transfer Protocol (Secure version adds TLS/SSL encryption).
+
+Use case: Communication between browsers/apps and web servers.
+
+How it works:
+
+Request–Response model.
+
+Client sends HTTP request (GET, POST, PUT, DELETE).
+
+Server responds with HTML, JSON, or other content.
+
+Example:
+
+Browser: GET /products
+
+Server: Returns list of products in JSON.
+
+Key point: Stateless → each request is independent.
+
+HTTPS: Same as HTTP but encrypted (used in banking, payments, etc).
+
+
+
+
+2.2️⃣ SMTP
+
+Full form: Simple Mail Transfer Protocol.
+
+Use case: Sending emails between servers.
+
+How it works:
+
+Client (e.g., Gmail, Outlook) sends email using SMTP.
+
+SMTP server forwards the email to recipient’s mail server.
+
+Ports: 25 (default), 587 (with TLS).
+
+Example:
+
+You send an email from alice@gmail.com to bob@yahoo.com.
+
+Gmail’s SMTP server forwards it to Yahoo’s mail server.
+
+Key point: SMTP is for sending mail; for receiving, protocols like IMAP/POP3 are used.
+
+
+
+
+
+4.Use case: Real-time, two-way communication between client and server.
+
+How it works:
+
+Unlike HTTP (request–response), WebSockets keep a persistent connection open.
+
+Client and server can both push messages anytime.
+
+Ports: Usually 80 (ws://) or 443 (wss:// secure).
+
+Example:
+
+Chat apps (WhatsApp Web, Slack).
+
+Live stock market tickers.
+
+Online multiplayer games.
+
+Key point: Low-latency, full-duplex (both sides talk simultaneously).
+
+
+
+3️⃣ FTP
+
+Full form: File Transfer Protocol.
+
+Use case: Uploading and downloading files between client and server.
+
+How it works:
+
+Client connects to FTP server using username/password.
+
+Commands: GET file.txt (download), PUT file.txt (upload).
+
+Ports: 21 (control), 20 (data).
+
+Example:
+
+A developer uploads website files to hosting server via FTP.
+
+Key point: Not secure by default → FTPS (FTP over SSL/TLS) or SFTP (SSH File Transfer Protocol) are used for secure transfer.
+
+
+
+2.Peer 2 peer
+*we have 2 client
+*we have one server
+*now thwy all can tal to each other
+*we dont need the serere between 2 machine here 2 machine can talk directly and they are fast
+*
+
+
+
+Transport layer
+1.tcp/ip 
+*in tcp ip we have the virtual connection
+*and then we send the data in packets and there must be ordering 
+*and once they reach the server they needs to be acknoeldege to the client
+*if no acknowledgement send then it client again sent the adat packets
+*1. Protocols in Transport Layer
+
+There are mainly two protocols here:
+
+1. TCP (Transmission Control Protocol)
+
+Connection-oriented → A virtual connection is established before data transfer (like a phone call).
+
+Reliable → Guarantees delivery of data.
+
+Ordered delivery → Reassembles packets in correct sequence.
+
+Error-checking & retransmission → If a packet is lost, TCP resends it.
+
+Flow control → Prevents sender from overwhelming receiver.
+
+👉 Used in: Web browsing (HTTP/HTTPS), email (SMTP/IMAP/POP3), file transfer (FTP), remote login (SSH).
+
+
+
+udp
+*here first of all no virtual connection is set up
+*then data is split in chunk and send
+*but here no ordering happens
+*and here no guarnetee adta will get deleivered
+*here no rentransmissoon or confirnmation
+*Used in: Video streaming, VoIP, gaming, DNS queries.
+
+
+
+so the webrtc proptocol in peer 2 pier uses the udp protocol under the hood
+*
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+cap theorem
+*cap system defines the desirable property of the distributed system with replocated data
+*suppose we have one db node in india and one in the usa so these are the distributed system
+*and these both have the duplicated data
+*we have the application that is accessing these db node independently
+*so cap is the cap system defines the desirable property of the distributed system with replocated data
+*and thsese 3 properties consistency,availability,partial tolerance cant be used at once
+
+so consistency measn suppose application write a=5 instead of 4 in A node
+*so now it hsoul also update the a in B db node
+*so that when application read from d db node it should give 5
+*so consistency emans after successful write in one node then the read from another node must be consistent
+
+
+*availability measn all node should repond to the application
+*
+
+*partition tolerance means suppose there is brakage in the distributed system but application is still able to query or send request and gets repojse its called partition tolerance
+
+
+possible are ca,cp,ap but cap  together is not possible
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+In this video we have discussed :
+
+Monolithic architecture
+Microservice architecture 
+Microservice phases
+Decomposition  Pattern in detailed
+Advantage and Disadvantage of Monolithic and Microservices
+
+
+Monoloithic architecture
+*suppose we have the online shopiing portal 
+*so we have clinets then we was the controller layer tan w have different module then dao layer which interact with databases
+*so this monolitihic tructire is wasy to develop,easy to test,and easy for deployment,easy to scale by horizonatl scaling
+*now the company grows so the application measn many controller layer,may dao,many tables added
+*Disadvantages of Monolithic Architecture
+1. Scalability Issues
+
+You can’t scale only one part of the system; you must scale the whole application.
+
+👉 Example: If only the reporting module is receiving heavy load, you still need to deploy multiple copies of the entire app, wasting resources.
+
+2. Tightly Coupled Codebase
+
+A small change in one module may affect others (hard dependencies).
+
+👉 
+
+4. Limited Technology Flexibility
+
+You’re stuck with one tech stack across all modules.
+
+👉 Example: If the app is in Java, you can’t build the analytics module in Python (better for ML) — everything must be Java.
+
+5. Hard to Maintain (Code Complexity)
+
+As the app grows, the codebase becomes huge and difficult for new developers to understand.
+
+👉 Example: A large e-commerce monolithic app with millions of lines of code makes debugging and onboarding painful.
+
+6. Reliability Problem (Single Point of Failure)
+
+If one module crashes, it can bring down the entire application.
+
+👉 Example: If the payment service fails, the entire e-commerce site may go down — login, browsing, cart, etc.
+
+7. Slow Release Cycle
+
+Teams can’t release features independently. Everyone must coordinate for a single release.
+
+👉 Example: Marketing team wants to push a “discount coupon” feature, but must wait until the billing team finishes their changes.
+
+🔹 Real-Life Example
+
+Imagine a banking application (Monolithic):
+
+Modules: Login, Fund Transfer, Loan Processing, Notifications.
+
+If the Loan Processing module needs an update, the whole banking app must be redeployed.
+
+During deployment, all services (including login and fund transfer) are unavailable → downtime for customers.
+
+
+
+✅ Summary:
+Monolithic = Easy to start, but hard to scale, maintain, and update as the system grows.
+That’s why companies move to Microservices, where modules are independent, scalable, and can use different tech stacks.
+
+
+
+What is Microservice Architecture?
+
+*Microservice Architecture is a way of building applications as a collection of small, independent services.
+*Each service is responsible for a specific business function (e.g., payment, user, inventory).
+*Services communicate via APIs (REST, gRPC, message queues, etc.).
+*Each can be developed, deployed, and scaled independently.
+
+
+
+Key Characteristics
+*Independence – Each microservice can be deployed without affecting others.
+*Decentralized Data Management – Each service may have its own database (polyglot persistence).
+*Scalability – Scale only the services that need extra resources.
+*Technology Flexibility – Different services can use different programming languages or databases.
+*Resilience – Failure of one service doesn’t crash the entire system.
+
+
+Microservice Example (E-Commerce App)
+*🔹 Microservice Example (E-Commerce App)
+
+Imagine Amazon built with microservices.
+
+User Service → Handles login, signup.
+
+Product Service → Manages catalog, inventory.
+
+Cart Service → Manages user’s shopping cart.
+
+Order Service → Processes orders.
+
+Payment Service → Handles payments.
+
+Notification Service → Sends email/SMS updates.
+
+👉 If traffic increases only on Product Service (during Black Friday), you can scale that service alone — no need to scale the whole app.
+
+Advantages of Microservices
+*Scalability → Scale services independently.
+✅ Faster Deployment → Teams deploy their services separately.
+✅ Resilience → Failure in one service doesn’t bring down the whole system.
+✅ Technology Diversity → Teams can choose the best stack per service.
+✅ Faster Development → Parallel development by different teams.
+✅ Easier Maintenance → Smaller codebases per service.
+
+
+
+Microservice challenge
+*additional complexity with distributed system
+*communication between service is challenging
+*deployment complexity
+*monitoring complexity
+
+What are the problems with the which cant be solved without changing the architecture
+*when we add new feature we need to amke lot of changes
+*on demand scaling
+*and afdd the technologu is much cost
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Microservice design principles
+1.Independentent/autonomous
+*here small team size
+*parallel development
+*independent deployment
+
+
+2.fault tolerance/design for failure
+*means eror comes at one it should not affect other
+*if fault come in any service it should not affect other services
+*consider failure analyze and shult not come agin
+
+
+3.now the observable
+*we need to centralized monitoring
+*then we need to have centralized logging
+*then do the health check system
+
+4.discoverable
+*there must be one service  whwre all services are registered
+*and then the and every service must be aware of other service because all services are registered atsome centralized service
+*It makes client life easy
+
+
+
+5.Domain driven
+*each service should take care of one thing at a time
+
+
+6.Decentralization
+*each database for each service
+*choce of database depnds on each service
+*
+
+
+
+7.High cohesion
+*high cohesion means that each service should follw the srp
+
+
+8.Single source of truth
+there should be single source of truth
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Microservice design patterns
+*we need our services to be 
+*highly available
+*highly scalable
+*Resilient to features
+*efficient
+
+
+
+*design patterns helps in solving specific microservice architecture
+*decomposition pattern comes when we are designing the microservice
+*so in the decomposition we have the 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Decomposition 
+
+There are 2 kinds of project under microservices
+*monolithic to microservices-then the brown field projects
+*microservices from scratch-green field projects
+*micro means small
+
+1.Now to decide the size of microservice
+🔹 What is Decomposition in Microservices?
+
+When moving from a monolithic to microservices, you need to decide how to split the application into smaller services.
+
+This “splitting” is called decomposition.
+
+Bad decomposition = tightly coupled services → micro-monolith.
+
+Good decomposition = independent services aligned with business needs.
+
+🔹 Decomposition by Domain / Subdomain
+
+This is one of the most recommended approaches because it’s based on business capabilities instead of technical layers.
+
+It comes from Domain-Driven Design (DDD):
+
+Domain = The overall problem space (your business area).
+
+Subdomain = A smaller, specific part of that domain.
+
+Each subdomain can become a microservice.
+
+ Think: “Organize microservices the way the business is organized.”
+
+
+
+Example: E-Commerce Application
+Domain: E-Commerce
+
+Subdomains could be:
+
+Customer Management
+
+Signup, Login, Profile → User Service
+
+Product Catalog
+
+Add, Browse, Search → Product Service
+
+Shopping Cart
+
+Add to Cart, Remove → Cart Service
+
+Order Management
+
+Place Order, Track Order → Order Service
+
+Payment
+
+Process payments, Refunds → Payment Service
+
+Shipping
+
+Address, Delivery Tracking → Shipping Service
+
+Here, each subdomain = one microservice.
+If the Payment Service goes down, other subdomains (like browsing products) still work
+
+
+
+
+2.Strangler pattern is
+*suppose we have the monolithic architecture in which we have one module as the product management
+*we need to convert it into the one microservice service
+*suppose we have the account management which is having has of the product management in teh monolithic architecture
+*now we have converted this product amangement to the product management microservice
+*now we have to design a strategy such that in between such that account management should call either the product management module or product managmenet service through a route
+*route is basically a if else condition on the basis of which it will call the product management module or the service
+*so our final goal is this product management should go to the production for that we ned to send 10 request to the product management miroservice and 90 to the module if working fine increase if not then reduce percentage of requests on the microservice
+
+*1:transform:so diffrenet phase of strangler pattern is transform the module in microservice
+*2.and then coexist ,with the help of route co exist the product management module and micro service
+*3.then eliminate the module and make in production the new microservice
+
+Why is it called “Strangler”?
+
+Answer: Inspired by the strangler fig tree that grows around a host tree, gradually replacing it until the host dies. Similarly, the new system (microservices) slowly replaces the old monolith.
+
+
+
+3.Sidecar pattern
+*so basically what happens is that the we have some common feature in each service
+*
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Database pattern
+*so absically requirement of each service is that they can be they should be loosely couples so that they can be 
+*developed independently
+*deployed independently
+*scaled independently
+
+and requirement for each service is that the in each service
+there must be different  data 
+and there must be different storage type
+
+*so for each service we have the databses 
+*now we want rdbms
+*then for each service we can have the set of table used that for service
+*or for each service we can have one schema private to thatservice
+*or for each service we can have database server
+
+Note:use schema for each service
+challenges
+*queries that joins over multiple databases-use the cqrs
+*transaction between multiple databases-use the saga pattern
+
+cqrs
+*command query responsibility segregation
+*suppose we hav eth 2 service product service with its own databases
+*now user come create ,update dlete from product service so this isone phase
+*second time user come and view only so thats view phases
+*but here view phase and create phase are done on one db only
+*so we need to separten the query phase and the creation phase
+*so we have prouct service with database and here we can have create ,update delete phase
+*another we have the history service with database to view only
+*now when we perform the create in the database of pruct service how data can be replicate in history service db
+
+1.first way is event handling so when data is stored in the product service database then event is passed from the product service to history service
+2.second way is through the database trigger and procedure such that data stord in the product service db can be replicated in the history service database
+
+
+The challenges with the cqrs
+*delay in the data replication
+*
+
+cqrs benefit
+*4. What are the benefits of CQRS?
+
+✅ Scalability → Scale read and write workloads independently.
+
+✅ Performance → Use separate optimized databases (NoSQL for queries, RDBMS for writes).
+
+✅ Flexibility → Different models for reads vs writes.
+
+✅ Maintainability → Clear separation of concerns.
+
+
+
+
+
+
+
+
+
+
+Saga pattern
+
+*A transaction is a unit of work that must be executed fully or not at all (atomic).
+*In monolithic apps with a single database → transactions are easy (ACID: Atomicity, Consistency, Isolation, Durability).
+👉 Example: In a banking app, transferring ₹1000 from Account A to B — both debit and credit must succeed together.
+*Transactions in Microservices
+
+In microservices, the challenge is:
+
+Each service has its own database.
+
+A single business operation may involve multiple services.
+
+ACID transactions across multiple microservices/databases are hard (distributed systems).
+
+
+*saga is used to maintain the data consistency across various services in distributed transaction scenarios
+*it is sequence of transaction which updates each service and publish event to trigger the next transaction step
+*If a step fails ,the saga rollback to previous transaction
+
+Saga is actually a sequency of local transactions
+each local transaction happen updates the db the trigger evenet if ome fails it emits the compensatable transaction
+*compensatable transaction are those which can be reversied by processing another ransaction in reverse order
+
+Saga implementataion
+1.. Choreography (Event-driven)
+
+There is no central coordinator.
+
+Each service performs its local transaction and then publishes an event.
+
+Other services listen to the event and react accordingly.
+
+If a failure happens → services publish compensating events to undo previous actions
+*Example (E-commerce Order)
+
+Order Service → Create order → publish OrderCreated.
+
+Payment Service (listens to OrderCreated) → Process payment → publish PaymentDone.
+
+Inventory Service (listens to PaymentDone) → Reserve stock → publish StockReserved.
+
+Shipping Service (listens to StockReserved) → Ship order.
+
+If Payment fails → PaymentFailed → Order Service cancels order.
+
+
+
+
+✅ Pros:
+
+Simple (no central brain needed).
+
+
+Cons:
+
+Hard to track the flow (who triggers whom).
+
+
+
+2..2. Orchestration
+
+A central orchestrator (Saga Coordinator) controls the saga.
+
+Orchestrator tells each service what to do (via commands).
+
+Each service replies with success/failure.
+
+Orchestrator decides the next step or triggers compensations if failure occurs.
+
+👉 Example (E-commerce Order)
+
+Orchestrator → tells Order Service to create order.
+
+Order Service → responds success.
+
+Orchestrator → tells Payment Service to deduct payment.
+
+Payment Service → responds success.
+
+Orchestrator → tells Inventory Service to reserve stock.
+
+Inventory responds success.
+
+Orchestrator → tells Shipping Service to ship order.
+
+If payment fails → Orchestrator triggers compensations (e.g., cancel order).
+
+
+✅ Pros:
+
+Centralized control = easy to track & debug.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Scale from 0 to million
+*suppose whave our local server which conatisn code and client interacts and its works fine
+*so we host in the cloud server it has some ip
+*now what happend any client access any server by ip
+*so wehen we to type goggle .com its goes to dns whicg return ip and then we connect to server
+*now what happens i many usera are coming so we introduced databases
+*let it be horizonatl or vertical
+*now many more request so we created many server and used the load balancers
+*to map request to server
+*then again many usrs and allserver request goes onone db
+*so we created local copies of db
+*and follows the master slave architecture for dbs
+*suppose on the login we say the profile ,now many user want to see tripti dimri
+*so one thing all user one by one get it from db but it will be time consuming
+*so we have the cache db first the clinet request find it in the clinet db if oud give response elese find from the adtabases
+*incacahe data we store the frequenecy asked request
+*what is cdn scdn stores the share data that can be used my many servers
+*so suupose my website use the google fon any many more websit used
+*so client comes request will go the nearest cdn which stores the goggle fonts
+*now comes suppose i made request it will takes 200ms to compute and then retirn response measn loading going on client this is sync
+*now another scenario is request comes setver put in message que and sed reponse we will send you after some time 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------What is hashing
+*hashing is the hashing function that takes arbitrary length argument return fixed length string
+*so wes tore this in the hashatble of fixed size
+*so the key gets store at return from hashfunction % size of hashtable
+*this works best ehn the hastable size is fix
+
+
+
+*lets see the 2 usecase of load balanace for application layer and horizonatl sharding
+*so in both case how to divide such that load on each server is uniform
+*so here the thing is that the no of server is not fixed in both
+*so as the nof of server changes so does the modulo 
+*due to which we need to do reblancing for multiple enteries
+
+
+so consistent hashing is you can rebalance upto 1/n of the total no of keys
+*so here we take the ring
+*here hash the serve r and map on the ring
+*similarly hash the key ans map on the ring
+*now move clcokcwise then the for key 1 the nearest hashed server will be mapped 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+url shortner deisgn system
+
+functional
+*url shortner
+*redirection
+*expiry
+
+
+non functional
+*latency fast result
+*url should not be predictable
+
+
+
+system capacity
+*read heavy or wrute havy
+*ask in a amonth how many redirection and how many write calls so ist 100:1 measn 100 is redirection and 1 is the write
+*in one month 100 million redirection measn 100000000/30*24*3600=50qps
+*and foe write 1 million 1000000 and its expiry time is 10 years so in bytes=1000000*12*10*500 whwre 500 is size of one url
+*converted to kb
+*GB=10243Bytes​
+*so its 64 gb storagae hard disk required primary 
+*ram for caching with 1 day ttl
+*now to calculate size of ecodary memory
+*50 qps and in 1 day=5 million
+*only 5 % i will store in cacahe that meas 1.25*500bytes=1 gb for cacahe
+
+
+
+
+hld
+*apis->
+1.shortenurl(url,userId,key,expiry)->here the key is generate for each userId for security
+2.dleteUrl()
+*signup
+*login
+*logout
+*redirection
+
+*database 
+we will use the mongodb as its highly available 
+
+so create table are
+User->user id,api key,name,email,created_at
+
+Url->original_url,shorten_url,user_id,expiry_date,creared_at
+
+*algorithms
+long->short
+and no collision
+we can use the md5 hash that return 128 bit but if we take 5 character then these can be same for other url so we need to avoid collision
+
+so we need to decide the length of url
+62 powe n>1000000*10*12 here we can get n
+*heren=7
+*so here we will not use md5 hash and we will use base62 tahat takes the number as input 
+*so for each long_url generate the random number give to base 62 and store result of it in db
+*now for another url,this generated number can be same so we can apply the property in db that store if data is not already present in db
+*but in mongo no contsranint can be applied 
+* 
+*so our rewuirement is that number generated for each url must be unique
+*So you need a centralized, distributed, unique counter generator → this is where Apache Zookeeper helps. 
+*Zookeeper can generate monotonically increasing unique IDs across distributed systems.
+
+It maintains a znode (like a node in a filesystem).
+
+If you create a sequential znode, Zookeeper automatically appends an incrementing counter.
+
+*Note:on db storage please maintain the cache with most frequent entries
+Note:db must be consistent and there must be read and write replicas
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Back of the envelope estimation
+*so boe estimation drives our decision for system design
+*we should use the load balancer or not
+*consideration->rought estimation
+*cheat sheet
+*thousand-kb
+*000000-mb
+*000000000-gb
+*000000000000-tb
+
+charater-2 byres
+long double -4 bytes
+
+So for storage calculations
+*x million users*ymb=1 xy tb
+*
+
+1.Traffic calculations
+*user-1 billion
+*daily usre-250 million
+*readand write qyery is 7
+*so query per seconds=250000000*7/24*60*60=18k per second
+
+
+Storage assumptions
+*each user is doing the 2 post(each of 250 chacaters)=250*2*2 byres=1000 bytes
+*so daily we have 250 million uses=250million*1 kb=250 gb per day
+*and for image 25 million*300kb=7500gb=8000gb->8tb/per day for image
+
+
+rAM estimations
+*so we are using last 5 post post in cacahe
+*for 1 post=250*2=500byres*5 post=2500 bytes
+*250 million*3000 byres=750 gb per day for cacahing
+
+latency
+*95% 500 ms
+*means in 500 ms i am serving 1 request so in 1 sec=2 request adn server has 50 thread
+*so 100 request per second cab be served by one server
+*and request coming to server are 18k
+*so no of servers are 180 servers
+*
+
+
+cap theorem (tradeoffs)
+*ask interviewers
+*here  and p we will considers
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+🏗️ Step 1: Clarify Requirements
+
+Operations:
+
+put(key, value)
+
+get(key)
+
+Constraints:
+
+Value size: ≤ 10 KB
+
+Keys must be unique
+
+Must be highly available and scalable
+
+Consistency: Tunable (can choose strong or eventual consistency)
+
+Low latency (fast lookups)
+
+🏗️ Step 2: Basic Building Block
+
+In-memory hashtable → O(1) put/get.
+
+Problem: limited memory, single node → doesn’t scale.
+
+So:
+
+Move to distributed system with partitioning + replication.
+
+🏗️ Step 3: Data Partitioning
+
+Use consistent hashing to distribute keys across servers.
+
+Example:
+
+Keys hashed into a number space (e.g., MD5 → 128-bit).
+
+Each server/node gets a range of the hash space.
+
+Lookup = hash(key) → find which node owns it.
+
+✅ Advantage: When nodes join/leave, only small data needs to move.
+
+🏗️ Step 4: Data Replication
+
+To ensure availability → replicate data on multiple nodes.
+
+Example: Replication factor = 3.
+
+Node N1 (primary), N2, N3 (replicas).
+
+If N1 goes down, reads/writes can still happen from N2 or N3.
+
+🏗️ Step 5: Tunable Consistency
+
+When a client writes:
+
+Can wait for W replicas to acknowledge.
+
+When a client reads:
+
+Can read from R replicas.
+
+Rule: if R + W > N, then strong consistency.
+
+If not, we get eventual consistency but lower latency.
+
+👉 Example:
+
+Replication factor (N) = 3
+
+If W=2, R=2 → strong consistency
+
+If W=1, R=1 → fast, but eventual consistency
+
+🏗️ Step 6: Storage
+
+Hot data (frequently accessed) → kept in in-memory cache (Redis-like).
+
+Cold data → stored on disk/SSD for persistence.
+
+Compression can be applied to save space.
+
+🏗️ Step 7: High Availability
+
+Use leader election for replicas (Zookeeper/etcd).
+
+If a primary node dies → a replica becomes leader.
+
+Use heartbeats to detect failures quickly.
+
+🏗️ Step 8: Scalability
+
+Horizontal scaling → add more nodes.
+
+Consistent hashing ensures minimal rebalancing.
+
+Support for sharding → each shard is a smaller KV cluster.
+
+🏗️ Step 9: Handling Partition Tolerance
+
+According to CAP theorem:
+
+During partition, must choose Consistency (C) or Availability (A).
+
+Example:
+
+Banking system → choose C (block writes until replicas sync).
+
+Social feed / caching → choose A (allow reads/writes, sync later).
+
+🔹 Interview Style Answer (Crisp)
+
+If asked “How would you design a Key-Value Store?”, you can say:
+
+I’d start with a simple hashtable for O(1) put/get, but since memory is limited and we need high availability + scalability, I’d move to a distributed key-value store.
+
+Use consistent hashing for partitioning keys across nodes.
+
+Use replication to ensure availability.
+
+Support tunable consistency by allowing reads/writes from configurable number of replicas.
+
+Store hot data in-memory for low latency and cold data on disk.
+
+For fault tolerance, use leader election and replica promotion.
+
+This way, the system is scalable, available, and tunable on consistency/latency trade-offs depending on business needs.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------1. Partitioning
+
+👉 Think of cutting your data into pieces so it’s easier to store.
+
+It’s a general term for dividing data.
+
+Can be horizontal (split by rows) or vertical (split by columns).
+
+✅ Example:
+You have a table of 1 billion users.
+
+Users in India go to DB1.
+
+Users in US go to DB2.
+
+Users in Europe go to DB3.
+
+This is partitioning — you split one big table into smaller pieces.
+
+🔹 2. Sharding
+
+👉 Sharding is just a special kind of partitioning (usually horizontal).
+
+Each partition is called a shard.
+
+A shard key (like user_id % 3) decides which shard holds the data.
+
+✅ Example:
+You decide to shard users by user_id:
+
+If user_id % 3 == 0 → goes to Shard1.
+
+If user_id % 3 == 1 → goes to Shard2.
+
+If user_id % 3 == 2 → goes to Shard3.
+
+So, instead of one huge DB, you now have 3 smaller DBs.
+👉 Sharding = partitioning across multiple machines.
+
+🔹 3. Replication
+
+👉 Replication means making copies of the same data on different machines.
+
+Goal = high availability & fault tolerance.
+
+If one server fails, another has the same data.
+
+✅ Example:
+You store users in DB1.
+
+You copy the same data into DB2 and DB3.
+
+If DB1 crashes, DB2 can take over.
+
+This is replication — same data, multiple places.
+
+🔹 Putting Them Together (Super Simple)
+
+Partitioning → Cutting big data into smaller parts.
+
+Sharding → Partitioning done across multiple machines using a shard key.
+
+Replication → Copying the same data on multiple machines.
+
+✅ Example with Twitter:
+
+Tweets are sharded by user_id (so different users’ tweets live on different DBs).
+
+Each shard is also replicated 3 times for reliability.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+sql vs no sql
+*SQL (Relational)
+
+Stores data in tables (rows & columns).
+
+Fixed schema (must define table structure first).
+
+Relationships via foreign keys & joins.
+
+Example: MySQL, PostgreSQL.
+
+
+Stores data as key-value, document, column-family, or graph.
+
+Schema-less / flexible schema.
+
+Designed for hierarchical, nested, or denormalized data.
+
+Example: MongoDB (document), Redis (key-value), Cassandra (columnar).
+
+
+
+
+
+Scalability
+
+SQL
+
+Typically vertically scalable → add more CPU, RAM, SSD to one big machine.
+
+Sharding is possible but complex.
+
+NoSQL
+
+Designed for horizontal scaling → add more cheap commodity servers.
+
+Built-in sharding, partitioning, replication.
+
+
+
+Consistency vs Availability (CAP Theorem)
+
+SQL → prefers Consistency over Availability
+
+Strong consistency (ACID: Atomicity, Consistency, Isolation, Durability).
+
+Example: Banking transactions.
+
+NoSQL → prefers Availability & Partition Tolerance
+
+Eventual consistency, tunable consistency (BASE: Basically Available, Soft state, Eventual consistency).
+
+Example: Social networks, caching, analytics.
+
+
+
+
+5. Use Cases
+
+SQL:
+
+Banking, e-commerce transactions, enterprise apps.
+
+Where ACID transactions are critical.
+
+NoSQL:
+
+Real-time analytics, social feeds, IoT, caching.
+
+Where scale & availability matter more than strong consistency.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+wattsapp design system
+*Design a achat server to send the message receive to direct friend or the groups
+1gathering of functional and non functional requirements
+.Requiremnets:
+login,
+send message one to nene,
+groups,
+see history,
+send images also
+recipts after delivery
+
+
+Non functiona rqeuirements is:
+1.scalability->1 billion user *100 msg per day*1000bytes=10 tb
+2.cap here we need availability non consistency
+3.latency must be low means we can serve one request in the 300 ms
+*and system must be reliable once ,essage send no data loss
+
+
+
+
+2.Core entity
+*User
+*groups
+*message
+
+3.api design
+*post->call for sign up{name,emal}
+One to one:
+*now to send message WS:v1/message /send
+*now to see the all chats v1/chat/{userid}:List<chat>pagination
+*now to see chat with on peson v1/message/{userid]/receiver id and here the lazy load will be ther
+
+group message 
+*post->create group
+*post to add members in the group by group id 
+*post to remove by the group id 
+*here also to end the message we will use the web sockets 
+*to see all chats history v1/group/{group id}:List<chat>pagination or lazy load
+
+
+Note:n API Gateway is a single entry point that sits between clients (mobile, web, 3rd party apps) and backend microservices.
+
+👉 Instead of clients calling many services directly, they call the API Gateway, which:
+
+Routes the request to the correct service.
+
+Applies policies (security, rate limiting, logging, monitoring).
+
+Aggregates responses if needed.
+
+
+
+
+
+
+Why Do We Need an API Gateway?
+
+Single entry point
+
+Without gateway → client needs to know the address of every service.
+
+With gateway → client only knows one endpoint.
+
+Request Routing
+
+Gateway sends /users/123 → to User Service.
+
+Sends /orders/567 → to Order Service.
+
+Security
+
+Handles authentication & authorization (e.g., JWT tokens, OAuth).
+
+Prevents exposing internal services directly.
+
+Load Balancing & Failover
+
+Distributes traffic across multiple service instances.
+
+Rate Limiting / Throttling
+
+Prevents abuse (e.g., max 1000 requests/min per user).
+
+Response Aggregation
+
+If a client needs data from multiple services, gateway can combine responses.
+
+Example: /userDashboard = data from User + Orders + Payments service.
+
+Cross-cutting concerns (things common to all services)
+
+Logging
+
+Monitoring
+
+API versioning
+
+SSL termination
+
+
+High level design
+*so usres 
+*then load balancer and api gateway for authentication,authorization and distribute traffic across many server
+*than user service with user db
+*mssg service with message db
+*but file cant be stored in the db so they need to be storedin blob
+*group service and group db
+
+
+low level design
+*user db enetities will be userId,username,email,phone
+*group db will have group id,group name,group description and it will also have group mapping db which will have id,group id,user id here grup id is not uniwye as many users acn have same user id
+*Note:in web sockets sending and recieing of messga etakes place at sam timed
+
+chat service
+*now we also need the websocke gateway which will route all websocket api to the chat service
+*so b=first the http call to intiate the websocket than the handshake or acknowledhemebt nd gfinallly web sockert commectin is et up
+*so every use is cokected to diffrenet chhtservice
+*suppoe to the service 1 i send message,user1.user 4
+*now we need to send message first we need to find trhe service through which this user 4 sis connected
+*so it will find the mapper object which will store each use is mapped to which webscooket connection
+*so we will store this mapper object in ther redis cache
+*now all websocket connection will not always open si here we ahve the ttl
+*now suppose one user got offline so its entry will be eremoved from registry
+*and whn he comes its entry will be created again
+*suppose user 1 is swnding data to the user 4 who is oofline in that scenario  we need to store data in db but db can be full so we will sue the redus stream which will store the messafe and will find the channel whwre receiving service is subscribed
+*and then goes to the msg service who consumes the redis stream nd out it in chat dbchat db
+*and one more thing w also want to send the notification to user 4 for that notification service afte theredis stram 
+
+
+
+group service
+*first user send messagein the group
+*request in chat service
+*then the group service and it return list of users
+*we iterate through user and find they are active or not
+*if active emans in redis cache we send if not active then that redis stream flow
+
+to upload the video or photo we have another service as pjto upload with s3 db
+*as soon as data is stored a call is made throught websocket gateway with video and get stored inm teh caht db
+
+
+
+*suppose i want to show the user available ofr thet first check in redis cache webet connect is alive if alive make updation is use db lastseen
+*for that we will implement cdc pipelineover here
+*
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Design rate limiter
+*ddos attack is client sending forge reuest tos erver due to which all server resources get compensated 
+*now new clinet cant make the request
+*now we have alogorithms 
+1.token bucket here we have the bucket of teken which have rhe capacity
+*and if we have more token than acapcity than bucket will overflow
+*and then w have refiller which refille after some time
+
+so the thing is request comes it check if the toke in bucket then consume if no teken thena the request denied
+*so to each user we assign some token =3and time :1 min after which it will get filled with the refiiler
+
+user1->post->{counter :2,4:30:00}
+user1->post->{counter :1,4:30:35}
+user1->post->{counter :0,4:30:45}
+user1->post->request denied
+
+2.leaking bucket
+so we have the bucket and we have open tap which give water so they are request
+*now there is leak in bucket from where request are proceesed at fixed rate 
+*if more request due to which overflow than the request denied
+*it is impelmeted using the quqeue
+*request comes and check if queye is empty then add else if full deny
+*Not suitable for amazon whre many request in night
+
+
+3.fixed window counter
+*here widow of fixed size and counter
+*as request comes in fixed window size counte decrease as it become 0 request denied
+
+Note:disadvantage for edge case scenario request become dubke
+
+
+
+4.sliding window log
+*1️⃣ Sliding Window Log Algorithm
+✅ How it Works
+
+Maintain a log (timestamp list) of every request per user.
+
+When a new request comes in:
+
+Remove old timestamps that are outside the window (e.g., older than 1 min).
+
+Check the number of timestamps left.
+
+If it’s below the limit, allow the request and log its timestamp.
+
+If above the limit, reject the request.
+
+✅ Example
+
+Limit = 5 requests per 1 minute.
+
+User makes requests at: t=0s, 5s, 10s, 15s, 20s.
+
+Now at t=30s, user makes another request:
+
+Remove timestamps older than t-60s (none removed here).
+
+Log = [0,5,10,15,20] → already 5 → reject request.
+
+At t=65s → remove 0s log entry → now only [5,10,15,20] → allow request.
+
+
+
+
+to design ratelimiter we need client then sthe rate limiter then the server
+*ratelimits akso connected to redi to store counter
+*and also connect to cdn to have the config file
+
+Client  →  API Gateway / Rate Limiter  →  Server (Backend)
+                          │
+                          ├─ Redis (store counters/logs)
+                          └─ Config (from DB / CDN / etc.)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Message queye
+*what is message uque 
+*we have one producer who produces the message
+*this mesaage goes into queue
+*and then consumer reads this message from the queue
+
+Usecase:
+1.async task 
+*suppose a auser buy a product from e com application we want to send notification
+*but he needs not to wait we need to send quickly
+*so it  e comm application will produces the message sne notification
+*sen dnotification application consume the message and then send the notification to user
+
+
+question is why cant we send directly from e com aaplication to send notification application here because time is increase
+2..next question is why we need message queue because retry capability is added means i ssend notification application is down then the retry mechanism works in message que it put backs message again
+3..pace matching for many producer with one consumers
+
+what is pubsub and p2p?
+*in p2p message whenever message is put message queue ,it can be processesd or consumed by one consumer means single message must be consumed by one cinsimer
+*in pubsub based on the echange logic or the message logiv message is put in all the queues means single message shold be consumed by many consumers
+
+so how does the message queue works
+*kafka-producer
+consumer
+consumer group
+broker
+topic
+partition
+offset
+zookeeper
+
+*we have producer
+*when we start kafka we have the kafka server starts or the broker
+*it has many topi
+*each topic has many partitions
+*partition are just queue
+then we have consumer group which has many consumer
+*Note:within one consumer group one different consumer consume different partitions
+*cluster is group of broker
+*zookepper helps to interacts bwtewwn the diffrente brokers
+*
+
+working
+*producer produces the message {
+key:
+value:
+partition:
+topic:}
+here value and topic is mandatory key and partition are not firstly oartition is calculated on basis of key if not the partition if not the first msg in p1 partition then second in partition2
+*Note:offset helps in by talling till which the consumer has ready from teh partition
+*Note:if any consumer down then the next consumer from the consumer group will read the partition from which last consumer left
+*note suppose tipic 1 in broker 1 with partition 0 as leader
+*its replica is topic 1 partition 0 in broker 2 as follower
+*a soon as one partition down then the folloer becomes the leader
+*question :what happens when consumer does not able to process mssg
+*so it will give three time try and will not increase the offser
+*if after three time fails put in the failure queye/dead leeter quue and increase the offset
+
+
+Rabbit mq is puseh based as here partition pushes message to consumer as sson as message comes from producer
+*1. Core Components of RabbitMQ
+
+Producer
+
+The application/service that sends messages.
+
+Example: Order service publishing an "order created" event.
+
+Broker (RabbitMQ Server)
+
+The middleman responsible for receiving, storing, and routing messages.
+
+Inside the broker, we have:
+
+Exchange: Takes messages from producers and routes them to queues (based on rules).
+
+Queue: A buffer where messages wait until consumed.
+
+Binding: Rules that connect an exchange to a queue (like routing logic).
+
+Consumer
+
+The application/service that receives messages from queues.
+
+Example: Notification service consuming "order created" messages to send an email.
+
+         ┌─────────────┐
+         │   Producer  │
+         └──────┬──────┘
+                │
+        Publish │ message (routing_key)
+                ▼
+         ┌─────────────┐
+         │  Exchange   │  (Direct / Fanout / Topic / Headers)
+         └──────┬──────┘
+                │
+        ┌───────┴────────┐
+        │                 │
+  ┌──────────┐      ┌──────────┐
+  │  Queue 1 │      │  Queue 2 │
+  └─────┬────┘      └─────┬────┘
+        │                 │
+   ┌────▼────┐       ┌────▼────┐
+   │Consumer │       │Consumer │
+   └─────────┘       └─────────┘
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+what is proxy server
+*suppose a child and he want chocolate
+*now he ask moms to bu she goes to shop says the rwuest take respins and give to child
+*so here mom is proxy server
+*child is client
+*here mom is proxy server
+*shopd is server
+*so proxy server is one between client and server and takes who takes request on behalf of the server
+*
+Types:
+1.forward proxy:here the proxy server hides the client from server,no server can connect to client because they dont the ip address,only they know the ipd addresss of proxy
+*so tehy help to access the restrictive contentas proxy can say its noy coming from india
+*we have the security as here after response  from server it can provide securitrty by not sendi g to client
+*it supports acching
+
+
+Reverse proxy the proxy sits between internt and the server
+*and it does not allow to intercat directly with the servers
+*these reverse proxy just give the ip of its own to internt
+*they are used in security as they prevent from ddso attack
+*they supports cacahing
+*they supports load balancing
+
+
+
+1. VPN (Virtual Private Network)
+
+Purpose: Secure communication over the internet.
+
+How it works:
+
+Encrypts traffic between a client and VPN server.
+
+Masks client’s real IP with the VPN server’s IP.
+
+Often used for privacy, secure remote work, and accessing internal networks.
+
+👉 Example:
+
+You connect to your company’s VPN → all your requests go securely through the VPN tunnel → then reach internal servers.
+
+✔ Key Point: Focused on security + private network access.
+
+
+
+
+
+🔹 3. Load Balancer
+
+Purpose: Distributes traffic across multiple servers to improve performance, reliability, and availability.
+
+How it works:
+
+Client sends request to Load Balancer (LB).
+
+LB chooses one backend server based on an algorithm (Round Robin, Least Connections, etc.).
+
+LB forwards request, server responds, LB returns response to client.
+
+👉 Example:
+
+1 million users hitting example.com → LB distributes requests across 10 backend servers.
+
+✔ Key Point: Focused on scalability + fault toleran
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Caching
+*caching is accessing data from the fast memory
+*It heps to reduce the latency
+*It helps to achieve the fault tolerance
+
+
+In server side caching
+*first application server ask for data from redis cache instead from db
+*suppose when many app servers are accesing the redis
+*but its not scalable it can take load from many clinet as its has limited space
+*and along with it single point of failure
+
+
+so here comes the distributed cacahing
+*so the thing that happens is that the each app sever talk to cache clinet to get te cacahe srver
+*and which srevre will be allocated is decided by the consistent hashing
+
+
+caching strategy
+1.cacahe aside
+*firts app server first cache if found cache hit and return to the clinet
+*if not then cache miss then app server ask from db  and store in cacahe an return to clinet
+*so pros is it suppoet hevy read
+*second pros is cache down still reposne
+*and its data modelis independ of db data models
+
+
+cons
+*for write first read is missed
+*then can be data inconsistency we need to apply cachibg on write also in case write update thde data cache still store prev value
+
+2.read through cache
+8same but if msiis thh now ccahe library askd from db store in the cache and return 
+pros
+*so pros is it suppoet hevy read
+*second pros is cache down still reposne
+
+cons
+*for write first read is missed
+*then can be data inconsistency we need to apply cachibg on write also in case write update thde data cache still store prev value
+*and its data modelis independ of db data models
+
+
+3.write around cache
+*so here the directly write data in cache
+*it does not update cache and make it invalidate by making it dirty
+
+
+4.write throught cache
+*write data incache
+*write data in db sync
+so pros
+*casche and db consistenr
+chance of cache hit increases
+
+cons:
+cant be used alone used with  write around
+if 1 one fail another also fails
+
+
+4.write back ccahe
+write data incache
+*write data in db async
+
+pros
+*heavy read
+*cache hit more chance
+*low latency
+
+cons
+*
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
