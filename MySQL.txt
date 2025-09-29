@@ -1,0 +1,1113 @@
+MySQL
+*there is app and database and we need to get,update and delete from database we need some toll called the rdms
+*MySQL is dbms
+*rdbms stores the data in table format
+*difference between sql and MySQL is
+*sql is a structured query language that is used to talk to databaaes
+*where MySQL uses the sql to talk to databases
+*to see all databases use the show databases;
+*its not case sensitive
+*to create database using the gui click on create schema
+*or by using the query updateuse create database school_db
+*now to use database run the query use school_db
+*now we are using school_db and now tocheck the database we are using run show database()
+*now to drop  a database use drop database school_db
+
+
+
+
+*create a new table
+create table student
+(
+id int,
+name varchar(100)
+);
+*to see the tbale run desc students
+
+
+
+Adding data in the table
+*insert into students(id,name) values (1,"neha")
+*insert into student values(1,"neha")//used whn we insert values of colum in the same sequence
+
+
+Reading data from the table
+*Select * from student
+*select id from student
+
+
+
+Update data in table
+*update student set name="Prachi" where id=1;
+
+
+delete data from table
+*delete from studene where name ="Prachi"
+
+
+dropping a table
+*drop table student
+
+*what are null values means suppose insert into student(id) value (10)
+*then in student table one more row with id as 102 and name as NULL
+*by default if we wont give any value to any cloum by default its NULL
+*insert into studnt values(NULL,NULL)
+*and we dont want that any colun to take the NULL value so
+*create table student
+(
+id int ,
+name varchar(100) not null,
+);
+*now if i write insert into student(id) value (10) cant possibl as it does not have default
+*insert into student(id) value (10,NULL) then the not possible
+
+
+How to set the default value
+*create table student
+(
+id int ,
+name varchar(100) default 'neha',
+);
+
+
+Primary Key
+*It uniquely identifies each record in a atble
+*Primary keys must contains unique values and cant be null
+*a table can have one primary key
+*so if we write insert into student(name) value("neha")
+*error as primary key cant be null
+
+
+
+Working with ethe auto increment
+*create table student
+(
+id int primary key auto_increment ,
+name varchar(100) default 'neha',
+);
+*insert into student(name) value("neha")
+*then select * from student we can see the 1 nehaa
+*insert into student value(101,"neha")
+*insert into student(name) value("neha")
+*thwn 1 neha 101 neha 102 neha
+*
+
+
+String functions
+*concate(string1,string2)
+*suppose we hav table as employee with column as emp_id,firstname,lastname
+*we need to concate firstname and last name aso
+*so slect emp_id,concat(firstname,lastname) as name from employee
+
+
+substring(string,pos1,pos2)
+*Note:here index start from 1 
+*and bot startpos and endpos is the inclusive
+
+replace
+*replace(string,partofstringtobereplaced,withwhichtoreplacestring)
+
+upper(string)
+lowr(string)
+char_length(string)
+select insert('hey neha',5,0,'golu ')->gives the hey golu neha as its used to insert the words in between
+
+
+
+Distinct keyword
+*Now to select the distinct keywords from the column name from table
+*select distinct fname from employee
+*
+
+order by
+*this is used when we need to sort on the basis of one column
+*supposewe have one column as the fname,we need to view the data that names must be sorted
+*so we write select * from employee order by fname
+*select * from employee order by fname desc
+*suppose we have the column as the deptname,fname then we wtite query as select * from employee order by deptname,dname
+*then sort first on the basis of deptname ,then for the fname for duplicate values in the deptname,their fname will be sorted
+
+
+
+like
+*suppose we need to find data which have the the cgarater as mention between the %as%
+*select * from employe whwre fname like '%ha%'
+*suppose we need to take 4 charaters length fname then select * from employe whwre fname like '----'.
+
+
+to add the new column 
+alter table employye 
+add column slary int not null;
+
+question we need to the find the employee with max slaray than selecet * from employee order by slary desc limit 1.
+
+
+
+
+count(*)
+it give count of all rows
+*selecet count(*) from emeployee
+*then count(*)
+      9
+*we have the qurstion we have the dept column which has the many department we need to find the unique departments
+*select count(distinct dept) from employee
+
+group by
+*suppose we have the dept with various dept 
+*we have another colum of f name 
+*suppoe in the dept we have thte it,eng,it,it,enf
+*i want count of people in the it department then the 
+*then select count(fname) from employee group by dept
+
+
+
+subquery we need to find the max sarly employee
+slect fname from employe where salry=(selecet max(salry) from employee)
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------1. WHERE clause
+
+Used before grouping (filters rows from the table).
+
+You can use it with normal columns (not aggregate functions).
+
+Example: filter employees whose age > 20.
+
+SELECT name, age, dept_id
+FROM Employee
+WHERE age > 20;
+
+
+👉 This removes rows that don’t meet the condition before grouping happens.
+
+🔹 2. HAVING clause
+
+Used after grouping (filters groups/aggregates).
+
+You can use it with aggregate functions like COUNT(), SUM(), AVG().
+
+Example: show only departments that have more than 2 employees.
+
+SELECT dept_id, COUNT(emp_id) AS total_employees
+FROM Employee
+GROUP BY dept_id
+HAVING COUNT(emp_id) > 2;
+
+
+👉 Here, HAVING checks the grouped results (not individual rows).
+
+📊 Quick Example with your Employee/Dept tables:
+Case 1: Using WHERE
+
+👉 Employees older than 20, then group by dept:
+
+SELECT d.dept_name, COUNT(e.emp_id) AS total_employees
+FROM Employee e
+JOIN Dept d ON e.dept_id = d.dept_id
+WHERE e.age > 20
+GROUP BY d.dept_name;
+
+
+Output
+
+dept_name	total_employees
+IT	2
+ENG	1
+FIN	1
+Case 2: Using HAVING
+
+👉 Show only depts where total employees > 2:
+
+SELECT d.dept_name, COUNT(e.emp_id) AS total_employees
+FROM Employee e
+JOIN Dept d ON e.dept_id = d.dept_id
+GROUP BY d.dept_name
+HAVING COUNT(e.emp_id) > 2;
+
+
+Output
+
+dept_name	total_employees
+IT	3
+✅ Rule of Thumb
+
+WHERE → filters rows (before grouping)
+
+HAVING → filters groups (after grouping)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+> Writing queries using group by  and having clause ?(Employee and Dept. table is there , you need to find the total count of employee related to a particular dept. whose age is greater than 20 )
+
+Employee Table
+emp_id	name	age	dept_id
+1	John	25	101
+2	Alice	19	101
+3	Bob	30	102
+4	Steve	28	101
+5	Maria	22	103
+Dept Table
+dept_id	dept_name
+101	IT
+102	ENG
+103	FIN
+📌 Query: Count employees per dept whose age > 20
+SELECT d.dept_name, COUNT(e.emp_id) AS total_employees
+FROM Employee e
+JOIN Dept d ON e.dept_id = d.dept_id
+WHERE e.age > 20
+GROUP BY d.dept_name;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+left join
+📊 Example with your tables:
+
+Employee
+
+emp_id	name	age	dept_id
+1	John	25	101
+2	Alice	19	101
+3	Bob	30	102
+4	Steve	28	101
+5	Maria	22	103
+6	Tom	29	999
+
+Dept
+
+dept_id	dept_name
+101	IT
+102	ENG
+103	FIN
+104	HR
+🔹 LEFT JOIN (Employee LEFT JOIN Dept)
+SELECT e.name, d.dept_name
+FROM Employee e
+LEFT JOIN Dept d ON e.dept_id = d.dept_id;
+
+
+✅ Output:
+
+name	dept_name
+John	IT
+Alice	IT
+Bob	ENG
+Steve	IT
+Maria	FIN
+Tom	NULL
+
+
+
+
+right join
+SELECT e.name, d.dept_name
+FROM Employee e
+RIGHT JOIN Dept d ON e.dept_id = d.dept_id;
+SELECT e.name, d.dept_name
+FROM Employee e
+LEFT JOIN Dept d ON e.dept_id = d.dept_id;
+✅ Output:
+
+name	dept_name
+John	IT
+Alice	IT
+Bob	ENG
+Steve	IT
+Maria	FIN
+Tom	NULL
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+what is procedure 
+*What is a Procedure?
+
+A Stored Procedure is a precompiled set of SQL statements stored in the database.
+
+You can call it by name, pass parameters (IN, OUT, INOUT), and execute complex logic (loops, conditions, DML, transactions).
+
+Think of it like a method in Java, but written inside the DB.
+
+
+-- Creating a Procedure
+DELIMITER $$ 
+CREATE PROCEDURE GetEmployeeCountByDept(IN deptName VARCHAR(50), OUT empCount INT)
+BEGIN
+    SELECT COUNT(*) INTO empCount 
+    FROM Employee e
+    JOIN Dept d ON e.dept_id = d.dept_id
+    WHERE d.dept_name = deptName;
+END$$
+DELIMITER ;
+
+-- Calling a procedure
+CALL GetEmployeeCountByDept('IT', @count);
+
+-- See result
+SELECT @count;
+
+
+
+What is a Function?
+
+1.A Function is also a stored block, but it must return a single value.
+2.Used in queries (SELECT, WHERE, HAVING, etc.) like a built-in function (e.g., SUM, AVG).
+
+Cannot perform DML (INSERT/UPDATE/DELETE) in most databases.
+-- Creating a Function
+DELIMITER $$
+CREATE FUNCTION GetAgeCategory(empAge INT) 
+RETURNS VARCHAR(20)
+DETERMINISTIC
+BEGIN
+    DECLARE category VARCHAR(20);
+
+    IF empAge < 25 THEN
+        SET category = 'Junior';
+    ELSEIF empAge BETWEEN 25 AND 40 THEN
+        SET category = 'Mid-level';
+    ELSE
+        SET category = 'Senior';
+    END IF;
+
+    RETURN category;
+END$$
+DELIMITER ;
+
+-- Using function in query
+SELECT name, age, GetAgeCategory(age) AS category FROM Employee;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+An index in a database is like the index in a book 📖.
+
+Instead of reading the whole book (table) to find a word (row), the index helps you directly jump to the page (row location).
+*In technical terms:
+
+1.An index is a data structure (commonly a B-Tree or Hash) that improves the speed of data retrieval.
+
+2.It stores a sorted copy of one or more columns along with pointers to the actual rows in the table.
+
+
+Why use Index?
+
+✅ Speeds up SELECT queries (search, filter, join, order by).
+✅ Helps enforce uniqueness (PRIMARY KEY and UNIQUE automatically create indexes).
+❌ But slows down INSERT, UPDATE, and DELETE (because the index also needs to be updated).
+❌ Consumes extra memory/disk space.
+
+Example
+
+Suppose we have a table:
+
+Employee
+
+emp_id	name	age	dept_id
+1	John	25	101
+2	Alice	19	101
+3	Bob	30	102
+4	Steve	28	101
+5	Maria	22	103
+Query without index:
+SELECT * FROM Employee WHERE name = 'Bob';
+
+
+👉 DB scans all rows one by one (Full Table Scan).
+
+Add index:
+CREATE INDEX idx_employee_name ON Employee(name);
+
+
+Now DB maintains a sorted structure on name:
+
+Searching Bob becomes O(log n) instead of scanning every row.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DML (Data Manipulation Language)
+*Used to manipulate data inside tables (rows).
+Examples:
+
+SELECT → Retrieve data
+
+INSERT → Add new data
+
+UPDATE → Modify data
+
+DELETE → Remove data
+
+Works on data only, not table structure.
+✅ Changes made by DML can be rolled back (if inside a transaction).it can be rolled back if not comited if commited cant be rollback
+
+When you run a DML command (like INSERT, UPDATE, or DELETE), the change is not permanently saved until you explicitly say COMMIT.
+If you decide that you don’t want the changes, you can undo them using ROLLBACK, but only if you haven’t committed yet.
+
+This is possible because DML statements work inside transactions.
+
+🔹 Example
+
+Suppose we have an Employee table:
+
+emp_id | name  | age
+-------+-------+----
+101    | John  | 25
+102    | Mary  | 30
+
+Case 1: Using Transaction with ROLLBACK
+BEGIN;   -- start transaction (some DBs use START TRANSACTION)
+
+UPDATE Employee SET age = 26 WHERE emp_id = 101;
+
+-- At this point: John’s age = 26 (but not yet permanent)
+
+ROLLBACK;   -- undo the change
+
+
+
+
+2.🔹 2. DDL (Data Definition Language)
+
+👉 Used to define or modify database schema (structure).
+
+Examples:
+
+CREATE → Create database objects (table, view, index)
+
+ALTER → Modify structure (add/drop column)
+
+DROP → Delete table/database
+
+TRUNCATE → Delete all rows (faster than DELETE, cannot rollback)
+
+⚠️ DDL commands are auto-commit → once executed, cannot be rolled back.
+
+
+
+3.3. DCL (Data Control Language)
+*Used to control access & permissions.
+*sed to control access & permissions.
+
+Examples:
+
+GRANT → Give permission
+
+REVOKE → Take back permission
+
+Example:
+
+GRANT SELECT, INSERT ON Employee TO user1;
+REVOKE INSERT ON Employee FROM user1;
+
+
+4.🔹 TCL (Transaction Control Language)
+
+TCL statements are used to manage transactions in a database.
+A transaction is a sequence of one or more SQL operations that are executed as a single unit of work.
+
+👉 If one part of the transaction fails, the entire transaction can be rolled back (undone), ensuring data integrity.
+
+✨ TCL Commands
+1. COMMIT
+
+Makes all changes made by the current transaction permanent.
+
+Once committed, you cannot rollback.
+
+✅ Example:
+
+BEGIN;  -- start transaction
+
+INSERT INTO Employee(emp_id, name, age, dept_id)
+VALUES (103, 'Alice', 28, 101);
+
+COMMIT;  -- permanently save this change
+
+2. ROLLBACK
+
+Undo changes made in the current transaction.
+
+Used when an error occurs or you don’t want to save changes.
+
+✅ Example:
+
+BEGIN;
+
+UPDATE Employee SET age = 40 WHERE emp_id = 101;
+
+ROLLBACK;  -- undo the update, no change in DB
+
+3. SAVEPOINT
+
+Creates a checkpoint within a transaction.
+
+You can rollback to a savepoint instead of rolling back the entire transaction.
+
+✅ Example:
+
+BEGIN;
+
+UPDATE Employee SET age = 35 WHERE emp_id = 101;
+SAVEPOINT sp1;
+
+UPDATE Employee SET age = 45 WHERE emp_id = 102;
+
+ROLLBACK TO sp1;  -- undo only the last update
+COMMIT;           -- John’s age=35 is saved
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What is trigger and advantages of triggers
+?
+*A Trigger is a special kind of stored procedure that automatically executes when a specified event occurs in a table (like INSERT, UPDATE, or DELETE).
+You don’t call a trigger manually — the DBMS fires it automatically.
+*Types of Triggers
+📌 Types of Triggers
+
+1.BEFORE Trigger → Executes before the event happens.
+(e.g., validate data before inserting)
+
+2.AFTER Trigger → Executes after the event happens.
+(e.g., log the action into an audit table)
+
+3.INSTEAD OF Trigger → Used with views to perform custom actions instead of the triggering action.
+
+
+tep 1: Create Employee table and insert sample data
+CREATE TABLE Employee (
+    emp_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50),
+    dept VARCHAR(50)
+);
+
+-- Insert sample data
+INSERT INTO Employee (name, dept) VALUES
+('Alice', 'IT'),
+('Bob', 'HR'),
+('Charlie', 'Finance');
+
+🔹 Step 2: Create Audit table
+CREATE TABLE Employee_Audit (
+    emp_id INT,
+    name VARCHAR(50),
+    deleted_at TIMESTAMP
+);
+
+
+This table will store deleted employee details.
+
+🔹 Step 3: Create Trigger
+DELIMITER $$
+
+CREATE TRIGGER after_employee_delete
+AFTER DELETE ON Employee
+FOR EACH ROW
+BEGIN
+    INSERT INTO Employee_Audit(emp_id, name, deleted_at)
+    VALUES (OLD.emp_id, OLD.name, NOW());
+END$$
+
+DELIMITER ;
+
+
+🔑 Explanation:
+
+AFTER DELETE ON Employee → Trigger fires after a row is deleted from Employee.
+
+FOR EACH ROW → Works for each deleted row.
+
+OLD.columnName → Refers to the deleted row's old values.
+
+🔹 Step 4: Test the trigger
+-- Delete an employee
+DELETE FROM Employee WHERE name = 'Bob';
+
+🔹 Step 5: Check Audit table
+SELECT * FROM Employee_Audit;
+
+
+✅ Output will look like:
+
+emp_id | name  | deleted_at
+-------+-------+---------------------
+2      | Bob   | 2025-08-27 14:45:30
+
+🔹 Step 6: Verify Employee table
+SELECT * FROM Employee;
+
+
+Output:
+
+emp_id | name     | dept
+-------+----------+---------
+1      | Alice    | IT
+3      | Charlie  | Finance
+
+
+👉 So now, every time you delete an employee from Employee, their record automatically gets inserted into Employee_Audit with a timestamp.
+old->before th dlete and update
+new->after insert and update
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What is a View?
+*A view in SQL is a virtual table based on the result of a query.
+
+It doesn’t store data itself (by default).
+*You can treat it like a table (use SELECT from it), but you can’t always update it (depends on the query).
+*CREATE VIEW IT_Employees AS
+SELECT e.emp_id, e.name, d.dept_name
+FROM Employee e
+JOIN Dept d ON e.dept_id = d.dept_id
+WHERE d.dept_name = 'IT';
+
+
+SELECT * FROM IT_Employees;
+
+
+Why will you use a View?
+
+1.Simplify queries → Hide complex joins and calculations.
+2.Reusability → Write logic once, reuse everywhere.
+
+
+What is an Aggregate Function?
+
+Aggregate functions perform a calculation on a set of values and return a single value.
+
+Common aggregate functions:
+
+COUNT() → Counts rows
+
+SUM() → Adds values
+
+AVG() → Average value
+
+MIN() → Minimum value
+
+MAX() → Maximum value
+
+SELECT dept_id, COUNT(*) AS total_employees, AVG(age) AS avg_age
+FROM Employee
+GROUP BY dept_id;
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. INNER JOIN
+
+Definition: Returns only the rows where there is a match in both tables.
+
+If there is no matching row in either table, the row will not appear in the result.
+
+Example:
+
+Suppose we have two tables:
+
+Table: Employees
+
+emp_id	name	dept_id
+1	Alice	101
+2	Bob	102
+3	Charlie	103
+
+Table: Departments
+
+dept_id	dept_name
+101	HR
+102	IT
+104	Sales
+
+Query:
+
+SELECT Employees.name, Departments.dept_name
+FROM Employees
+INNER JOIN Departments
+ON Employees.dept_id = Departments.dept_id;
+
+
+Result:
+
+name	dept_name
+Alice	HR
+Bob	IT
+
+✅ Notice that Charlie is missing because there is no department with dept_id = 103.
+
+2. OUTER JOIN
+
+Definition: Returns matching rows plus the unmatched rows from one or both tables.
+
+There are three types of outer joins:
+
+a) LEFT OUTER JOIN (or LEFT JOIN)
+
+Returns all rows from the left table, and matching rows from the right table.
+
+If no match exists in the right table, it shows NULL.
+
+SELECT Employees.name, Departments.dept_name
+FROM Employees
+LEFT JOIN Departments
+ON Employees.dept_id = Departments.dept_id;
+
+
+Result:
+
+name	dept_name
+Alice	HR
+Bob	IT
+Charlie	NULL
+
+✅ Charlie appears, but dept_name is NULL because there’s no matching department.
+
+b) RIGHT OUTER JOIN (or RIGHT JOIN)
+
+Returns all rows from the right table, and matching rows from the left table.
+
+If no match exists in the left table, it shows NULL.
+
+SELECT Employees.name, Departments.dept_name
+FROM Employees
+RIGHT JOIN Departments
+ON Employees.dept_id = Departments.dept_id;
+
+
+Result:
+
+name	dept_name
+Alice	HR
+Bob	IT
+NULL	Sales
+
+✅ The Sales department appears even though no employee is assigned.
+
+c) FULL OUTER JOIN
+
+Returns all rows from both tables, matching where possible.
+
+If there is no match, it shows NULL.
+
+SELECT Employees.name, Departments.dept_name
+FROM Employees
+FULL OUTER JOIN Departments
+ON Employees.dept_id = Departments.dept_id;
+
+
+Result:
+
+name	dept_name
+Alice	HR
+Bob	IT
+Charlie	NULL
+NULL	Sales
+
+✅ All employees and all departments appear; unmatched rows have NULLs.
+
+✅ Quick Summary
+Join Type	Returns
+INNER JOIN	Only matching rows in both tables
+LEFT JOIN	All left table rows + matching right rows
+RIGHT JOIN	All right table rows + matching left rows
+FULL OUTER JOIN	All rows from both table
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1.1. Clustered Index
+1. Physical Order
+
+Physical order means the actual storage order of rows on the disk.
+
+When a table has a clustered index, the database rearranges the table rows physically to match the order of the index column(s).
+
+Only one clustered index per table is allowed because a table can only be physically sorted in one way.
+
+Example:
+
+Table Employees:
+
+emp_id	name	dept_id
+1	Alice	101
+2	Bob	102
+3	Charlie	103
+
+If we create a clustered index on emp_id, the rows on disk will be stored as:
+
+emp_id 1 → row 1
+emp_id 2 → row 2
+emp_id 3 → row 3
+
+
+If we insert a new row with emp_id = 2.5, the DB may physically move rows to maintain the order.
+
+2. Logical Order
+
+Logical order is the order in which the index organizes pointers to the data, without changing the actual storage of rows.
+
+Non-clustered indexes store a copy of the indexed columns + pointers to actual rows, not the full table sorted.
+
+Multiple non-clustered indexes can exist because they don’t affect physical storage.
+
+Example:
+
+Non-clustered index on name:
+
+name	pointer_to_row
+Alice	1
+Bob	2
+Charlie	3
+
+The table itself may not be stored in this order. For example, rows on disk might still be in the order: Charlie, Alice, Bob.
+
+The index allows the DB to quickly find “Alice” without scanning the whole table.
+
+Analogy
+
+Physical order: The books on a library shelf are arranged by book ID. (You have to move books physically to reorder.)
+
+Logical order: The library has a catalog card that tells you where each book is. (You don’t move books; you just use the index.)
+
+
+
+
+
+
+*-Sorts table rows physically according to the column(s).
+
+*One per table.
+
+*Usually on the primary key.
+Example:
+
+CREATE CLUSTERED INDEX idx_emp_id
+ON Employees(emp_id);
+
+
+Effect:
+The table data will be stored in emp_id order. Queries like WHERE emp_id = 3 are very fast
+
+
+2.2. Non-Clustered Index
+
+Logical order; physical order stays the same.
+
+Can have multiple non-clustered indexes.
+
+Example:
+
+CREATE INDEX idx_name
+ON Employees(name);
+
+
+Effect:
+Query SELECT * FROM Employees WHERE name='Alice'; is faster.
+
+The index contains pointers to the actual table rows.
+
+3.33. Unique Index
+
+Ensures no duplicate values.
+
+Can be clustered or non-clustered.
+
+Example:
+
+CREATE UNIQUE INDEX idx_email
+ON Employees(email);
+
+
+Effect:
+No two employees can have the same email.
+
+
+44.3. Unique Index
+
+Ensures no duplicate values.
+
+Can be clustered or non-clustered.
+
+Example:
+
+CREATE UNIQUE INDEX idx_email
+ON Employees(email);
+
+
+Effect:
+No two employees can have the same email.
+
+4. Composite (Multi-Column) Index
+
+Index on multiple columns.
+
+Helps queries using both columns in WHERE or ORDER BY.
+
+Example:
+
+CREATE INDEX idx_name_dept
+ON Employees(name, dept_id);
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Constraints in databases are rules applied to table columns to ensure the integrity, accuracy, and consistency of the data.
+1.1. NOT NULL
+NOT NULL
+
+Purpose: Ensures that a column cannot have a NULL value.
+
+Example:
+
+CREATE TABLE Employee (
+    emp_id INT NOT NULL,
+    name VARCHAR(50) NOT NULL
+);
+
+
+Here, emp_id and name must have a value; they cannot be left empty.
+
+
+2.2. UNIQUE
+
+Purpose: Ensures that all values in a column are unique.
+
+Example:
+
+CREATE TABLE Employee (
+    emp_id INT UNIQUE,
+    email VARCHAR(50) UNIQUE
+);
+
+
+emp_id and email cannot have duplicate values.
+
+3.33. PRIMARY KEY
+
+Purpose: Uniquely identifies each record in a table. Combines NOT NULL and UNIQUE.
+
+Example:
+
+CREATE TABLE Employee (
+    emp_id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
+
+
+emp_id is unique and cannot be NULL.
+
+
+
+4.4foreign key
+*It links child table columns to parent table primary keys.
+
+Tables in your example:
+
+1. Department (Parent Table)
+
+CREATE TABLE Department (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(50)
+);
+
+
+dept_id is the primary key, so each department has a unique ID.
+
+Example data:
+
+dept_id	dept_name
+1	HR
+2	IT
+3	Finance
+
+2. Employee (Child Table)
+
+CREATE TABLE Employee (
+    emp_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    dept_id INT,
+    FOREIGN KEY (dept_id) REFERENCES Department(dept_id)
+);
+
+
+dept_id here is a foreign key, meaning each employee’s dept_id must exist in the Department table.
+
+Example data:
+
+emp_id	name	dept_id
+101	Alice	1
+102	Bob	2
+
+✅ Notice that dept_id values 1 and 2 exist in the Department table.
+hat happens if you try to insert invalid data?
+INSERT INTO Employee (emp_id, name, dept_id) VALUES (103, 'Charlie', 5);
+
+
+Error! Because dept_id = 5 does not exist in Department.
+
+This prevents orphan records in the Employee table
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. One-to-One (1:1) Relationship
+
+Definition: Each row in Table A corresponds to exactly one row in Table B, and vice versa.
+
+Implementation: Use a foreign key with UNIQUE constraint in one table pointing to the primary key of the other table.
+
+Example: Each employee has exactly one passport.
+
+CREATE TABLE Employee (
+    emp_id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
+
+CREATE TABLE Passport (
+    passport_id INT PRIMARY KEY,
+    emp_id INT UNIQUE,  -- ensures 1:1 relationship
+    country VARCHAR(50),
+    FOREIGN KEY (emp_id) REFERENCES Employee(emp_id)
+);
+
+
+emp_id in Passport can appear only once, enforcing 1:1 mapping.
+
+2. One-to-Many (1:N) Relationship
+
+Definition: A row in Table A can correspond to multiple rows in Table B, but each row in Table B corresponds to only one row in Table A.
+
+Implementation: Place a foreign key in the "many" table referencing the primary key of the "one" table.
+
+Example: Each department has many employees.
+
+CREATE TABLE Department (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(50)
+);
+
+CREATE TABLE Employee (
+    emp_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    dept_id INT,
+    FOREIGN KEY (dept_id) REFERENCES Department(dept_id)
+);
+
+
+A single dept_id in Department can appear multiple times in Employee.
+
+Each employee belongs to exactly one department.
+
+3. Many-to-Many (M:N) Relationship
+
+Definition: Multiple rows in Table A can relate to multiple rows in Table B.
+
+Implementation: Use a junction (link) table with two foreign keys, each referencing the primary keys of the two tables.
+
+Example: Students and courses — a student can take multiple courses, and each course can have multiple students.
+
+CREATE TABLE Student (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
+
+CREATE TABLE Course (
+    course_id INT PRIMARY KEY,
+    course_name VARCHAR(50)
+);
+
+CREATE TABLE Student_Course (
+    student_id INT,
+    course_id INT,
+    PRIMARY KEY (student_id, course_id),
+    FOREIGN KEY (student_id) REFERENCES Student(student_id),
+    FOREIGN KEY (course_id) REFERENCES Course(course_id)
+);
+
+
+The junction table Student_Course resolves the many-to-many relationship.
+
+A student can appear in multiple rows with different courses, and each course can appear in multiple rows with different students.
+
+Summary Table
+Relationship	How to implement	Example
+1:1	FK + UNIQUE in one table	Employee → Passport
+1:N	FK in “many” table	Department → Employee
+M:N	Junction table with 2 FKs	Student ↔ Course → Student_Course
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,316 @@
+In browser we have the many layers
+*firstly we have the ui layer
+*so ui layer consists of the address bar,refresh button ,bookmark optons
+*then next layer is the browser engine which acts as the mediator between the ui layer and the rendering engine and also communicate with the data storage
+*and data layer consists of the cookies,cache and bookmarks
+*network layer consists of the http requests,web sockets,and web rtc
+*js interpreter is the componnets which executes and interprets the js code
+*ui backedn is the brain of the ui layer so we have in the ui the address bar but how the address bar will be functional will be decided by the ui backned
+*Herat of the browser is the rendering engine
+
+*How the browser renders a page(rendering)
+*so to server we put the rwquest and in response we get the css/htm;/js
+*so css is render blocking
+*js is parser blocking
+*whenever we get reponse in html/css/js we create the built the htmldome by parsing the html
+*and by parsing the css we get css dom
+*and we combine both dom tree to get the render tree and render tree isoptimized versions of the html dom tree and the css dom tree
+*when parsing the css from the html dom this process is called parsing
+*and in between we came across js then we blocks the parsing and execute the js first
+*when we say our code is big so than it takes time due to this step
+*now the step from the render tree to building layout is called the rendering and if at any step the css comes
+*then again rendering pauses again css dom ceated and again render tree will be created
+*now in the bulding layout thing we need to create wireframe measn allot some spaces
+*then after the wireframe we paints the tree
+*the next step is composting means stack multiple wireframe on each other
+*
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+HTTP (HyperText Transfer Protocol)
+*What it is: HTTP is an application-layer protocol used for transmitting hypertext (web pages, images, etc.) over the internet.
+How it works:
+*Operates in a request-response model: a client (e.g., browser) sends an HTTP request to a server, which responds with data (e.g., HTML, JSON).
+*Stateless: Each request is independent unless managed with cookies or sessions
+*Runs on top of a transport protocol (typically TCP for HTTP/1.1 and HTTP/2, or UDP for HTTP/3).
+
+
+
+TCP (Transmission Control Protocol)
+*What it is: TCP is a transport-layer protocol in the OSI model, designed for reliable data transmission over networks.
+How it works:
+*Connection-oriented: Establishes a connection via a three-way handshake (SYN, SYN-ACK, ACK) before data transfer.
+*Ensures reliability through:
+Error checking: Detects and retransmits lost packets.
+Ordered delivery: Reassembles packets in the correct order.
+
+Drawbacks:
+Overhead from handshakes and retransmissions can cause latency.
+
+
+
+
+HTTP/3
+
+*What it is: HTTP/3 is the latest version of HTTP, built on QUIC (a transport protocol over UDP) instead of TCP.
+*How it works:
+Inherits HTTP/2 features (multiplexing, header compression) but uses QUIC for transport.
+QUIC:
+Combines transport and session-layer features (e.g., encryption, connection setup).
+Reduces latency with faster connection establishment (0-RTT or 1-RTT vs. TCP’s 3-way handshake).
+Eliminates head-of-line blocking by allowing independent streams.
+Built-in encryption (TLS 1.3), unlike TCP, which requires separate TLS setup.
+Improves performance on unreliable networks (e.g., mobile) by reducing retransmission delays.
+
+
+UDP (User Datagram Protocol)
+What it is: UDP is a transport-layer protocol, like TCP, but designed for low-latency, connectionless communication.
+How it works:
+Connectionless: Sends packets (datagrams) without establishing a connection.
+No reliability guarantees:
+No retransmission of lost packets.
+No ordering of packets.
+No flow or congestion control.
+Lightweight and fast, ideal for applications where speed trumps reliability (e.g., video streaming, gaming, DNS).
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+corjava interview question 
+index
+output based question from try catch
+from each topic
+design pattern till 10 
+need to revise js ,reduc react,
+dsa
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Mongodb
+*what is database?
+*so database is an organized collection of data
+*We shoukd have methods to manipulate the data
+
+
+organized   unorganized books
+
+*Mongodb is a NoSQL database that store unstructured data in the json like documents
+*App using the mongo can be scaled easily
+
+Mongo db structure:
+*It stores unstructured data in collecions and document
+*A document is set of key value pairs
+*Collections is as set of documents
+
+*Suppose we hav the collection as users->like table
+*in user collection we have documents->row toring the detaisl about each users
+suppose document is 
+{
+"id":1,
+"name":neha,
+
+}
+*here firls is key value pair with and its like the column
+
+Sql vs no sql
+*scalability
+*no sql is horizontall scalable and means adding multiple app server and use load balancy to send the request so the load is equally distributed on each server
+*sql is vertical scalable mena resource to single app server
+
+Schema flexibility
+*no sql has no schema so any dynamic data can be stored without altering the schema
+*sql database has a predefined schema and adding here more coumn is complex
+
+*Speed
+*no sql is more optimized for read and write operation making very useful for real  time data processing like social media platform
+*whereas in the sqp we have low speed for read write because of the transaction acid property
+
+
+Mongodb installation
+*go to mngo db ->resources->self managed than community edidtion->download
+*now the mongo db community deos not come up with the mongoshell
+*so we go to tools download mongoshell too
+*mongoshell is aterminal to execute the query
+*first go to the momgo compasss and then connect and by default it run on 27017
+*now go to then mongo shell and write mongosh
+*now this mongoshell terminal witll connect to port 12707
+*now in mongosh write show dbs
+*along with its alos download the gui version
+
+
+Mongo query
+*use shool->create database and use it
+*now db.users.insertOne({name""neha",age"25})
+*db.users.find()
+
+Note:in gui we can add document and find also
+
+*mongodb atlas is alos tool but here the data is atored on loud but managed by our local
+*so go free create cluster and create and the connect->
+
+
+1.use company
+2db.createCollcetion("employee")
+3.show collections
+4.db.createCollection("department")
+5.db.department.drop()
+6.db.dropDatabase()
+
+Crud opertions
+*suppose we hav ethe car we have firlsds like modeltype,
+*use car_dealer_relationship
+*db.createCollection("car")
+
+Create
+*db.insertOne({modelType,model,FuelType,engine,sunroff ,airbag})
+*db.insertMany([{},{}])
+*
+
+Read
+*db.cars.find()
+*we want query like slect model from employye for tat db.cars.find({},{model:1})
+*but here id column is alos shown we want to discard this so
+*db.cars.find({},{model,_id:0})
+*now want the data where type:fdieel
+*db.cars.find({type:"fuel"})
+*Note:make sure try to pu key in doubl ebrabce
+*db.cars.find({"roof.type":"turbocharge"})
+
+
+Update
+*add new column
+*db.cars.update({model:"nexon"},{$set:{color:red})//means add column for this particular row
+*if in any row or document i want to push so d.cars.update({model:"nexon",{$push:{features:"headset"}})
+*update many also do the same thing add column but during the finder it find all the rows and then add column unike the updateOne was finding One
+*Note:to update all document and all the column for that
+db.cars.updateMany({}.{$set:{color:red})
+*Now want to want to remove the field
+db.cars.upadte({},{$unset:{address:""})
+*db.cars.update({model:"nexon"},{$set:{color:red}) supoose the checker does not exist for tht we create the document and insert values using the upsert
+*db.cars.update({model:"nexon"},{$upsert:{color:red})
+
+
+
+Delete
+*to dlete the document
+*db.deleteOne({model:"suv"})
+*deleteManydb.deleteMany({model:"suv"})
+*
+
+Mongodb Data Types
+*Mongo db stores data in binary json format
+*binary json format includes all the json data types and many more
+
+
+Quereis with 
+1.relational operator mean soperatr on colcum
+*find the car with enginegreater than 4000
+*so db.cars.find({"engine.cc":{$gt:4000}})
+
+2.find cars  with engine range between the 4000 and 50000
+db.cars.find({"engine.cc":{$in:[4000,5000]}})
+
+3.i want car with fe:diesel nd sunrrof  present
+db.cars.find({and:[
+{},{}]})//and here in array operations like fuel:deselet
+
+4.{$}Note:
+5.db.cars..find({$and:[{fuel:diesel
+}]})
+6.
+db.cars..find({$or:[{fuel:diesel
+}]})
+
+
+
+2.element operator
+*$exists 
+*$type
+*$size
+
+
+3.how to find the number of documents
+*.find().count()
+*fin.sort({name:1)means sort by name
+*find().limit(2)
+*
+
+Aggregate framework
+*it a framework for complex operator ike filtering,sorting using pipeleine
+*db.cars.aggregate([]
+)
+*it takes array
+*db.cars.aggregate([
+{$match:{size:medium}
+}
+]
+)
+1.group
+*db.cars.aggregate(
+{$group:{
+id:"$maker"
+}
+})Note:$maker means valyes of maker column
+*so it will give the rows with id as column hwre the maker name is value and the 
+*db.cars.aggregate(
+{$group:{
+id:"$maker",
+totaCard:{$sum:1}
+}
+})
+Note:here 1.it prints the number of dicument aftre grouping on bassis of makers document
+
+*other thing we can use id 
+db.cars.aggregate(
+{$group:{
+id:"$maker",
+avgprice:{$avg:price}
+}
+})
+
+
+2.match
+db.cars.aggregate(
+{$match:{
+maker:"hynduai",
+engine.cc:{$gt:1200}
+}
+})->itwill be slecet from cars where the make is hyndua and avg cc greatethan 100
+
+
+3.b.cars.aggregate(
+{$match:{
+maker:"hynduai"}{
+count:"totalcount_count"
+}
+}
+})
+
+4.
+find all cars of hynundai and print specific details
+b.cars.aggregate(
+{$match:{
+maker:"hynduai"}
+{
+$project:{maker:1,fueltyp:1
+}
+}
+}
+})
+
+5. for systme generate vriable use $$
+*---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+data relationship
+*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

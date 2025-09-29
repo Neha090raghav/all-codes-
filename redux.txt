@@ -1,0 +1,1223 @@
+https://www.geeksforgeeks.org/reactjs/react-redux-tutorial/
+Introduction to Redux (Action, Reducers and Store)
+*Redux is a state managing library used in JavaScript apps
+*It simply manages the state of your application
+*it is used to manage the data of the application
+*It is used with a library like React.
+
+There are three principles of Redux these are:
+
+*Single source of truth:The state of the application is stored in one object called store,means one application one store
+*It means that we don’t change the state object and its properties directly.In Redux, once you have a state object, you never modify it directly. Instead, you create a new copy with the changes
+. Why Redux Enforces This
+Fast change detection:
+Redux and React-Redux check if state changed by comparing object references, not deep contents. If you change the reference, they know an update is needed. (If you mutate the same object, they can't tell.)
+*Reducers are pure functions that take previous state and action (discuss later) and return the new state
+
+
+Building Parts of redux: 
+1.Actions:
+*Actions are a plain JavaScript object that contains information.
+*Actions have a type field that tells what kind of action to perform and all other fields contain information or data
+*Action Creators, these are the function that creates actions
+
+
+
+2.Reducers
+*so reducers are the pure functions that take the current state and action and return the new state
+*function task(tasks = [], action) {
+  
+  if (action.type === 'ADD_TODO') {
+    return [...tasks, action.task];
+  } else if (action.type === 'REMOVE_TODO') {
+      return tasks.filter(task => task !== action.task);
+    }
+  return tasks;
+}
+*In the above case if task is added, then it returns the array containing older list of task and with one new added, but the new state are not gonna mutate the older state we gonna return new one, this is needed to be kept in mind.
+
+
+3. Store: The store is the object which holds the state of the application.
+*createStore() - To create a store
+*dispatch(action) -To change the state
+*getState() - for getting current state of store.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Introduction to react-redux
+*React-Redux is a popular state management library that helps manage the application state in React applications.
+*React-Redux connects the Redux store to React components, enabling seamless communication between the two.
+
+
+Why Use React-Redux?
+*Simplifies State Management: It allows you to manage the entire state in one place, making it easier to track changes across your application.
+*Redux makes state changes predictable, which is crucial for debugging and maintaining large-scale applications. The state can only change through actions, and those actions are processed by reducers, making the flow of data transparent.
+*With React-Redux, you can decouple the UI components from the state logic.his means components focus on rendering the UI while Redux manages the application state.
+*React-Redux enables tools like Redux DevTools that allow you to inspect, log, and replay state changes, making debugging easier.
+
+
+Core Concepts of React-Redux	
+1. Store
+The store is a centralized object that holds the application state
+
+2.2. Actions
+An action is a plain JavaScript object that describes a change in the application state. It must have a type property and can optionally include a payload.
+
+3. Reducers
+A reducer is a pure function that specifies how the application’s state changes in response to an action. It takes the current state and an action as arguments and returns a new state.
+
+4. Dispatch
+*The dispatch function is used to send an action to the Redux store, triggering the reducer to process the state change.
+
+
+5.A selector is a function that retrieves specific pieces of state from the Redux store
+*const selectCount = (state) => state.count;
+
+6.The Provider component makes the Redux store available to all the components in the application.
+It should wrap the entire application so that any component can access the store.
+*import { Provider } from 'react-redux';
+
+<Provider store={store}>
+    <App />
+</Provider>;
+
+
+7.connect() is a function provided by React-Redux to connect React components to the Redux store.
+*It allows the components to access the state and dispatch actions.
+*import { connect } from 'react-redux';
+
+const Counter = ({ count, increment }) => (
+    <div>
+        <h1>{count}</h1>
+        <button onClick={increment}>Increment</button>
+    </div>
+);
+
+const mapStateToProps = (state) => ({
+    count: state.count
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    increment: () => dispatch({ type: 'INCREMENT', payload: 1 })
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter)
+
+
+How React-Redux Works
+React-Redux connects React components to the Redux store, ensuring smooth state management across your app. Here’s a simplified breakdown of how it works:
+
+
+.1. Setting Up the Store
+*The Redux store holds the entire state of your application.
+*It’s created using createStore() and initialized with a reducer where bases on action state changes takes place
+
+
+2.Actions are plain objects that describe changes in state. These actions are dispatched to inform Redux of a state change.
+store.dispatch({ type: 'INCREMENT', payload: 1 });
+
+3.A reducer is a function that updates the state based on the action type. It takes the current state and action, then returns a new state.
+.const counterReducer = (state = 0, action) => {
+    switch (action.type) {
+        case 'INCREMENT': return state + action.payload;
+        default: return state;
+    }
+};
+.4. Connecting Components with connect()
+React-Redux’s connect() function connects React components to the Redux store, allowing components to access state and dispatch actions.
+
+5. Using Provider to Make Store Accessible
+The Provider component makes the store available to all components in the app.
+
+<Provider store={store}><App /></Provider>
+6. Re-Renders and Reactivity
+React-Redux ensures that only components dependent on updated state will re-render, optimizing performance.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Getting started with redux
+
+1. Store Creation in Redux 
+*To build a Redux store,developers use the redux library's createStore function and send in a root reducer as an argument. 
+* A root reducer is a collection of reducers that describe how the state in an application changes
+
+*import { createStore } from 'redux';  
+import rootReducer from './reducers';
+
+// Create the redux store by calling createStore 
+// and passing in the root reducer
+const store = createStore(rootReducer);
+
+2. Action Creation in Redux
+*Developers define an object with a type property and any other data required to describe the change to make an action. Here's an illustration of how to make an action in Redux:
+*// Define a action creator function that 
+// takes test as an argument and returns
+// an action object.
+
+const addTodo = (text) => {
+    return {
+
+        // Describes the action to be taken
+        type: 'ADD_TODO',
+        text
+    };
+};
+
+3. Dispatching Actions in Redux
+*To dispatch an action and update the state, developers call the dispatch method on the store
+*pass in the action as an argument
+*// Dispatch the addTodo action by calling 
+// store.dispatch and passing in the action
+store.dispatch(addTodo('Learn Redux'));
+
+4. Reducer Functions in Redux
+Redux reducers are pure functions in Redux that accept the current state and an action and return the next state. Here's an example of a Redux reducer function
+*// Define a reducer function that accepts the
+// current state and an action and return the
+// next state
+
+const todoReducer = (state = [], action) => {
+
+    // To handle different action types
+    switch (action.type) {
+
+        // For the ADD_TODO action type
+        case 'ADD_TODO':
+            return [
+
+                // Create a new array with the 
+                // existing todos
+                ...state,
+                {
+                    // Add a new todo with the text
+                    // from the action
+                    text: action.text,
+
+                    // Set the completed property
+                    // to false
+                    completed: false
+                }
+            ];
+        default: // For any other action types
+            return state;
+    }
+};
+
+
+5. Combining Reducers in Redux
+*If an application has multiple reducers, developers can use the redux library's combineReducers function to combine them into a single root reducer.
+*// Combine multiple reducers into a single 
+// root reducer using combineReducers
+
+import { combineReducers } from 'redux';
+const rootReducer = combineReducers({
+    todos: todoReducer,
+    visibilityFilter: visibilityFilterReducer
+});
+
+6. Connecting Components to Redux
+*Developers use the react-redux library's connect function to connect a Redux store to React components.
+*// Connect a Redux store to a react component
+// using the connect  
+
+import { connect } from 'react-redux';
+
+// Define functional components that accepts
+// todos as a prop
+const TodoList = ({ todos }) => (
+    <ul>
+        /* map over the todos array to render
+        each todo */
+        {todos.map((todo, index) => (
+            <li key={index}>{todo.text}</li>
+        ))}
+    </ul>
+);
+const mapStateToProps = (state) => {
+    return {
+        // Specify which properties should 
+        // be mapped to props
+        todos: state.todos
+    };
+};
+export default connect(mapStateToProps)(TodoList);
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What are the advantages of using Redux with ReactJS ?
+1.Centralized state management system i.e. Store
+*React state is stored locally within a component.
+*To share this state with other components in the application, props are passed to child components
+* Redux state, on the other hand, is stored globally in the store
+*All the components of the entire application can easily access the data directly
+*This centralizes all data and makes it very easy for a component to get the state it requires
+
+
+2.Performance Optimizations
+*By default, whenever a component is updated, React re-renders all the components inside that part of the component tree.
+*Redux store helps in improving the performance by skipping such unnecessary re-renders and ensuring that a given component re-renders only when its data has actually changed.
+
+3.Pure reducer functions
+*As opposed to React, Redux depends on such pure functions. It takes a given state (object) and passes it to each reducer in a loop. In case of any data changes, a new object is returned from the reducer (re-rendering takes place). However, the old object is returned if there are no changes (no re-rendering).
+
+
+4.Since data stored in redux persists until page refresh:
+Since data stored in redux persists until page refresh, it is widely used to store long-term data that is required while the user navigates the application, such as, data loaded from an API, data submitted through a form, etc
+
+5.Time-travel Debugging
+*In React, it becomes a tedious task to track the state of the application during the debugging process. Redux makes debugging the application an easy process.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What are the three principles that Redux follows ?
+1.Redux is a Single Source of Truth:
+
+*The global state of an app is stored within an object tree in a single store
+*A single state tree, in turn, makes it easy to inspect an app. 
+*Besides this, it also enables a faster and shorter development cycle.
+
+
+2.The State is Read-only State:
+*There is only one way to change the state--emit an action or an object that describes what happened.
+*As per the second principle, neither the network nor the views callbacks would ever write to the state
+*Instead of it, these express intent for the transformation of the form.
+
+
+3.The Modifications are Done with Pure Functions
+*he reducers are merely pure functions, which take the previous state as well as action and move it to the next state. You should remember that you should return to new state objects other than mutating to the last state.
+*
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What is a store in Redux ?
+*In Redux, the store is the central where all the state for the application is stored.
+*This ensures the state is predictable and persistent for the entire application
+
+
+Basics of Redux Store
+Responsibilities of the Redux Store
+
+*Manages Application State: It stores and organizes all the data that different components need.
+*Components can retrieve data from the store using getState().
+*Changes in state happen only through dispatch(action), ensuring that updates follow a predictable flow.
+* Reducers define how state updates occur based on actions dispatched to the store.They take the current state and ction and retirn new state.new state is not mutable with odl state instead they are the new objects
+
+setting up store in redux import { createStore } from "redux";
+
+
+const initialState = {
+  count: 0,
+};
+
+const counterReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "INCREMENT":
+      return { ...state, count: state.count + 1 };
+    case "DECREMENT":
+      return { ...state, count: state.count - 1 };
+    default:
+      return state;
+  }
+};
+
+const store = createStore(counterReducer);
+
+export default store;
+
+
+
+
+What Are Actions?
+*Actions are plain JavaScript objects that describe what needs to change in the application's state. They are the only way to send data to the Redux store. Each action must have a type property that defines what kind of change should happen. Optionally, it can include additional data (payload) needed for the update.
+
+
+
+What Are Reducers?
+*Reducers determine how the state should change based on the received action. A reducer is a pure function that takes the current state and an action as input and returns the new state.
+
+Must be pure functions (no side effects like API calls or modifying inputs).
+Should return a new state instead of modifying the existing state.
+Must always return a valid state.
+
+const initialState = { count: 0 };
+
+const counterReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "INCREMENT":
+      return { ...state, count: state.count + 1 };
+    case "DECREMENT":
+      return { ...state, count: state.count - 1 };
+    default:
+      return state;
+  }
+};
+
+
+
+How Actions and Reducers Connect to the Store
+
+1.Store Dispatches an Action:Components or middleware dispatch an action to signal a change.
+2.Action is Passed to the Reducer
+3.The reducer takes the current state and the action, processes it, and returns a new state.
+4.Store Updates Components:The Redux store notifies all subscribed components about the state update. Components re-render with the latest state.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Enhancing Redux Store with Middleware
+*Middleware enhances the Redux store  by handling asynchronous actions,logging.
+*
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Middleware
+*middlewares are an essential concept for handling side effects
+*They are used to intercept actions sent to the Redux store and modify them before they reach the reducer or after they are dispatched.
+
+Middleware Workflow in Redux
+*Here’s how middleware typically works in Redux
+
+1.. Dispatching an action: When you dispatch an action, it first goes through the middleware before reaching the reducer.
+
+
+2.2. Middleware Intercepts the Action;
+*Modify the action.
+*Perform side effects (like API calls).
+*Dispatch additional actions.
+
+
+3. Action Reaches Reducer: Once the middleware has completed its work, the action is passed to the reducer, which updates the application’s state based on the action.
+
+
+Types of Middleware in Redux
+Here are the main types of middleware in Redux:
+
+Logging Middleware: Logs every action dispatched to Redux, useful for debugging (e.g., redux-logger).
+Thunk Middleware (redux-thunk): Allows action creators to return functions (for handling async actions).
+
+
+
+
+How to Write Custom Middleware in Redux
+*Custom middleware can be written to extend Redux functionality.
+*const middleware = (store) => (next) => (action) => {
+  // You can do something here (like logging, async calls, etc.)
+  return next(action); // Pass the action to the next middleware or reducer
+};
+
+*First function receives the store
+(store) => {
+  // you can access store.dispatch and store.getState
+}
+*next is the function that forwards the action to the next middleware or the reducer.
+(next) => {
+  // this is where you intercept or modify actions
+}
+*(action) => {
+  // do something with action (log it, modify it, wait, etc.)
+  next(action); // pass it forward
+}
+*const logger = store => next => action => {
+  console.log("Dispatching:", action);
+  const result = next(action); // continue to next middleware or reducer
+  console.log("Next state:", store.getState());
+  return result;
+};
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What is Redux Thunk?
+*Redux Thunk is like a co-worker for Redux, giving it the power to handle asynchronous actions
+*It's that extra tool that allows your Redux store to deal with things like fetching data from a server or performing tasks that take some time
+*Example: Suppose you are building a weather app using React and Redux. For this app you want to display the current temperature, but fetching this data from a weather API takes some time.
+
+
+*Without Redux Thunk:
+*// Fist is to Action Creator
+const fetchTemperatureRedux = () => {
+  // This won't work without Redux Thunk for asynchronous operations
+  return {
+    type: 'FETCH_TEMPERATURE',
+    payload: fetch('https://api.weather.com/current-temperature')
+  };
+};
+
+
+*Redux only supports synchronous actions by default.
+*{
+  type: 'FETCH_TEMPERATURE',
+  payload: 25
+}
+*Reducers expect the payload to be a plain value like a number or object — not a Promise.
+
+
+*✅ What You Need: Redux Thunk
+*To handle async operations (like fetch), you use Redux Thunk middleware.
+*It allows action creators to return a function instead of an object.
+*
+const fetchTemperatureThunk = () => {
+  return async (dispatch) => {
+    dispatch({ type: 'FETCH_TEMPERATURE_REQUEST' });
+
+    try {
+      const response = await fetch('https://api.weather.com/current-temperature');
+      const data = await response.json();
+
+      dispatch({
+        type: 'FETCH_TEMPERATURE_SUCCESS',
+        payload: data.temperature
+      });
+    } catch (error) {
+      dispatch({
+        type: 'FETCH_TEMPERATURE_FAILURE',
+        error: error.message
+      });
+    }
+  };
+};
+*his function returns another function (enabled by Redux Thunk).
+
+
+
+*The inner function receives dispatch as an argument.
+*You can now perform async work inside it.
+*    dispatch({ type: 'FETCH_TEMPERATURE_REQUEST' });
+*   This is the first dispatch.
+
+*Good for setting loading: true in your state.
+* try {
+      const response = await fetch('https://api.weather.com/current-temperature');
+      const data = await response.json();
+*      dispatch({
+        type: 'FETCH_TEMPERATURE_SUCCESS',
+        payload: data.temperature
+      });
+
+*If the API call succeeds, we dispatch a success action with the temperature as payload.
+
+The reducer can now update the state with the actual temperature and stop the loading.
+*    } catch (error) {
+      dispatch({
+        type: 'FETCH_TEMPERATURE_FAILURE',
+        error: error.message
+      });
+    }
+
+
+
+
+*Advantages of React Thunk:
+*Asynchronous Operations: Redux Thunk enables handling asynchronous tasks seamlessly within Redux, like fetching data from an API, ensuring smooth integration with the state management.
+Flexibility with Actions: It allows the dispatching of actions that are functions, providing greater flexibility when dealing with side effects and asynchronous operations.
+
+
+Disadvantages of React Thunk:
+*Complextiy: Introducing Redux Thunk may add complexity to the application, especially for simple projects, as it involves writing and managing asynchronous action creators.
+Learning Curve: Developers new to Redux might face a steeper learning curve when incorporating Redux Thunk due to its asynchronous nature and the need to understand how to structure actions.
+
+
+Note:first install npm install redux react-redux redux-thunk
+*import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+
+import { applyMiddleware, createStore } from "redux";
+import reducers from "./reducers";
+import thunk from "redux-thunk";
+import { Provider } from "react-redux";
+
+
+// Create store with the reducers and
+// apply thunk as a middleware
+const store = createStore(reducers, applyMiddleware(thunk));
+
+const root = ReactDOM.createRoot(
+    document.getElementById("root"));
+
+root.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Reducers
+
+Pure function
+*A function is said to be pure if the return value is determined by its input values only and the return value is always the same for the same input values or arguments
+*A pure function has no side effects.
+*Pure Function Example:
+*const multiply= (x, y) => x * y;
+multiply(5,3);
+
+
+Redux Reducer Parameters:
+Redux State
+Redux Action
+
+
+Redux State
+*The State is an object that holds some information that may change over the lifetime of the component. If the state of the object changes, the component has to re-render.
+
+
+//store.js
+
+import { createStore } from 'redux';
+import rootReducer from './reducers/index';
+const store = createStore(rootReducer, 
+    window.__REDUX_DEVTOOLS_EXTENSION__ && 
+    window.__REDUX_DEVTOOLS_EXTENSION__());
+export default store;
+
+*//reducer/index.js
+
+import change from './func'
+import { combineReducers } from 'redux';
+
+const rootReducer = combineReducers({
+    change
+});
+
+export default rootReducer;
+*//reducers/func.js
+const initialState = 0;
+const change = (state = initialState, action) => {
+    switch (action.type) {
+        case "INCREMENT": return state + 2;
+        case "DECREMENT":
+            if (state == 0) {
+                return state;
+            }
+            else {
+                return state - 2;
+            }
+        default: return state;
+    }
+}
+export default change;
+*//index.js
+
+export const incNum = () => {
+    return { type: "INCREMENT" }
+}
+export const decNum = () => {
+    return { type: "DECREMENT" }
+}
+*//index.js
+
+export const incNum = () => {
+    return { type: "INCREMENT" }
+}
+export const decNum = () => {
+    return { type: "DECREMENT" }
+}
+*// Filename - App.js
+
+import React from 'react';
+import './index.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { incNum, decNum } from './actions/index';
+function App() {
+    const mystate = useSelector((state) => state.change);
+    const dispatch = useDispatch();
+    return (
+        <>
+            <h2>Increment/Decrement the number by 2,
+                using Redux.</h2>
+            <div className="app">
+
+                <h1>{mystate}</h1>
+                <button onClick={() => dispatch(incNum())}>
+                    +</button>
+                <button onClick={() => dispatch(decNum())}>
+                    -</button>
+            </div>
+        </>
+    );
+}
+export default App;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*What's the typical flow of data like in a React with Redux app ?
+*Another important observation here is that flow of data in a React-Redux application is unidirectional, i.e., it only goes in one direction.
+*https://media.geeksforgeeks.org/wp-content/uploads/20210706235837/reactreduxx.png
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Redux Toolkit
+*Redux Toolkit, or RTK, is a node package that simplifies development by providing utility functions
+*The Redux toolkit is a wrapper around Redux and encapsulates its necessary functions. Redux toolkit is flexible and provides a simple way to make a store for large applications.
+*t follows the SOPE principle, which means it is Simple, Opinionated, Powerful, and Effective.
+
+
+Problems solved by Redux Toolkit (RTK) in Redux
+*Too much code to configure the store.
+*Writing too much boilerplate code to dispatch actions and store the data in the reducer.
+*Extra packages like Redux-Thunk and Redux-Saga for doing asynchronous actions.
+
+
+Why Redux Toolkit is preferred over Redux ?
+
+Redux:
+*Redux is a state management tool that makes it easier to pass data between components
+* Along with stores, react-redux introduces actions and reducers which work simultaneously with stores to make the state more predictable
+
+
+Redux ToolKit(RTK):
+*RTK abstracts the basic redux code and provides us boilerplates that enable us to write redux code in less lines of code
+
+Reasons for preferring RTK(Redux ToolKit):
+*Redux ToolKit solves various issues by providing a hook-based implementation of Redux 
+*RTK gives the ability to write mutable state updates in the reducers.
+*RTK also has the feature of RTK query which eliminates the use of Thunks and makes the query processing faster
+
+
+Dependencies Included with RTK(Redux ToolKit):
+*immer
+*redux
+*redux-thunk
+*reselect
+
+To install RTK(Redux ToolKit) in the existing project use the command
+*npm install @reduxjs/toolkit# Yarn
+
+
+Important features provided with RTK:
+*configureStore() function that provide default middleware
+*create action and create Reducer functions are replaced with a single function called createSlice() function.
+*Support for the immer library that allows writing the immutable code mutably is provided by createReducer() utility.
+*createAsyncThunk() that takes Redux strings as arguments and returns a Promise.
+
+Comparison Between Redux and Redux Toolkit in React:
+
+1.Comparing Store and Reducers
+*// Redux
+const addHandler=(state=0,action)=>{
+if(action.type==='ADD')
+{
+    return state+1;
+}
+return state;
+}
+
+const store = createStore(addHandler);
+
+store.dispatch({type:'ADD'});
+
+----reduxbjs toolkit
+*// Resux Toolkit
+// Action Creators
+const add = createAction('ADD'); 
+
+const addHandler = createReducer(0, {  
+  [add]: state => state + 1
+})
+
+const store = configureStore({
+  reducer: addHandler
+})
+
+store.dispatch(add());
+
+
+
+| Feature             | Plain Redux                           | Redux Toolkit (RTK)                                       |
+| ------------------- | ------------------------------------- | --------------------------------------------------------- |
+| Action Creator      | Manual `{ type: 'ADD' }`              | `createAction('ADD')` returns a reusable function         |
+| Reducer Writing     | Pure function, manually handle switch | Use `createReducer`, supports immutability with Immer     |
+| Store Setup         | `createStore()`                       | `configureStore()` adds dev tools & middleware by default |
+| Mutability Handling | Manual (must avoid mutations)         | Handled internally with Immer (you can "mutate")          |
+| Boilerplate         | High                                  | Low                                                       |
+
+
+
+2.Comparing modification of states:
+*Redux: We need to manually handle and change the state immutably.
+Redux Toolkit: It provides the support for immer.js library which automatically changes the code immutably.
+// Redux
+const initialState={
+counter:0}
+
+const handler=(state=initialState,action){
+return{
+    ...state,
+    counter:state.counter+1;
+    }    
+}
+
+
+
+
+Important function provided by Redux Toolkit:
+*The createStore function in basic Redux is wrapped by the configureStore function which automatically provides middlewares and enhancers.
+*Classic reducer is replaced by createReducer function which makes the code shorter and simpler to understand.
+*Redux createSlice() function comes in handy to replace create action and create Reducer functions with a single function.
+*Redux createAsyncThunk() that takes Redux strings as arguments and returns a Promise.s
+*
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------Redux Toolkit Better way to write Redux code in ReactJS
+*npm install @reduxjs/toolkit react-redux
+*Store Creation: Create a file called store.js by using the configureStore method from the redux toolkit package, pass in the list reducer's required for the application to initialize a store.
+
+
+import { configureStore } from '@reduxjs/toolkit'
+
+export const store = configureStore({
+    reducer: {},
+})
+*Providing Store to React application: Once the store is created, we can provide the store to the react app using the Provider method from the react-redux package.
+*import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import App from './App';
+import { store } from './store.js';
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root'),
+);
+*Creating A Redux Slice: Create a slice.js file. In Redux Toolkit, we create a reducer using createSlice API from the redux toolkit package. It simplifies the creation of actions and the complex switch cases of a reducer into a few lines of code by internally using them.
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+  name: [],
+  food: [],
+};
+
+const customerSlice = createSlice({
+
+  // An unique name of a slice
+  name: 'customer',
+
+  // Initial state value of the reducer
+  initialState,
+
+  // Reducer methods
+  reducers: {
+    addCustomer: (state, { payload }) => {
+      state.name.push(payload);
+    },
+
+    orderFood: (state, { payload }) => {
+      state.food.push(payload);
+    },
+  },
+});
+
+// Action creators for each reducer method
+export const { addCustomer, orderFood }
+            = customerSlice.actions;
+            
+export default customerSlice.reducer;
+
+Note:export const { addCustomer, orderFood }
+            = customerSlice.actions;
+even thoghu we push we didn't mutated the original array
+*Now, we import the reducer into the store.js file we created earlier. By defining a field inside the reducer parameter, we tell the store to use this slice reducer function to handle all updates to that state.
+*import { configureStore } from '@reduxjs/toolkit';
+import reducer from './slice.js';
+
+export default configureStore({
+  reducer: {
+    customers: reducer,
+  },
+});
+
+
+*import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { orderFood } from './slice.js';
+
+function CustomerCard({ name }) {
+  const [orders, setOrders] = useState('');
+
+  // Using useSelector hook we obtain the redux store value
+  const food = useSelector((state) => state.customers.food);
+
+  const dispatch = useDispatch();
+
+  // Using the useDispatch hook to send payload back to redux
+  const addOrder = () => dispatch(orderFood(orders));
+
+  return (
+    <div>
+      <div className="customer-food-card-container">
+        <p>{name}</p>
+
+        <div className="customer-foods-container">
+          {food.map((foo) => (
+            <div className="customer-food">{foo}</div>
+          ))}
+
+          <div className="customer-food-input-container">
+            <input value={orders} onChange={(event) => 
+              setOrders(event.target.value)} />
+
+            <button onClick={addOrder}>Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default CustomerCard;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What is the purpose of constants in Redux ?
+*it provides a way to define the type of actions and reducers in one file or one place.
+*The reasons to consider the constants:
+*The type of actions and reducers are being used in two different files. Constants help to import them and use them from a single page.
+*The readability of code increases because all constants are listed in one file and give info in one read.
+
+
+const INCREMENT = "INCREMENT";
+const DECREMENT = "DECREMENT";
+
+*Steps to Create the React Application And Installing Module:
+*const INCREMENT = "INCREMENT";
+const DECREMENT = "DECREMENT";
+
+const incrementCount = () => ({
+    type: INCREMENT,
+});
+
+const decrementCount = () => {
+    return {
+        type: DECREMENT,
+    };
+};
+
+export { INCREMENT, incrementCount, decrementCount, DECREMENT };here in action used contanet
+*and in reducers //reducers/currencyReducer.js
+
+import { INCREMENT, DECREMENT } from "../actions/CounterActions";
+
+const currencyReducer = (state = 0, action) => {
+    switch (action.type) {
+        case INCREMENT:
+            return state + 1;
+        case DECREMENT:
+            return state - 1;
+        default:
+            return state;
+    }
+};
+
+export { currencyReducer };here in reducer also
+*----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*State Management in React – Hooks, Context API and Redux
+*To help manage this complexity, React provides several tools: Hooks, Context API, and Redux.
+
+
+*Here are some features of State Management:
+1.Local State (useState): Manage data within a single component.
+2.Global State (Context API): Share state across multiple components.
+3.Centralised State (Redux): Manage complex state with a global store for large apps.
+4.mmutability: State cannot be directly mutated;
+5.Re-renders: React re-renders components when state changes.
+
+State Management with Hooks:
+
+1.useState hook
+*he useState Hook is the most commonly used hook for local state management in functional components.
+*. It allows a component to have its state that can be modified using a setter function.
+*Syntax
+
+const [state, setState] = useState(<default value>)
+In the above syntax
+
+useState(<default value>): A React hook to manage state in functional components.
+<default value>: Initial value of the state (e.g., a number, string).
+[state, setState]: State holds the current value of the state, and setState is a function to update the state.
+
+
+
+import React, { useState } from 'react';
+
+function NameInput() {
+    const [name, setName] = useState('');
+
+    const handleInputChange = (event) => {
+        setName(event.target.value);
+    };
+
+    return (
+        <div>
+            <h1>Enter Your Name</h1>
+            <input
+                type="text"
+                value={name}
+                onChange={handleInputChange}
+                placeholder="Type your name"
+            />
+            <p>Hello, {name ? name : 'Stranger'}!</p>
+        </div>
+    );
+}
+
+export default NameInput;
+
+
+
+
+2.2. useReducer
+*useReducer hook is the better alternative to the useState hook and is generally more preferred over the useState hook when you have complex state-building logic 
+*when the next state value depends upon its previous value 
+*when the components need to be optimized.
+
+
+
+
+State Mangement with Context API
+*The Context API is a feature built into React that allows for global state management
+*It is useful when we need to share state across many components without having to pass props down through multiple levels of the component tree.
+*
+
+
+
+state management with redux
+*for the centralized state management
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+How to set initial state in Redux ?
+*We prefer to declare and set initial state in Redux at the reducer files.
+*Then we use that reducer in the store and provide that store use inside the whole application.
+*// Filename - redux/reducers/reducer.js
+import produce from "immer";
+
+const INITIAL_STATE = {
+    signed: false,
+    counter: 0
+};
+
+export default function auth(state = INITIAL_STATE, action) {
+    return produce(state, draft => {
+        switch (action.type) {
+            case "@auth/LOGIN":
+                draft.signed = true;
+                break;
+            case "@auth/LOGOUT":
+                draft.signed = false;
+                break;
+            case "@auth/INCREMENT":
+                draft.counter += action.payload;
+                break;
+            case "@auth/DECREMENT":
+                draft.counter -= action.payload;
+                break;
+            default:
+        }
+    });
+}
+Note:here we are using the immer manukaaly though the rdx js tookit uses the immer but here we are usig it manuaally
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What is the use of Middleware Redux thunk ?
+What is Redux Thunk?
+*Redux Thunk is a middleware that allows you to write action creators that return a function instead of an action.
+*This function can be used to delay the dispatch of an action or to dispatch actions only if a certain condition is met.
+* It makes it possible to handle asynchronous operations inside action creators, which is crucial for tasks like fetching data from an API.
+
+
+Why Use Redux Thunk?
+*
+In a typical Redux application, action creators return plain objects. This works well for synchronous operations, but it falls short for asynchronous tasks. For example, when you need to fetch data from an API, you can't wait for the API response synchronously in the action creator to return thr plain action object
+*Redux Thunk addresses this limitation by allowing action creators to return functions that can perform asynchronous operations.
+Note:so basically what haapens in redux thunk we return function in wjhcig after async operation the dispath can be called whereas earlier from the synchronous operaton plain object was returned but for the async we cant wait till or response araived then only retur thr object
+
+
+
+Here are some key benefits of using Redux Thunk:
+*synchronous Actions: It simplifies the process of handling asynchronous actions, such as API requests.
+*Conditional Dispatch: It allows actions to be dispatched conditionally, depending on the application's current state or the result of previous operations.
+
+
+
+// action.js
+
+// This is a synchronous action, hence
+// thunk will not interfere.
+export const deleteData = ()=>{
+    return ({
+        type : 'DELETE_DATA'
+    })
+}
+
+// This function includes some async logic,
+// hence we can dispatch action manually
+export const addData  = ()=>{
+
+    // Thunk Function
+    return async (dispatch,getState)=>{
+
+        // Fetching results from an API : asynchronous action
+        const response = await fetch(
+            'https://jsonplaceholder.typicode.com/todos/1');
+        const data = await response.json();
+
+        // Dispatching the action when async
+        // action has completed.
+        dispatch({
+            type : 'ADD_DATA',
+            payload : data
+        });
+    }
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What is the use of middleware Redux Saga ?
+What is Redux Saga?
+*Redux Saga is a middleware library for Redux that provides an elegant way to handle side effects in your React applications
+*Side effects can include asynchronous actions like making API calls, managing WebSocket connections, and more.
+*Redux Saga is built on the concept of generators, a feature introduced in ES6.
+*Generators are special functions that can be paused and resumed, making them perfect for handling asynchronous operations in a non-blocking manne
+
+How to implement
+*cd saga-app
+npm install @reduxjs/toolkit react-redux redux-saga
+
+
+
+*
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------// userSlice.js
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+// 1. Create async thunk
+export const fetchUser = createAsyncThunk(
+  'user/fetchUser', // action type
+  async (userId, thunkAPI) => {
+    try {
+      const response = await axios.get(`/api/users/${userId}`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+// 2. Create slice
+const userSlice = createSlice({
+  name: 'user',
+  initialState: {
+    user: null,
+    loading: false,
+    error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+      })
+      .addCase(fetchUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  },
+});
+
+export default userSlice.reducer;
+Note:here action type is fetchuser and the actin creater for asyc call is 
+// src/features/user/userSlice.js
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+export const fetchUser = createAsyncThunk(
+  'user/fetchUser',
+  async (userId, thunkAPI) => {
+    try {
+      const response = await axios.get(`https://jsonplaceholder.typicode.com/users/${userId}`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+const userSlice = createSlice({
+  name: 'user',
+  initialState: {
+    user: null,
+    loading: false,
+    error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+      })
+      .addCase(fetchUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  },
+});
+
+export default userSlice.reducer;
+Note:whatever it return gets stored in the action.payload
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+useContext 
+
+Redux
+
+useContext is a hook.	Redux is a state management library.
+It is used to share data.	It is used to manage data and state.
+Changes are made with the Context value.	Changes are made with pure functions i.e. reducers.
+We can change the state in it.	The state is read-only. We cannot change them directly.
+It re-renders all components whenever there is any update in the provider's value prop.	It only re-render the updated components.
+It is better to use with small applications.	It is perfect for larger applications. 
+It is easy to understand and requires less code.	It is quite complex to understand.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1️⃣ Your React app needs infinite scrolling (like LinkedIn feed). How would you implement it efficiently?
+2️⃣ How would you auto-logout users after 30 minutes of inactivity in a React app?
+3️⃣ Your app must support multiple languages. How would you implement internationalization in React?
+4️⃣ You need to upload large files (100MB+) in React. How do you handle this without timeouts?
+5️⃣ Your client complains that Google isn’t indexing your React SPA. How would you solve this issue?
+6️⃣ Inside useEffect, you’re working with outdated state values. How do you fix stale closures?
+7️⃣ Your app bundle is too large. How do you reduce the bundle size and improve load time?
+8️⃣ Some routes must only be accessed by Admins. How would you protect and manage role-based routes in React Router?
+9️⃣ Your product team asks for smooth page transitions & animations. What’s your approach in React?
+🔟 Your API calls frequently hit the rate limit. How would you throttle?
+
+👉 Follow Sharad kumar for daily doses of tech wisdom, corporate realities, and relatable IT life. 🚀
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+so in auth0 w nstall tehn there make use of documentation connect with react application
+*in our app.js we provide authprovidr
+*tn in login page weuse uelogin redirect to go to login page
+*
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
