@@ -1,0 +1,2752 @@
+React Interview Questions For Freshers
+1.1. What is ReactJS?
+*ReactJS is a JavaScript library 
+*used to build reusable components for the view layer in the MVC architecture.
+*It is used to build the Single Page Application (SPA) due to its component-based architecture,
+* efficient re-rendering with the Virtual DOM
+*and ability to manage dynamic content without needing full page reloads
+
+
+Important Features of React:
+*Component-Based Architecture: React builds UI using reusable, isolated components, making code more modular, maintainable, and scalable.
+*Virtual DOM: React uses a virtual DOM to efficiently update and render components, ensuring fast performance by minimizing direct DOM manipulations.
+*Hooks: React Hooks allow functional components to manage state and side effects, making them powerful and more flexible.
+*Server-Side Rendering (SSR): React can be used for server-side rendering, where HTML content is generated on the server and sent to the client. This improves the app's performance, especially for SEO.
+---------------------------------------------------------------------------------------------------------------------------------------
+
+2.2. What is the latest version of the React?
+*The latest stable version of React is v19.1.0, released on March 28, 2025 . This version builds upon the major updates introduced in React v19.0.0, which was officially released on December 5, 2024.
+
+
+3.3. Explain the MVC architecture
+*The Model-View-Controller (MVC) framework is an architectural/design pattern that separates an application into three main logical components Model, View, and Controller. Each architectural component is built to handle specific development aspects of an application.
+*
+Components of MVC
+The MVC framework includes the following 3 components:
+
+Controller
+Model
+View
+
+
+Controller
+*The controller is the component that enables the interconnection between the views and the model so it acts as an intermediary.
+*The controller doesn’t have to worry about handling data logic,model do that by interacting with the databss
+*t processes all the business logic and incoming requests
+*manipulates data using the Model component, and interact with the View to render the final output.
+
+Responsibilities:
+Receiving user input and interpreting it.
+Updating the Model based on user actions.
+Selecting and displaying the appropriate View.
+
+Example: In a bookstore application, the Controller would handle actions such as searching for a book, adding a book to the cart, or checking out.
+
+View:
+*The View component is used for all the UI logic of the application
+*It generates a user interface for the user. 
+*iews are created by the data which is collected by the model component but these data aren’t taken directly but through the controller. It only interacts with the controller.
+
+
+Responsibilities:
+Rendering data to the user in a specific format.
+Displaying the user interface elements.
+Updating the display when the Model changes.
+
+
+Model:
+*The Model component corresponds to all the data-related logic that the user works with. This can represent either the data that is being transferred between the View and Controller components or any other business logic-related data.
+*Responsibilities:
+Managing data: CRUD (Create, Read, Update, Delete) operations.
+Enforcing business rules.
+Notifying the View and Controller of state changes.
+
+Working of the MVC framework with Example
+*Let's imagine an end-user sends a request to a server to get a list of students studying in a class. The server would then send that request to that particular controller that handles students. That controller would then request the model that handles students to return a list of all students studying in a class.
+*The model would query the database for the list of all students and then return that list back to the controller. If the response back from the model was successful, then the controller would ask the view associated with students to return a presentation of the list of students. This view would take the list of students from the controller and render the list into HTML that can be used by the browser.
+*The controller would then take that presentation and returns it back to the user. Thus ending the request. If earlier the model returned an error, the controller would handle that error by asking the view that handles errors to render a presentation for that particular error. That error presentation would then be returned to the user instead of the student list presentation
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*4. Explain the building blocks of React.
+The five main building blocks of React are
+*Components: These are reusable blocks of code that return HTML.
+*jsx:t stands for JavaScript and XML and allows you to write HTML in React.
+*Props and State: props are like function parameters and State is similar to variables.
+*Context: This allows data to be passed through components as props in a hierarchy.
+*virtual dom
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+9. What are components and their type in React?*
+*A Component is one of the core building blocks of React. In other words, we can say that every application you will develop in React will be made up of pieces called components. Components make the task of building UIs much easier. 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*10. How do browsers read JSX?
+*In general, browsers are not capable of reading JSX and only can read pure JavaScript. The web browsers read JSX with the help of a transpiler. Transpilers are used to convert JSX into JavaScript. The transpiler used is called Babel.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*11. Explain the steps to create a react application and print Hello World?
+*To install React, first, make sure Node is installed on your computer. 
+*npx create-react-app <<Application_Name>>
+*Note: The above method is now deprecated, so use the below given method for creating the React application.
+
+npm create vite@latest
+*cd <<Application_Name>>
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+12. How to create an event in React?
+*To create an event in React, attach an event handler like onClick, onChange, etc., to a JSX element. Define the handler function to specify the action when the event is triggered, such as updating state or executing logic.
+*import React from 'react';
+
+function Component() {
+    const doSomething = (e) => {
+        e.preventDefault();
+        console.log("Button clicked!");
+        console.log("Button value:", e.target.value);        // If value attribute is set
+        console.log("Button text:", e.target.textContent);   // Button inner text
+    };
+
+    return (
+        <button onClick={doSomething} value="SubmitValue">
+            Submit
+        </button>
+    );
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+16. Explain the difference between React and Angular?
+*
+React                                                       Angular
+React is libray                                             Angular is famework
+
+it follows the mvc                                           it follows mv vm                                       
+It updates the virtual dom                                    it updates real dom
+data flow is unidirectional                                    here data flow is bidirectial
+it follows one way data binding                                 it following multile way data binding
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+17. Explain the use of render method in React?
+*Render method is used to return thr jsx means it is used to provide the html to browsers
+*In the render() method, we can read props and state and return our JSX code to the root component of our app.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+22. Explain one way data binding in React?
+*ReactJS Data Binding
+*Data Binding is the process of connecting UI (view) and application logic (component/data) so that they can communicate with each other.
+*Data binding in React can be achieved by using a controlled input.
+*A controlled input is achieved by binding the value to a state variable and an onChange event to change the state as the input value changes.
+
+How React Handles Data Binding?
+*How React Handles Data Binding?
+React handles data binding by using a unidirectional data flow, where state and props manage component data, and controlled components enable real-time synchronization between the UI and state.
+
+Define a state to manage data.
+Set up event listeners to detect user interactions.
+Update the state when an event occurs.
+React automatically re-renders the component with updated data.
+
+
+There are two ways to achieve data binding in Reac
+*One-way Data Binding
+*One-way data binding means data flows in a single direction, from the component's state to the UI. 
+*When the state of a component changes, React updates the DOM to reflect the new state, ensuring that the UI is always in sync with the component’s data.
+*One-way data binding is commonly used in React applications. When the state of a component changes, React updates the DOM to reflect the new state, ensuring that the UI is always in sync with the component’s data.
+ 
+Parent components pass data down to child components via props.
+Child components cannot directly modify the props they receive; they are read-only.
+The view automatically re-renders when the state or props change.
+The component controls the data, with user interactions updating the state explicitly via event handlers.
+
+
+
+1. Model
+*1. Model
+The model in React represents the data in your application. It can be stored in various places, such as in component state, props, or through more complex state management libraries like Redux.
+State: This holds the model data (i.e., variables that can change over time).
+Props: These are the values passed from parent components to child components.
+
+
+2.2. View
+The view is the visual representation of the data.
+In React, the view is defined by the JSX (a syntax extension for JavaScript), which renders the UI based on the state and props.
+
+
+
+Various steps involved are:
+*1. Initial Rendering: When the component renders, React looks at the model (state or props), and based on the data, it renders the view (UI).
+2 State/Props Change: If the model (state or props) changes, React re-renders the component and updates the UI accordingly.
+3.User Interaction: If a user interacts with the UI (e.g., clicks a button, types in an input field), an event handler is triggered, which updates the state or model.
+4. Re-render: React then triggers a re-render to update the view based on the new model values.
+
+import React, { useState } from 'react';
+
+function comp() {
+    const [count, setCount] = useState(0);
+
+    return (
+        <div>
+            <h1>Count: {count}</h1>
+            <button onClick={() => setCount(count + 1)}>Incre</button>
+        </div>
+    );
+}
+
+export default comp;
+
+
+
+Implementing Component to View Data Binding
+*It is a process where the component's state is dynamically linked to the UI, such that any changes in the state automatically update the view.
+*import React, { Component } from 'react';
+
+class App extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            subject: "ReactJS"
+        };
+    }
+
+    render() {
+        return (
+            <div style={{ textAlign: "center" }}>
+                <h4 style={{ color: "#68cf48" }}>GeeksForGeeks</h4>
+                <p><b>{this.state.subject}</b> Tutorial</p>
+
+            </div>
+        )
+    }
+}
+
+export default App;
+*here based on model data the view is implements means initial rendering happens
+*Implementing View to Component Data Binding
+*import React, { Component } from 'react';
+
+class App extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            subject: ""
+        };
+    }
+
+    handleChange = event => {
+        this.setState({
+            subject: event.target.value
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                <h4 style={{ color: "#68cf48" }}>GeeksForGeeks</h4>
+                <input placeholder="Enter Subject"
+                    onChange={this.handleChange}></input>
+                <p><b>{this.state.subject}</b> Tutorial</p>
+
+            </div>
+        )
+    }
+}
+
+export default App;
+*here as the state changes real dom is updated and hence the re renders happens and ui is in sync with the data
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Two way Data Binding
+*In two-way data binding, data flows in both directions. This means that the changes in the UI (like user input) are reflected in the component’s state, and changes in the state are automatically reflected in the UI.
+*React, by default, does not have built-in two-way data binding as part of its core functionality.
+*However, developers can easily implement it using controlled components (in forms, for instance), where both the state and the input field are tied together.
+*import React, { useState } from 'react';
+import './App.css';
+
+function App() {
+    const [subject, setSubject] = useState("");
+
+    const handleInputChange = (event) => {
+        setSubject(event.target.value);
+    };
+
+    return (
+        <div className="container">
+            <h1>Two-Way Data Binding Example</h1>
+            <div className="content">
+                <input
+                    type="text"
+                    placeholder="Enter a subject..."
+                    value={subject}
+                    onChange={handleInputChange}  // Update state on change
+                    className="input-field"
+                />
+                <p>Your selected subject is: <b>{subject || "___"}</b></p>
+            </div>
+        </div>
+    );
+}
+
+export default App;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+before deploying application we need to improve performabve such that sppedd ,efficien can be increased
+*however on using the react the perfirmacve increase on its own still
+*Using React.Fragment - When working with React, there are cases where we need to render multiple elements or return a group of related items. Using additional div to wrap will fix this, but it comes with a problem. Because we are adding an extra node to the DOM, which is totally not useful. In cases like this, where we have the child component which is enclosed within a parent component. Here we encounter this problem. Let’s solve this by using React Fragment, which will help not to add any additional node to the DOM.
+*Windowing or list virtualization - Windowing or List virtualization is a concept of only rendering or writing the visible portion in the current “ window ” to the DOM. The number of items rendered for the first time is smaller than the original one. The items which are not rendered in the first small window will load when scrolling down to it. The DOM nodes of items that exit from the current window are replaced by the new which were not rendered the first time. This improves the performance of rendering a large list.
+*Use of production build - Another way of optimizing a React app is by making sure you bundle your app for production before deploying. By default, the app is in development mode, which means React will include helpful warnings which come with it. This method is useful while you are developing a ReactJS application, but it creates a problem that your app size is large and responses are slower than usual. If the project is built with create-react-app, This can be fixed by running npm run build before the deployment, which will create a production-ready build of your app in a build/ folder that can be then deployed. This can make sure that your app is in either development or production mode using the React Developer Tools.
+*Prefer component state local - Whenever a state updates in a parent component, it re-renders the parent and its child components. Therefore, we need to make sure that re-rendering a component only happens when it is necessary. We can achieve this by making it local to that part of the code.
+
+
+
+*Optimizing React performance can be achieved using:
+
+React.memo() for preventing unnecessary re-renders.
+Lazy loading components with React.lazy() and Suspense.
+Using useMemo() and useCallback() hooks to memoize values and functions.
+Avoiding unnecessary state updates.
+Memoizing React components - React.memo is a great way of optimizing performance as it helps cache functional components.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+7. Differentiate between Real DOM and virtual DOM?
+
+*The actual DOM, a tree-like structure representing the UI elements.
+*Directly manipulates the Real DOM, causing re-rendering of the entire UI.
+*its slower
+*Entire UI might need to be re-rendered when changes occur.
+*
+
+
+Virtual dom
+*A lightweight copy of the Real DOM that contains node of react elements.
+*Updates are made to the Virtual DOM first, then changes are batched and only the necessary changes are reflected in the Real DOM.ths
+u not causing re rendering of whole ui
+*its faster
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*9. What are components and their type in React?
+*A Component is one of the core building blocks of React. In other words, we can say that every application you will develop in React will be made up of pieces called components
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+25. What is the use of dangerouslySetInnerHTML in React?
+*ReactJS dangerouslySetInnerHTML Attribute
+*The dangerouslySetInnerHTML attribute in react is used to inject raw HTML directly into a component.
+* It enables direct DOM Manipulation in React.
+*It is dangerous as it can potentially expose the application to cross-site scripting attacks.
+*In class-based components, the dangerouslySetInnerHTML attribute is used to set innerHTML for the page. This is the replacement for innerHTML attribute.
+*// Filename - App.js
+
+import React from "react";
+
+// Defining our App Component
+const App = () => {
+	// Function to demonstrate dangerouslySetInnerHTML attribute
+	function Set() {
+		return {
+			__html: "Setting HTML using dangerouslySetInnerHTML attribute"
+		};
+	}
+
+	// Returning our JSX code
+	return (
+		<>
+			<div>
+				<h1>GeeksforGeeks</h1>
+				<div dangerouslySetInnerHTML={Set()}></div>
+			</div>
+		</>
+	);
+};
+
+// Exporting your Default App Component
+export default App;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+26. What are Pure Components in React?
+*A Pure Component is a type of React component that only re-renders if the props or state it receives change. React provides React.PureComponent, which is a base class that automatically performs a shallow comparison of props and state to determine if a re-render is necessary.
+*---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+27. What is the significance of setState() in React?
+*setState() is a method used to update the state of a component. When the state is updated, React re-renders the component and its child components to reflect the changes.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+28. What is conditional rendering in React?
+*
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+29. What is React Router?
+*React Router is a library for handling routing and navigation in React JS Applications
+*It allows you to create dynamic routes, providing a seamless user experience by mapping various URLs to components
+*It enables navigation in a single-page application (SPA) without refreshing the entire page.
+*Supports client-side routing in React applications.
+*Provides nested routes for better organization.
+*Enables programmatic navigation via hooks like useNavigate().
+*Provides nested routes for better organization.
+
+
+Types of Routers in React
+1. Browser Router
+*It uses the HTML5 history API to manage the navigation.
+*This router makes use of pushState, replaceState, and the popState event to keep the UI in sync with the URL.
+*such when push than that url is displayed and find the component so that that componenet is rendered without loadibg the page
+*When you're using BrowserRouter in a React app, the routing is handled entirely on the client side using JavaScript but there shuld be proper server side setup
+
+
+
+When to Use BrowserRouter
+1.Hosting on a Web Server with Proper Routing: BrowserRouter works best when your app is hosted on a web server that can handle dynamic URLs (server-side routing):
+
+*It enables client-side routing, meaning the browser handles navigation without making full HTTP requests to the server for each route change. This results in faster, smoother transitions between pages in a single-page application (SPA).
+
+For example:
+
+When a user navigates from /home to /about, BrowserRouter updates the URL in the browser's address bar and renders the appropriate React component without a full page reload.
+
+*The reference to "server-side routing" in the context of BrowserRouter pertains to how the server must be configured to support a React application using BrowserRouter
+*While BrowserRouter handles routing on the client side, the server must be set up to handle requests for all possible routes in the application to ensure proper behavior, especially for direct URL access or page refreshes.
+Here’s why:
+*In a typical SPA using BrowserRouter, the React app is served as a single HTML file (e.g., index.html) with JavaScript that handles all routing logic.
+*When a user navigates within the app (e.g., clicking a link from /home to /about), BrowserRouter intercepts the navigation, updates the URL, and renders the correct component—all on the client side.
+*However, if a user directly accesses a URL (e.g., types example.com/about in the browser or refreshes the page), the browser sends a request to the server for that specific URL (/about).
+*The server must be configured to respond with the same index.html file (or the appropriate entry point for the SPA)
+*so that the React app can load and BrowserRouter can take over to render the correct route.
+
+
+What Does "Proper Routing" on the Server Mean?
+*To support BrowserRouter, the web server must be configured to:
+
+1.Serve the main index.html file for all valid application routes.
+2.Redirect all requests (except for static assets like CSS, JS, or images) to the index.html file, allowing the React app to load and handle the routing on the client side.
+
+
+server {
+    listen 80;
+    server_name example.com;
+
+    root /path/to/your/app;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+
+
+2.Improved SEO: Since BrowserRouter generates URLs without the hash, search engines can more easily crawl and index your pages.
+3.Single Page Applications (SPA): BrowserRouter is commonly used in SPAs, where the entire app runs on a single page.
+
+
+
+2.2. Memory Router
+*Memory Router is used when there is no web browser, like in testing or mobile apps.
+* It remembers the navigation history inside the app not in browser history
+*and do not change the url
+*No URL Change: Unlike Browser Router or HashRouter, MemoryRouter does not change the browser's URL. It stores the location state internally.
+In-memory history: It maintains history in memory, not in the URL or browser history, making it ideal for non-browser environments.
+
+
+When to use
+:Non-Browser Environments: Useful in applications like Electron where the app does not interact with a browser's URL.
+When URL Doesn’t Matter: If you don’t need to reflect state changes in the URL, Memory Router can manage routing internally
+
+
+
+
+3.3.3. Hash Router
+*A Hash Router is another type of router used in React applications.
+*t works by using the hash portion of the URL (the part that comes after the # symbol) to manage navigation.
+*It uses URL hash (#) to represent different routes (e.g., http://example.com/#/home).
+*The hash part is not sent to the server but is used to change the displayed content in the browser.
+*The hash (#) and everything after it is not sent to the server; instead, it’s handled entirely by the browser.
+*This allows HashRouter to manage client-side routing without requiring any server-side configuration.
+*or example:
+
+Navigating to http://example.com/#/about updates the content in the browser without sending a request to the server for /about.
+The React app reads the hash portion (#/about) and renders the corresponding component.
+
+
+
+
+Key Characteristics of HashRouter
+Client-Side Routing: All routing logic is handled in the browser using the hash portion of the URL.
+No Server Involvement: The server only needs to serve the main index.html file and associated static assets (e.g., JavaScript, CSS). It doesn’t need to handle specific routes.
+URL Appearance: URLs include a # (e.g., http://example.com/#/home), which can look less clean than URLs managed by BrowserRouter (e.g., http://example.com/home).
+
+
+When to Use HashRouter
+1.No Server-Side Routing (when the server cannot be configured to handle dynamic routes).
+*In contrast to BrowserRouter, which requires server configuration to serve index.html for all routes (as explained in the previous response), HashRouter doesn’t rely on the server to interpret routes because the routing information is encoded in the URL’s hash, which is processed entirely on the client side.
+
+2.Hosting on Static File Servers
+*Static file servers, like GitHub Pages, Netlify, or Firebase Hosting, are designed to serve static files (HTML, CSS, JavaScript) without running a dynamic server (e.g., Node.js, Express). These services typically cannot be configured to handle dynamic routing (e.g., redirecting /about to index.html), which is required for BrowserRouter.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+30. Explain the components of a react-router.
+Components of React Router
+Here are the main components used in React Router:
+1.1. BrowserRouter and HashRouter
+*BrowserRouter: Uses the HTML5 history API to keep your UI in sync with the URL.
+HashRouter: Uses the hash portion of the URL (i.e., window.location.hash) to keep your UI in sync with the URL.
+<BrowserRouter>
+    (/* Your routes go here */}
+</BrowserRouter>
+
+
+
+2.2. Routes and Route
+*Routes: A container for all your route definitions.
+Route: Defines a single route with a path and the component to render.
+
+
+
+3.3. Link and NavLink
+*Link: Creates navigational links in your application.
+*NavLink: Similar to Link but provides additional styling attributes when the link is active.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+31. How is React routing different from conventional routing?
+React routinng
+*Used in Single Page Applications (SPA).	
+*No full page reloads. React updates only the necessary parts of the UI.
+*React uses a client-side router (e.g., React Router) to handle navigation and manage different views within the same page.
+
+
+Conventional routing
+*Typically used in Multi-Page Applications (MPA).
+*Full page reload is triggered for every navigation request.
+*Uses server-side routing where the server responds with new HTML for each navigation.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+41. How to use styles in ReactJS?
+*CSS Modules allow you to write CSS that is scoped to a specific component, meaning the styles defined in a CSS Module file only apply to the component that imports it.
+*By convention, CSS Module files are named with the .module.css suffix (e.g., App.module.css).
+*This tells the build tool (like Webpack with css-loader) to process the CSS file as a module, generating unique class names to ensure local scoping.
+
+
+*Steps to Use CSS Modules in ReactJS
+1.Create a CSS Module File:
+Create a CSS file with the .module.css extension, e.g., App.module.css.
+/* App.module.css */
+.container {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.title {
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+
+2.Import the CSS Module in Your React Component:
+In your React component file (e.g., App.js), import the CSS Module using the import statement with the styles keyword (or any variable name you prefer).
+Syntax:
+javascript
+
+Collapse
+
+Wrap
+
+Run
+
+Copy
+import styles from './App.module.css';
+
+
+3.Apply styles to your jsx
+*// App.js
+import styles from './App.module.css';
+
+function App() {
+  return (
+    <div className={styles.container}>
+      <h1 className={styles.title}>Hello, CSS Modules!</h1>
+    </div>
+  );
+}
+
+export default App;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+React Interview Questions for Experienced
+*47. How to optimize a React code?
+We can improve our react code by following these practices:
+1.1. Using Binding Functions in Constructors
+What: Binding event handler functions in the constructor ensures that the function’s this context is correctly set to the component instance.
+Why Optimize: Binding functions in the render method or inline in JSX (e.g., onClick={this.handleClick.bind(this)}) creates a new function on every render, which can degrade performance, especially in large components.
+
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this); // Bind in constructor
+  }
+  handleClick() {
+    console.log('Clicked!');
+  }
+  render() {
+    return <button onClick={this.handleClick}>Click me</button>;
+  }
+}
+or use the arrow functions
+
+
+
+
+*2. Eliminating Inline Attributes
+What: Avoid inline styles (e.g., <div style={{ color: 'red' }}>), inline event handlers, or excessive inline logic in JSX.
+Why Optimize: Inline styles and functions create new objects on every render, increasing memory usage and slowing down the reconciliation process.
+How:
+Use CSS files, CSS Modules, or styled-components for styles.
+Move inline logic to separate functions or components.
+3.Avoiding extra tags by using React fragments
+4.Lazy loading
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------48. What is the difference between useref and createRef in React ?
+1.useRef
+*It is a hook.
+*It uses the same ref throughout the component's lifecycle.
+*It returns a mutable ref object (i.e., can be changed).
+*Used for accessing DOM elements, persisting values, or managing timers in functional components.
+*const myRef = useRef();
+
+createRef
+*It is a function.
+*It creates a new ref every time
+*t returns a read-only ref object (cannot be modified directly).
+*Used for class components, especially when referencing DOM elements.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+53. Explain CORS in React?
+*When building React apps, data is often fetched from external APIs or different domains. 
+*This can cause issues with CORS (Cross-Origin Resource Sharing), a security feature that prevents one domain from accessing resources on another without permission.
+
+How Does CORS Work?
+*The browser sends a preflight OPTIONS request to check if the server allows it.
+*The server responds with CORS headers like Access-Control-Allow-Origin.
+*If the headers allow the request, the browser sends the actual request.
+*If the headers don’t allow it, the browser blocks the request for security.
+
+In ReactJS their are two methods for setting up the CORS request:
+
+Axios for CORS Requests
+Fetch for CORS Requests
+
+
+1. Axios for CORS Requests
+*Axios is a popular HTTP client in React for making API requests
+*Axios automatically handles the sending of a preflight OPTIONS request to check if the server allows the origin to access the resource. Here are the steps to set up CORS with Axios
+*If you want to make an authenticated CORS request, especially with Bearer tokens or cookies, you must:
+
+Include credentials: 'include' in your request.
+
+Ensure the server returns Access-Control-Allow-Credentials: true.
+
+Avoid using * in Access-Control-Allow-Origin.
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const AxiosGET = () => {
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
+    const token = 'your_token_here';
+
+    useEffect(() => {
+
+        axios.get('https://jsonplaceholder.typicode.com/posts', {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true
+        })
+            .then(response => {
+                console.log('Response from server:', response);
+                setData(response.data);
+            })
+            .catch(error => {
+                console.error('Error occurred during CORS request:', error);
+                setError(error.message);
+            });
+    }, [token]);
+
+    return (
+        <div>
+            <h1>CORS Request with Axios</h1>
+            {error && <p style={{ color: 'red' }}>Error: {error}</p>}
+            {data ? (
+                <pre>{JSON.stringify(data, null, 2)}</pre>
+            ) : (
+                <p>Loading data...</p>
+            )}
+        </div>
+    );
+};
+
+export default AxiosGET;
+
+
+
+2.2. Fetch for CORS Requests
+*The Fetch API is a native JavaScript method to make HTTP requests.
+*When using the Fetch API to make a cross-origin HTTP request (i.e., calling an API hosted on a different domain than your frontend), you need to explicitly tell the browser how to handle it.
+*Why mode: 'cors'?
+The mode option in fetch() defines how the browser should handle cross-origin requests:
+
+'cors': Allows cross-origin requests with CORS headers.
+
+'same-origin': Only allows requests to the same origin (useful for internal APIs).
+
+'no-cors': Makes the request but blocks access to the response content (used for sending data without needing the response).
+
+*fetch('https://api.example.com/data', {
+  method: 'GET',
+  mode: 'cors', // This enables cross-origin requests
+  headers: {
+    'Authorization': 'Bearer <your_token>',
+    'Content-Type': 'application/json'
+  },
+  credentials: 'include' // if you're sending cookies or need the server to include credentials
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('CORS error:', error));
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+54. What is axios and how to use it in React?
+
+*Axios is a promise-based HTTP client for JavaScript, which is used to make HTTP requests to fetch or send data to a server.
+Key Features of Axios
+*Works in both NodeJS and browsers.
+*Promise-based API.
+*Automatically transforms JSON data.
+*Supports request and response interceptors.
+*Supports making GET, POST, PUT, DELETE, and other HTTP requests.
+
+
+1.1. GET Request
+*import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+const App = () => {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        // Make GET request to fetch data
+        axios
+            .get("https://jsonplaceholder.typicode.com//posts")
+            .then((response) => {
+                setData(response.data);
+                setLoading(false);
+            })
+            .catch((err) => {
+                setError(err.message);
+                setLoading(false);
+            });
+    }, []);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
+
+    return (
+        <div>
+            <h1>Posts</h1>
+            <ul>
+                {data.map((post) => (
+                    <li key={post.id}>{post.title}</li>
+                ))}
+            </ul>
+        </div>
+    );
+};
+
+export default App;
+
+
+
+2.2. POST Request
+*POST requests are used to send data to the server. Let’s see how you can use Axios to send data via a POST request.
+*import React, { useState } from "react";
+import axios from "axios";
+
+const CreatePost = () => {
+    const [title, setTitle] = useState("");
+    const [body, setBody] = useState("");
+    const [responseMessage, setResponseMessage] = useState("");
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        const newPost = {
+            title,
+            body,
+        };
+
+        // Make POST request to send data
+        axios
+            .post("https://jsonplaceholder.typicode.com//posts", newPost)
+            .then((response) => {
+                setResponseMessage("Post created successfully!");
+            })
+            .catch((err) => {
+                setResponseMessage("Error creating post");
+            });
+    };
+
+    return (
+        <div>
+            <h2>Create New Post</h2>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    placeholder="Post Title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                />
+                <textarea
+                    placeholder="Post Body"
+                    value={body}
+                    onChange={(e) => setBody(e.target.value)}
+                />
+                <button type="submit">Create Post</button>
+            </form>
+            {responseMessage && <p>{responseMessage}</p>}
+        </div>
+    );
+};
+
+export default CreatePost;
+
+
+
+Handling Errors in Axios
+*Error handling is an important part of working with HTTP requests. In the above examples, we used .catch() to handle any errors that occur during the request. However, Axios provides several ways to manage errors more efficiently
+*Error Object: Axios provides an error object containing useful information such as the response status, error message, and more. We can access it like this:
+
+
+axios
+    .get("https://jsonplaceholder.typicode.com//invalid-endpoint")
+    .catch((error) => {
+        if (error.response) {
+            // Server responded with a status other than 2xx
+            console.log("Response error:", error.response);
+        } else if (error.request) {
+            // No response was received
+            console.log("Request error:", error.request);
+        } else {
+            // Something went wrong setting up the request
+            console.log("Error:", error.message);
+        }
+    });
+You can use status codes to handle specific error cases, such as redirecting the user if a 401 Unauthorized error occurs, or showing a different message for a 404 Not Found error.
+Best Practices for Using Axios in React
+1.Use Axios with async/await: For cleaner code, consider using async/await with Axios:
+const fetchData = async () => {
+    try {
+        const response = await axios.get('https://jsonplaceholder.typicode.com//posts');
+        setData(response.data);
+    } catch (error) {
+        setError(error.message);
+    }
+};
+
+
+2.Use Axios Instances
+*const axiosInstance = axios.create({
+    baseURL: "https://jsonplaceholder.typicode.com/",
+    timeout: 1000,
+});
+
+axiosInstance
+    .get("/posts")
+    .then((response) => {
+        console.log(response.data);
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+
+
+3.Response Objects in Axios
+When you send a request to the server, you receive a response object from the server with the properties given below...
+
+data: You receive data from the server in payload form. This data is returned in JSON form and parse back into a JavaScript object to you.
+status: You get the HTTP code returned from the server.
+statusText: HTTP status message returned by the server.
+headers: All the headers are sent back by the server.
+config: original request configuration.
+request: actual XMLHttpRequest object.
+Error Object
+You will get an error object if there will be a problem with the request. Promise will be rejected with an error object with the properties given
+
+message: Error message text. 
+response: Response object (if received). 
+request: Actual XMLHttpRequest object (when running in a browser). 
+config: Original request configuration. 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Matrial UI
+1.Material UI Button API
+*Material-UI is a user interface library that provides predefined and customizable React components for faster and easy web development, these Material-UI components are based on top of Material Design by Google
+* Material UI provides a customizable <Button/> component that can be used for several purposes through its props.
+* Material UI provides a customizable <Button/> component that can be used for several purposes through its props.
+
+
+"Contained buttons" are buttons with a filled background and usually a little shadow (elevation) to make them pop.
+1.1️⃣ Default
+Appearance: Neutral background (often light gray or system default), dark text.
+
+Usage: For general actions that are not the main “call to action.”
+
+Example:
+
+css
+Copy
+Edit
+[  Save  ]
+Background: light grey, Text: black/grey.
+
+
+2.2️⃣ Primary
+Appearance: Branded color (e.g., blue in Material UI, green in WhatsApp).
+
+Usage: The main action on a screen — the thing you most want the user to do.
+
+Example:
+
+css
+Copy
+Edit
+[  Submit  ]
+Background: primary brand color, Text: white.
+
+3.3️⃣ Secondary
+Appearance: Slightly toned-down color, still filled but less dominant than primary.
+
+Usage: For important but secondary actions, like an alternate choice next to the primary.
+
+Example:
+
+csharp
+Copy
+Edit
+[  Save as Draft  ]
+Background: secondary brand color (e.g., grey/blue), Text: white.
+
+
+4.5️⃣ Disabled
+Appearance: Low-contrast background (light grey) and dimmed text, no hover effect.
+
+Usage: Indicates the button is currently not available due to unmet conditions.
+
+Example:
+
+csharp
+Copy
+Edit
+[  Submit  ]   ← faded out
+Background: very light grey, Text: grey, no click possible.
+
+Note:<Button variant="contained" color="primary">
+  Primary
+</Button>
+here Button comes fro button compoennet in mui resource
+*variant	"contained"	Fills background, adds shadow
+*"outlined"	Border only
+*"text"	Link-style, no background
+*color	"primary", "secondary", "inherit", "error", "success", "info", "warning"	Uses theme color
+*Now to add the classes in the mui
+**in mui version 5 we have the 
+When you write:
+
+jsx
+Copy
+Edit
+<Button variant="contained">Click Me</Button>
+Material UI doesn’t just render your text — it renders a styled root HTML element (the outermost wrapper).
+If you inspect it in DevTools, you’ll see something like:
+
+html
+Copy
+Edit
+<button
+  class="MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+  type="button"
+>
+  Click Me
+</button>
+Here:
+
+<button> → This is the root element (the main container for everything inside the Button).
+
+MuiButton-root → This is MUI’s default root CSS class for the Button.
+
+Other classes like MuiButton-contained and MuiButton-containedPrimary are added based on props (variant="contained", color="primary", etc.).
+
+className vs classes
+className → attaches your custom CSS class directly to this root <button> element.
+
+jsx
+Copy
+Edit
+<Button className="myCustomButton">Click Me</Button>
+Output:
+
+html
+Copy
+Edit
+<button class="MuiButton-root MuiButton-contained myCustomButton">Click Me</button>
+classes → lets you replace/extend classes for specific internal slots inside the component (like root, label, startIcon).
+
+jsx
+Copy
+Edit
+<Button classes={{ root: 'myRootClass' }}>Click Me</Button>
+Output:
+
+html
+Copy
+Edit
+<button class="myRootClass MuiButton-contained">Click Me</button>
+Internal "slots" in Button
+For a Button, MUI defines slots like:
+
+root → the outer <button> (main container)
+
+label → the <span> around the button text
+
+startIcon → container for the icon at the start
+
+endIcon → container for the icon at the end
+
+💡 In short:
+
+Root element = the main <button> tag MUI renders.
+
+className applies styles to that main element.
+
+classes.root does the same but through the classes prop (and is useful when overriding theme-based styles in a controlled way).
+
+Note:in version 5
+*<Button
+  startIcon={<SaveIcon />}
+  sx={{
+    backgroundColor: 'lightblue',
+    '& .MuiButton-label': {
+      fontWeight: 'bold'
+    },
+    '& .MuiButton-startIcon': {
+      color: 'red'
+    }
+  }}
+>
+  Save
+</Button>
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Material UI Typography
+*Typography:
+
+Typography is a Material-UI component used to standardize the text and its related CSS properties without worrying about browser compatibility issues.
+*import { Typography } from '@mui/material';
+
+function App() {
+  return (
+    <div className="App">
+      {/* Setting the text styling to H1*/}
+      <Typography variant="h1">
+        H1.Heading
+      </Typography>
+      {/* Setting the text to center with align prop */}
+      <Typography align="center" variant="h2">
+        H2.Heading
+      </Typography>
+      {/* Setting the text color to primary*/}
+      <Typography color="primary" variant="h3">
+        H3.Heading
+      </Typography>
+      {/* Setting the text type styling to be like a button */}
+      <Typography variant="button">
+        Button
+      </Typography>
+    </div>
+  );
+}
+
+export default App;
+same variant ,color from theme
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+React MUI Card API
+*import Card from '@mui/material/Card';
+*
+import * as React from 'react';
+import { Button, Card, CardMedia, CardActions, CardContent } 
+from '@mui/material';
+
+export default function Demo() {
+    return (
+        <div style={{ margin: 100 }}>
+            <h1 style={{ color: 'green' }}>GeeksforGeeks</h1>
+            <h3><u>React MUI Card API</u></h3>
+            <Card raised={true} sx={{ maxWidth: 400 }}>
+                <CardMedia
+                    component="img"
+                    height="200"
+                    image=
+'https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200x200-min.png'
+                    alt="GFG Logo"
+                />
+                <CardContent sx={{ bgcolor: "#E8E8E8" }}>
+                    <h3>DSA Self Paced Course</h3>
+                    <h4 style={{ color: "green" }}>
+                        Most popular course on DSA trusted by
+                        over 75,000 students! Built with years
+                        of experience by industry experts and
+                        gives you a complete package of video
+                        lectures, practice problems, quizzes,
+                        discussion forums and contests.<br />
+                        Start Today !
+                    </h4>
+                </CardContent>
+                <CardActions >
+                    <Button variant="contained" color="warning">
+                       Share
+                     </Button>
+                    <Button variant="contained" color="success">
+                       Enroll
+                    </Button>
+                </CardActions>
+            </Card>
+        </div>
+    );
+}
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+
+export default function Demo() {
+    return (
+        <div style={{ margin: 100 }}>
+            <h1 style={{ color: 'green' }}>GeeksforGeeks</h1>
+            <h3><u>React MUI Card API</u></h3>
+            <Card raised={true} sx={{ bgcolor: "#E8E8E8" }} >
+                <CardContent>
+                    <h1>Alert !!</h1>
+                    <h3>Are you sure you want to download ?</h3>
+                </CardContent>
+                <CardActions >
+                    <Button variant="outlined" color="success">
+                         Download
+                   </Button>
+                    <Button variant="outlined" color="error">
+                         Cancel
+                    </Button>
+                </CardActions>
+            </Card>
+        </div>
+    );
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+React MUI List API
+*import { List } from '@mui/material';
+*import "./App.css";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Divider from "@mui/material/Divider";
+import InboxIcon from "@mui/icons-material/Inbox";
+import DraftsIcon from "@mui/icons-material/Drafts";
+function App() {
+    return (
+        <div className="App">
+            <div
+                className="head"
+                style={{
+                    width: "fit-content",
+                    margin: "auto",
+                }}
+            >
+                <h1
+                    style={{
+                        color: "green",
+                    }}
+                >
+                    GeeksforGeeks
+                </h1>
+                <strong>React MUI List API</strong>
+            </div>
+            <br />
+            <Box
+                sx={{
+                    width: "100%",
+                    maxWidth: 360,
+                    margin: "auto",
+                    bgcolor: "background.paper",
+                }}
+            >
+                <nav>
+                    <List>
+                        <ListItem disablePadding>
+                            <ListItemButton>
+                                <ListItemText
+                                    primary="Data Structures" />
+                            </ListItemButton>
+                        </ListItem>
+                        <ListItem disablePadding>
+                            <ListItemButton>
+                                <ListItemText
+                                    primary="Algorithms" />
+                            </ListItemButton>
+                        </ListItem>
+                        <ListItem disablePadding>
+                            <ListItemButton>
+                                <ListItemText
+                                    primary="Machine Learning" />
+                            </ListItemButton>
+                        </ListItem>
+                    </List>
+                </nav>
+                <Divider />
+            </Box>
+        </div>
+    );
+}
+
+export default App;
+Note:here List,ListeIte,ListItemText
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Dialog 
+In this article, we are going to discuss the React MUI DialogContentAPI. The Dialogue component allows the user to show extra information on the user click action.
+*import * as React from 'react';
+import Button from '@mui/material/Button';
+import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+function SimpleDialog(props) {
+    const { onClose, open } = props;
+
+    const handleClose = () => {
+        onClose();
+    };
+
+    return (
+        <Dialog onClose={handleClose} open={open}>
+            <DialogTitle style={{ color: 'green' }}>
+                 DSA Self Paced Course</DialogTitle>
+            <DialogContent dividers>
+                <p style={{ margin: 20 }}>
+                    Most popular course on DSA trusted by
+                    over 75,000 students! Built with years
+                    of experience by industry experts and
+                    gives you a complete package of video
+                    lectures, practice problems, quizzes,
+                    discussion forums and contests.<br />
+                    Start Today !</p>
+            </DialogContent>
+        </Dialog>
+    );
+}
+
+
+export default function SimpleDialogDemo() {
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+    return (
+        <div style={{ margin: 100 }}>
+            <h1 style={{ color: 'green' }}>GeeksforGeeks</h1>
+            <h3><u>React MUI DialogContent API</u></h3>
+            <br />
+            <Button variant="outlined" 
+                onClick={handleClickOpen}>
+                DSA Self Paced Course
+            </Button>
+            <SimpleDialog
+                open={open}
+                onClose={handleClose}
+            />
+        </div>
+    );
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+https://www.youtube.com/watch?v=EgN4qwAQ0eM&list=PL4ruoTJ8LTT8jT83BEeE5k3crowAHPv1T&index=24
+*frmtend interview question in various comanie
+
+*in the old browserthatdoesn not support the foreach methods
+*reduce polyfill
+*check here that the first condition if that this must not be null and undefined
+*and then the check if callback is a function or not
+*function reduce(callback, initialvalue) {
+  if (this == null || this === undefined) {
+    throw new TypeError("Array.prototype.reduce called on null or undefined");
+  }
+  if (typeof callback !== "function") {
+    throw new TypeError("callback is not a function");
+  }
+  if (!this.length) {
+    if (arguments.length < 1) {
+      throw new TypeError("Reduce of empty array with no initial value");
+    } else if (arguments.length >= 1) {
+      return arguments[1];
+    }
+  }
+
+  //here array with initial value and without initial value both are handled
+
+  //so we loop over array so thatwe acn get the accumulator value
+  if (arguments.length < 2) {
+    {
+      acc = this[0];
+      k = 1;
+    }
+  } else {
+    var k = 0;
+    var acc = initialvalue;
+  }
+
+  while (k < this.length) {
+    acc = callback(acc, this[k], k, this);
+    k++;
+  }
+  return acc;
+}
+
+console.log([1, 2, 3].reduce((acc, curr) => acc + curr, 0));
+
+
+console.log([1, 2, 3].reduce((acc, curr) => acc + curr, 0));
+Note:
+test cases are 
+1.checkif the array is null
+2.check callback is function
+3.if array not there than initial value
+4 if array than the iterate store the acc amd return acc else if not than initial value will be arr[0]
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+Implementing the dom
+const vDocument = new VDocument();
+const body = vDocument.createElement("body");
+const div = vDocument.createElement("div");
+
+div.innerHTML = "Hello, I am a div!";
+body.appendChild(div);
+
+// Dynamic Insertion by the interviewer
+/*
+	const div1 = vDocument.createElement("div");
+	const div2 = vDocument.createElement("div");
+	div1.innerHTML = "Hello, I am a div 1!";
+	div2.innerHTML = "Hello, I am a div 2!";
+	div.appendChild(div1);
+	body.appendChild(div2);
+*/
+
+vDocument.appendChild(body);
+
+vDocument.render();
+
+/**
+ * For more programming concepts, questions, tips, and tutorials, visit:
+ *
+ * https://bit.ly/devtools-yt
+ * https://code.devtools.tech
+ * https://devtools.tech
+ *
+ * Author: Yomesh Gupta (https://yomeshgupta.com)
+ */
+
+/**
+ * Question: Implement the following code so that when interviewer calls vDocument.render()
+ * then following HTML structure should be printed.
+ *
+ * const vDocument = new VDocument();
+ * const body = vDocument.createElement("body");
+ * const div = vDocument.createElement("div");
+ *
+ * div.innerHTML = "Hello, I am a div!";
+ *
+ * body.appendChild(div);
+ * vDocument.appendChild(body);
+ *
+ * vDocument.render();
+ *
+ * Output:
+ * <html>
+ * 	<body>
+ *		<div>
+ * 			Hello, I am a div!
+ * 		</div>
+ * 	<body>
+ * </html>
+ *
+ * To understand the solution, visit: https://www.youtube.com/watch?v=CAzMsXUe2I0
+ */
+
+// Solution
+const INDENT_SIZE = 4;
+const getSpaces = (length) => {
+    return new Array(length).fill(" ").join("");
+};
+
+class Node {
+    constructor(name) {
+        this.name = name;
+        this.innerHTML = "";
+        this.children = [];
+    }
+    appendChild(node) {
+        this.children.push(node);
+    }
+}
+
+class VDocument extends Node {
+    constructor() {
+        super("html");
+    }
+
+    createElement(nodeName) {
+        return new Node(nodeName);
+    }
+    render() {
+        function printTree(currentNode, currentLevel) {
+            // calculating the prefix spaces for current level
+            const spaces = getSpaces(currentLevel * INDENT_SIZE);
+
+            let output = "";
+
+            // opening tag
+            output += `${spaces}<${currentNode.name}>\n`;
+
+            // innerHTML handling
+            if (currentNode.innerHTML) {
+                output += `${spaces}${getSpaces(INDENT_SIZE)}${
+                    currentNode.innerHTML
+                }\n`;
+            }
+
+            // loop for children
+            for (let i = 0; i < currentNode.children.length; i++) {
+                output += printTree(currentNode.children[i], currentLevel + 1);
+            }
+
+            // closing tag
+            output += `${spaces}</${currentNode.name}>\n`;
+
+            return output;
+        }
+
+        console.log(printTree(this, 0));
+    }
+}
+
+const vDocument = new VDocument();
+const body = vDocument.createElement("body");
+const div = vDocument.createElement("div");
+
+div.innerHTML = "Hello, I am a div!";
+body.appendChild(div);
+
+// Dynamic Insertion by the interviewer
+/*
+	const div1 = vDocument.createElement("div");
+	const div2 = vDocument.createElement("div");
+	div1.innerHTML = "Hello, I am a div 1!";
+	div2.innerHTML = "Hello, I am a div 2!";
+	div.appendChild(div1);
+	body.appendChild(div2);
+*/
+
+vDocument.appendChild(body);
+
+vDocument.render();
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Depply 
+/**
+ * For more programming concepts, questions, tips, and tutorials, visit:
+ *
+ * https://bit.ly/devtools-yt
+ * https://code.devtools.tech
+ * https://devtools.tech
+ *
+ * Author: Yomesh Gupta (https://yomeshgupta.com)
+ */
+
+/**
+ * Question: Given a deeply nested array, create a function on the array, namely flatten, that when invoked returns
+ * a flat version of the original array. Function should be defined in a way that it can be invoked on existing
+ * and future arrays. 
+ * 
+ * 
+    var input = [
+        1, 2, 3,
+        [4],
+        [5, 6, [7], [8, [9, [10]]]],
+        11, 12, 13,
+        [14, [[[[[15, [16]]]]]]],
+        17, 18,
+        [19, [20, [21, [22, [23, [24, [[[[[25]]]]]]]]]]]
+    ];
+
+    var flatArray = input.flatten();
+    // flatArray: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+ *
+ */
+
+// Solution
+
+/** var themes = []; themes.flatten(); */
+
+var input = [
+    1,
+    2,
+    3,
+    [4],
+    [5, 6, [7], [8, [9, [10]]]],
+    11,
+    12,
+    13,
+    [14, [[[[[15, [16]]]]]]],
+    17,
+    18,
+    [19, [20, [21, [22, [23, [24, [[[[[25]]]]]]]]]]],
+];
+Now answr to his 
+Array.protototye.flattedn=flatten
+function flatten()
+{
+}//use here function as arrow function does not have binding of this
+*here using function expression this will be teh array
+*So the logic will be that the iterate over arra
+*if elemnt is an aray d some processing else store lement directly in an temp array
+*var input = [
+    1,
+    2,
+    3,
+    [4],
+    [5, 6, [7], [8, [9, [10]]]],
+    11,
+    12,
+    13,
+    [14, [[[[[15, [16]]]]]]],
+    17,
+    18,
+    [19, [20, [21, [22, [23, [24, [[[[[25]]]]]]]]]]],
+];
+
+/** Solution 1 */
+function flatten() {
+    /**
+     * Loop over the array: 0 -- arr.length
+     * if currentElement is an array
+     *  do some processing
+     * else
+     *  use the currentElement directly
+     */
+
+    const output = [];
+
+    function processing(arr) {
+        /**
+         * input: [1,2,[3]]
+         * 0: 1 -> [1]
+         * 1: 2 -> [1,2]
+         * 2: [3] -> processing([3]) -> 0 - length -> [1,2,3]
+         */
+        for (let i = 0; i < arr.length; i++) {
+            const currentElement = arr[i];
+
+            if (Array.isArray(currentElement)) {
+                processing(currentElement);
+            } else {
+                output.push(currentElement);
+            }
+        }
+    }
+
+    processing(this);
+    return output;
+}
+[1,2,[3]].flatten()
+
+
+//2nd solution to this problem will be flat()
+{
+this.to_string()//means all lemenst separated by the ,no nested arra
+}
+function flatIt() {
+//     return this.toString()
+//         .split(",")
+//         .map((el) => Number(el));
+// }
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Compound component means parent child relationship
+*and aren't know ehichaccordionitem is clicked so 
+we have in the app.js as the <Accordion collapsible>
+        <AccordionItem id="1">
+          <AccordionToggle>Devtools Tech? 🤔</AccordionToggle>
+          <AccordionPanel>
+            The aim with Devtools Tech is to create a platform for Frontend
+            Engineers where we all can improve, invest in ourselves, and grow by
+            learning from high quality real world programming content. This is a
+            platform where you can practice actual interview questions, watch
+            courses, read blogs, and keep track of your progress across various
+            domains and topics.
+          </AccordionPanel>
+        </AccordionItem>
+        <AccordionItem id="2">
+          <AccordionToggle>Is it Free?</AccordionToggle>
+          <AccordionPanel>
+            Yes, the platform and YouTube both are completely free!
+          </AccordionPanel>
+        </AccordionItem>
+      </Accordion>
+
+*import React, { useState } from "react";
+
+import {
+  AccordionContext,
+  AccordionItemContext,
+  useAccordion,
+  useAccordionItem
+} from "./AccordionContext";
+
+const Accordion = ({
+  defaultActive = null,
+  children,
+  collapsible = false,
+  ...props
+}) => {
+  const [activePanel, setActivePanel] = useState(defaultActive);
+  const handlePanelClick = (id) => {
+    let nextActiveId = id;
+
+    if (collapsible && nextActiveId === activePanel) nextActiveId = null;
+
+    setActivePanel(nextActiveId);
+  };
+  const value = {
+    activePanel,
+    handlePanelClick,
+    collapsible
+  };
+
+  return (
+    <AccordionContext.Provider value={value}>
+      <div {...props}>{children}</div>
+    </AccordionContext.Provider>
+  );
+};
+
+export const AccordionItem = ({ id, children, ...props }) => {
+  const value = {
+    id
+  };
+
+  return (
+    <AccordionItemContext.Provider value={value}>
+      <div {...props}>{children}</div>
+    </AccordionItemContext.Provider>
+  );
+};
+
+export const AccordionToggle = ({ children, ...props }) => {
+  const { handlePanelClick } = useAccordion();
+  const { id } = useAccordionItem();
+
+  return (
+    <button
+      style={{
+        width: "100%",
+        height: "30px",
+        border: "1px solid #ebebeb",
+        textAlign: "left",
+        padding: "0px 20px"
+      }}
+      onClick={() => handlePanelClick(id)}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
+
+export const AccordionPanel = ({ children, ...props }) => {
+  const { activePanel } = useAccordion();
+  const { id } = useAccordionItem();
+
+  return activePanel === id ? (
+    <div
+      style={{
+        border: "1px solid #ebebeb",
+        textAlign: "left",
+        padding: "20px"
+      }}
+      {...props}
+    >
+      {children}
+    </div>
+  ) : null;
+};
+
+export default Accordion;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Custom timer
+*/**
+ * Author: Yomesh Gupta | Devtools Tech
+ * YouTube: https://bit.ly/devtools-yv
+ * Interview Questions: https://code.devtools.tech/questions/all/?ref=use-timer-sandbox
+ * Twitter: https://twitter.com/yomeshgupta
+ */
+
+import "./styles.css";
+
+import useTimer from "./useTimer";
+
+export default function App() {
+  const { isRunning, start, stop, seconds } = useTimer(5);
+
+  return (
+    <div className="App">
+      <h1>useTimer custom hook</h1>
+      <h2>{isRunning ? seconds : "No Timer Running"}</h2>
+      <button onClick={start} disabled={isRunning}>
+        Start Timer
+      </button>
+      <button onClick={stop} disabled={!isRunning}>
+        Stop Timer
+      </button>
+    </div>
+  );
+}
+
+import { useState, useRef, useEffect, useCallback } from "react";
+
+/**
+ * @param {number} totalDuration
+ * @returns {object} { isRunning: boolean, start: function, stop: function, seconds: number }
+ *
+ * This hook could be extended to have options like
+ * autoStart, pause functionality, onUpdate, and much more
+ */
+const useTimer = (totalDuration) => {
+  const [isRunning, setIsRunning] = useState(false);
+  const [seconds, setSeconds] = useState(totalDuration);
+  const timerRef = useRef(null);
+
+  // function to start the timer
+  const start = useCallback(() => {
+    /**
+     * start the timer
+     * decrement seconds every 1s
+     * update the isRunning --> true
+     */
+    // capturing interval id for future reference
+    timerRef.current = setInterval(() => {
+      // 5 --> 4 --> 3 --> ..
+      setSeconds((state) => state - 1);
+    }, 1000);
+    setIsRunning(true);
+  }, [setSeconds, setIsRunning]);
+
+  // function to top the timer
+  const stop = useCallback(() => {
+    // clearing interval
+    clearInterval(timerRef.current);
+    setIsRunning(false);
+    setSeconds(totalDuration);
+  }, [setIsRunning, setSeconds, totalDuration]);
+
+  useEffect(() => {
+    // to handle condition when timer reaches 0
+    if (seconds < 1) {
+      stop();
+    }
+  }, [seconds, stop]);
+
+  useEffect(() => {
+    // clear interval when component unmount happens
+    return () => timerRef && clearInterval(timerRef.current);
+  }, []);
+
+  return {
+    isRunning,
+    start,
+    stop,
+    seconds
+  };
+};
+
+export default useTimer;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Mastering rendering technique
+*so in csr basically first we load the ks,load assets
+*then the parse them and render the dom trees
+*then fetch the data nd finally it bcomes intercative
+*Since we use the react and its uses spa so its default rendering
+*It is used for the small app adn big also but here web vitals are not good
+*As we decrease network then we can see the blank page first as its loading js code
+*Its not greater experience 
+*low seo
+*low web vitals
+
+
+Sever side rendering
+*fetch the data 
+*render on server using the next js
+*Then we send all the things to browser 
+*browser loads th ejs
+*And it makes it interactive
+so open low network ssr app
+*we get the app laoded in small time
+*but its not intercative
+They are not interactive sind event handlers are not attached and they will be attached using the hydration
+*
+Now to make the ssr interactive we will us ethe selective hydration using the react 18+feature
+*which says load everything
+*but hydrate anything
+
+Got it 👍 Let’s break this down:
+
+Selective Hydration in SSR (Server-Side Rendering) is when the server renders the full HTML, but only parts of the UI hydrate immediately (attach client-side JS event handlers), while the rest hydrates lazily or when needed.
+This improves performance since not everything is hydrated at once.
+
+Here’s a React 18 + SSR example with selective hydration:
+
+🔹 Example: React SSR with Selective Hydration
+// server.js
+import express from "express";
+import { renderToPipeableStream } from "react-dom/server";
+import App from "./App.js";
+
+const app = express();
+
+app.get("/", (req, res) => {
+  let didError = false;
+
+  const stream = renderToPipeableStream(<App />, {
+    onShellReady() {
+      res.statusCode = didError ? 500 : 200;
+      res.setHeader("Content-type", "text/html");
+      stream.pipe(res);
+    },
+    onError(err) {
+      didError = true;
+      console.error(err);
+    }
+  });
+});
+
+app.listen(3000, () => {
+  console.log("Server running on http://localhost:3000");
+});
+
+// App.js
+import React, { Suspense } from "react";
+import NewsFeed from "./NewsFeed";
+import Comments from "./Comments";
+
+export default function App() {
+  return (
+    <html>
+      <body>
+        <h1>Selective Hydration Example</h1>
+        
+        {/* Hydrated immediately */}
+        <button onClick={() => alert("Clicked!")}>Click Me</button>
+
+        {/* Suspense boundary: hydrates only when ready */}
+        <Suspense fallback={<div>Loading News...</div>}>
+          <NewsFeed />
+        </Suspense>
+
+        {/* Another Suspense boundary */}
+        <Suspense fallback={<div>Loading Comments...</div>}>
+          <Comments />
+        </Suspense>
+      </body>
+    </html>
+  );
+}
+
+// NewsFeed.js
+import React from "react";
+
+export default function NewsFeed() {
+  return (
+    <div>
+      <h2>News Feed</h2>
+      <p>Hydrated later when data is ready!</p>
+    </div>
+  );
+}
+
+// Comments.js
+import React from "react";
+
+export default function Comments() {
+  return (
+    <div>
+      <h2>Comments</h2>
+      <p>Also hydrated separately.</p>
+    </div>
+  );
+}
+
+🔹 What Happens Here?
+
+Server sends HTML immediately → page loads fast.
+
+The button hydrates instantly (since it’s outside Suspense).
+
+NewsFeed and Comments hydrate selectively, only after their JS chunks load and are ready.
+
+This is selective hydration.
+
+If you interact with them before hydration, React will prioritize hydrating that part first.
+
+👉 This is useful when you have:
+
+A large page with critical interactive UI (hydrate first).
+
+Non-critical widgets (hydrate later in parallel).
+
+Heavy components (hydrate only when visible).
+
+Do you want me to also show you a real-world Next.js 13+ example with selective hydration (since it uses React 18’s SSR under the hood)?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function constructor are basicallyused to give a type to the objects ,they ipllicty return this when non primitive value is not returned
+*if the non premitive value is returnd that the object is retunrd
+*if primitive than also implxity this 
+
+
+function Person(name, profession) {
+	// 1. a new empty object is created and assigned to "this" inside the function
+	// this = {};
+
+	// 2. the function body executes and can modify "this"
+	this.name = name;
+	this.profession = profession;
+
+	// 3. The implicit "this" value is returned, if no explicit non-primitive value is returned;
+	// return this;
+}
+
+var yomesh = new Person('Yomesh', 'SE');
+console.dir(yomesh);
+
+
+var thisReference;
+
+function Person(name, profession) {
+	// this = {};
+
+	// fn body executes, can modify this
+	this.name = name;
+	this.profession = profession;
+
+	thisReference = this;
+
+	// return this;
+}
+
+2.var yomesh = new Person('Yomesh', 'SE');
+console.dir(yomesh);
+console.log('Are you two same??', thisReference === yomesh);//true imllcict this
+
+
+var thisReference;
+
+function Person(name, profession) {
+	this.name = name;
+	this.profession = profession;
+
+	thisReference = this;
+
+	// primitive
+	// non primitive: [], {}, () => {}
+
+	return function () {
+		console.log('I am amazing');
+	};
+}
+
+var yomesh = new Person('Yomesh', 'SE');
+console.log(thisReference === yomesh);//false
+
+
+3.var thisReference;
+
+function Person(name, profession) {
+	// this = {};
+
+	// fn body executes, can modify this
+	this.name = name;
+	this.profession = profession;
+
+	thisReference = this;
+
+	// return this;
+}
+
+var yomesh = new Person('Yomesh', 'SE');
+console.dir(yomesh);
+console.log('Are you two same??', thisReference === yomesh);//true
+
+5.function MyAwesomeLibrary(config) {
+	if (!new.target) {/created using new or not
+		return new MyAwesomeLibrary(config);
+		// throw new Error('CALL ME WITH NEW OPERATOR!!!!');
+	}
+
+	this.there = true;
+}
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------Closure
+*Each lexical environment has the lexical record and the refrence of the outer environment
+*function outer(){
+    var x = 1;
+
+    function inner(){
+        if(true){
+            console.log(`printing x ${x}`);
+        }
+
+        function innerMost(){
+            var y = 2;
+            if(true){
+                console.log(`printing y in innermost ${y}`);
+                console.log(`printing x in innermost ${x}`);
+            }
+        }
+
+        innerMost();
+    }
+    outside();
+    inner();
+}
+outer();
+
+function makeAdder(x){
+    var sum = x || 0;
+    return function(y){
+        return sum += y;
+    }
+}
+
+var adder = makeAdder(10);
+console.dir(adder); // to view the object properties of function adder with closure attached to it
+adder(2); // 12
+adder(3); // 15//why
+*when makeadd first the creation of lexical environment of the makeaddr and then execution weher sum is initilaizd with rg and then pt in stack but execution competed before popping them from stack ,with return function we ttach lexical env of make add
+*Note:when we console adder() in cope we will fnd the closure scope ith sum=10
+
+*when adder run ist lexical env createn and in it there is reference to lexical of outer functions
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*Slice vs splice
+*slice
+*when we want to get the elements from array from pos 1 to 4 and 4 is exclusive
+*here thre is no impact on original array
+*It works on the zero based index
+*it return the shallow copy
+*it takes the arsg as first ins tart index,second is end which is exckusive
+
+Splice
+*when we want to get the elements from array from pos 1 to 4 and 4 is exclusive
+*here thre is  impact on original array
+*It works on the zero based index
+*it wll return the part of array
+Note:here args are splice(index from whwre to delete ,deletcount)
+*arr.splice(2)..from 2 to the last of array
+*arr.splice(2,2),eans start from 2 delete 2 elemenst and original array delete 2 elemst
+*arr.splice(2,2,4,5)
+*from index 2 delete 2 elemsbt hence the array returned will be of deleted elemst and in original array replace i with 4,5
+*arr.splice(2,0,4,5)
+*means no elemnst deleted and at index 2 in original array add 4 5 in index 2
+
+
+Note:so slice return the selected elemsnt and does not change original array
+*splice returns deleted elents and changes the original array
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+JavaScript exexution have 2 parts
+*parsing where the hosting comes in
+*interpretation whre code is executed line by 
+*console.log(myvar)//refernce erro
+*console.log(myvar) var myvr="hii'' undefined
+*so initlization we hav 2 thing first declearion isnmove to top of the scope and initilzation remain in its place
+*
+
+2.hoisting inside function
+var DEFAULT_SIZE='Medium';
+
+var size = 'Large';
+
+function getSize () {
+	if(!size){
+        var size = DEFAULT_SIZE;
+    }
+    return size;
+}
+
+console.log('Value of getSize is ' + getSize());medium
+console.log('Your size is ' + size);large
+
+// Output ??
+
+*so in function during hosting the var size is move dto moved to top of scop and during execution it was initialized with medium and returnd as medium
+*and outre size as the large
+
+
+3.Hositing in function declaration
+
+
+
+myFunction();
+// Output: ??
+
+
+// Function Declaration.
+function myFunction() {
+  console.log('This is my function.');
+}; working fine as duin the prasing the declaration is moved at top and during execution it will run fine
+
+
+4.hositing in function expression
+
+
+
+myFunction(); 
+// Output ??
+
+
+// Function Expression.
+
+
+var myFunction = function() {
+  console.log('This is my function.');
+};
+//typeerror  as 
+during the parsing declaration is moved at top which means var mufunction at top and myfunction=function remain as it and f we call console in between than the typerror as var mufunction is undefined and caling undefined gives the typerror
+
+
+5.order of hoisting are in order in which written
+console.log(typeof square); //function
+// Output: ??
+
+var square = 'SQUARE';
+
+function square(num) {
+  return (num*num);
+}
+
+console.log(typeof square); //string
+
+// Output: ??
+
+
+so first the var square and the function is move dto top of scope
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Implementation of setinterval using the settimeout
+*function createSetIntervalPolyfill(){
+
+
+    // closure
+    var intervalID = 0;
+    var intervalMap = {};
+
+
+    function setIntervalPolyfill(callbackFn , delay = 0, ...args){
+
+        if(typeof callbackFn !== 'function'){
+            throw new TypeError("'callback' should be a function")
+        }
+
+        // Unique
+        var id = intervalID++;
+
+
+        function repeat(){
+            intervalMap[id] = setTimeout(
+                ()=> {
+                    callbackFn(...args)
+                    // Terminating
+                    if(intervalMap[id]){
+                        repeat();
+                    }
+                },
+                delay
+            )
+        }
+        repeat();
+
+
+        return id
+
+    }
+
+    function clearIntervalPolyfill(intervalID){
+        clearTimeout(intervalMap[intervalID]);
+        delete intervalMap[intervalID];
+
+    }
+
+
+    return {
+        setIntervalPolyfill,
+        clearIntervalPolyfill
+    }
+
+}
+
+const {
+    setIntervalPolyfill,
+    clearIntervalPolyfill
+} = createSetIntervalPolyfill()
+
+let counter = 0
+let intervalID;
+
+function greeting(name){
+    counter++;
+    console.log("Hello" , name);
+    if(counter >= 3){
+        clearIntervalPolyfill(intervalID)
+    }
+}
+
+
+intervalID = setIntervalPolyfill("", 1000 , "Yomesh");
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+JavaScript classes and arraow function
+*supposeclass parent
+{
+let id;
+void print()
+{
+this.id
+}
+
+}
+class child extends parent{
+int name;
+child(name,id)
+
+{
+super(id)
+}
+print(){
+this.name+thsi.id
+}
+
+
+var pare=new parent(1)
+var child=new child("two",2);
+parn.print()//1
+child.print()->shoild print two  but print 2
+
+
+Note:so outside constructor goes intorortoptyof class
+*and if the function is he arraow it goe t instnace of class
+*so when we call the child.print() it get dierctpropetyof arentclass and rit method so prints the 2
+*so pleas change parent method function into the function
+
+note:why do w nitilzatize in constructo so in callback function the function does not get bnd soe we are bnding n constrctor so th itcan becam the directable access property
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+If the rror si trow inside the promise chain than i willgoto nearest chaain
+*function first()
+{
+return Promise.reolsve(1);
+}
+functio secod()
+{
+thrw new Erroe()
+}
+
+first().then(()-second()).then().catch()
+{
+}
+*Note:try cath in normal function ,event buble up tonearestancestor cath
+*wheras in async await inside himself helpin catch
+*
+✅ Key Interview Point
+👉 try...catch in async only works with throw or await Promise.reject(...).
+👉 If you just return Promise.reject(...), you’re not throwing — you’re handing the rejection back to the caller.
+
+🔹 Output-Based Questions with Answers
+Q1. try...catch...finally
+function test() {
+  try {
+    console.log("A");
+    throw new Error("Something went wrong");
+  } catch (err) {
+    console.log("B");
+    return "C";
+  } finally {
+    console.log("D");
+  }
+}
+console.log(test());
+
+
+✅ Answer:
+
+A
+B
+D
+C
+
+
+Reasoning:
+
+"A" is logged before the error.
+
+Error goes to catch, logs "B", and prepares to return "C".
+
+finally always runs, so "D" is logged.
+
+Function ultimately returns "C".
+
+Q2. Async Error in setTimeout
+try {
+  console.log("Start");
+  setTimeout(() => {
+    throw new Error("Async error");
+  }, 0);
+  console.log("End");
+} catch (err) {
+  console.log("Caught:", err.message);
+}
+
+
+✅ Answer:
+
+Start
+End
+
+
+(Then program crashes with Uncaught Error: Async error)
+
+Reasoning:
+
+setTimeout executes later, outside the try...catch.
+
+Synchronous block logs "Start" and "End".
+
+The thrown error inside setTimeout is not caught here because try...catch only works synchronously.
+
+Q3. async with rejected promise (no await)
+async function foo() {
+  try {
+    return Promise.reject("X");
+  } catch (e) {
+    return "Y";
+  }
+}
+
+foo().then().catch(res => console.log("Result:", res));
+
+
+✅ Answer:
+
+Result: X
+
+
+Reasoning:
+
+return Promise.reject("X") returns a rejected promise, but since it’s not awaited, the rejection isn’t caught by try...catch.Note:async when return plain values wrpa thaem as the resolved when promise than as its is so it return s rejected promise 
+
+The caller sees the rejection and handles it in .then, printing "Result: X".
+
+Q4. async/await with rejection
+async function bar() {
+  try {
+    await Promise.reject("Oops!");
+    console.log("This line");
+  } catch (e) {
+    console.log("Caught:", e);
+  }
+}
+
+bar();
+
+
+✅ Answer:
+
+Caught: Oops!
+
+
+Reasoning:
+
+await Promise.reject("Oops!") immediately rejects.
+
+This is caught in the catch block.
+
+"This line" never executes.
+
+Q5. Promise rejection with outer try...catch
+try {
+  Promise.reject("Err").catch(err => {
+    console.log("Handled:", err);
+  });
+} catch (e) {
+  console.log("Caught:", e);
+}
+
+
+✅ Answer:
+
+Handled: Err
+
+
+Reasoning:
+
+The rejection is handled by the Promise’s .catch.
+
+Outer try...catch cannot catch async errors because the error happens after the synchronous block completes.
+
+Q6. async function throwing error
+async function test() {
+  try {
+    throw new Error("Boom!");
+  } catch (err) {
+    console.log("Caught inside:", err.message);
+  }
+  return "Done";
+}
+
+test().then(console.log);
+
+
+✅ Answer:
+
+Caught inside: Boom!
+Done
+
+
+Reasoning:
+
+throw is caught inside the function.
+
+"Caught inside: Boom!" is logged.
+
+Function returns "Done".
+
+Caller .then prints "Done".
+
+✅ These cover all variations:
+
+Sync vs async error handling
+
+Rejections with/without await
+
+Promise .catch vs try...catch
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Note:.catch only handle error in promise chain or async error
+
+variety1:
+function()
+{
+throw new Error("")
+return Promise.resolve("hii");
+}
+so here error thrown so it must be caugt by the outer try catch
+so try
+{
+function90
+}catch()
+{
+}
+*Now instead of this code if i run function .then ().catch()//so here then cataches teh async promise
+
+
+
+*Note:Promise.resolve()is ynchrnous but then handler is async
+variety 2*function f1()
+{
+Return Promise.resolve(1)
+}
+function second()
+{
+throw new Eroor("caught in then how")
+}
+f1.then(()->second()).catch(err->wrr.message)
+//if the function throwing error iis in promise chain than the error can be caught in promise chain
+
+
+
+
+
+variety 3:
+*var pr=new Promise((resolve,reject)=>{
+reolve(1)//here its is sync
+reject (2);
+console.log("reached")
+}
+pr.then(()=>{
+}).catch()
+//output is reached then 1
+
+so resolve are sync task and then is async so one thing can happen in promise eiethr reject or reolve so first one resolve
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+event look check if call stack emepty
+*thhn in each itearation it pick up the callbacks/tasks from microstak que untill and untill its empty
+*in each iteartion then it will check the callback queue an dpick task and put in stack
+
+Ahh 😅 got it — thanks for pointing that out. Let’s slow down and carefully align with your screenshots again, because I see where the confusion came from.
+
+📌 Screenshot 1 → Promise.resolve()
+function call() {
+  return Promise.resolve();
+}
+
+call()
+  .then(function first() { console.log(1); })
+  .then(function second() { console.log(2); })
+  .then(function third() { console.log(3); });
+
+call()
+  .then(function fourth() { console.log(4); })
+  .then(function fifth() { console.log(5); })
+  .then(function sixth() { console.log(6); });
+
+
+👉 Observed behavior (from your screenshot):
+The outputs interleave like this:
+
+1
+4
+2
+5
+3
+6
+
+
+✅ Why?
+
+Promise.resolve() gives an already-fulfilled promise.
+
+When you attach .then(), its callback goes into the microtask queue.
+
+After the first call(), first() is queued.
+
+Then the second call() runs immediately, and fourth() is queued before microtasks flush.
+
+When the microtask queue runs, both first() and fourth() are in there → they run in the order queued.
+
+Then their .then chains enqueue second() and fifth(), which again interleave.
+
+Hence: 1, 4, 2, 5, 3, 6.
+
+📌 Screenshot 2 → new Promise(resolve => setTimeout(resolve, 0))
+function call() {
+  return new Promise(resolve => setTimeout(resolve, 0));
+}
+
+call()
+  .then(function first() { console.print(1); })
+  .then(function second() { console.print(2); })
+  .then(function third() { console.print(3); });
+
+call()
+  .then(function fourth() { console.print(4); })
+  .then(function fifth() { console.print(5); })
+  .then(function sixth() { console.print(6); });
+
+
+👉 Observed behavior (your screenshot):
+The outputs are sequential:
+
+1
+2
+3
+4
+5
+6
+
+
+✅ Why?
+
+Each call() schedules a setTimeout(…, 0) → these run in the macrotask queue.
+
+The first timeout fires → resolves → runs first() → chains second() → runs second(), then third().
+
+Only after that whole chain is done does the event loop get back to the second timeout.
+
+So the entire first chain (1, 2, 3) completes before the second chain (4, 5, 6).
+
+🔑 Correct Summary
+
+Promise.resolve() → interleaved outputs (1, 4, 2, 5, 3, 6) because microtasks queue up immediately.
+
+setTimeout (0) → sequential outputs (1, 2, 3, 4, 5, 6) because macrotasks resolve one promise fully before moving to the next.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+How to solve the promise based code
+*console.log(1)
+seTimeoout(()=.{console.log(2)}
+Promise.reolve((3)
+Proise.reolve(setteimoute4)
+Promise.reolve((5)
+eTimeoout(()=.{console.log(6)}
+console.log(7)
+
+
+
+1,7,3,5,26,4 4 last as in microstaks taks esxecute complete but its put in callback quue at end
+
+Note new promise(()->console.log 8
+reolve(1).then (9)
+
+onsole.log(1)
+seTimeoout(()=.{console.log(2)}
+Promise.reolve((3)
+Proise.reolve(setteimoute4)
+Promise.reolve((5)
+eTimeoout(()=.{console.log(6)}
+console.log(7)
+
+
+8,1,17,9,3,5,2,6,4
+as inside the callback of new promise its synchronous
+
+*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+how to improve the website performance
+*so first part we can focus is on the navigation 
+*we want navigation to be perceived
+*so we are on page we want when we hover thne prefetch the resource so loading time when click decreases
+Note:Its basically used when we know that what will be user next destination,so we preftch the resource to improve the user experience
+Note:prefetch when when the browser is idle
+
+How do we implement it
+1.<Link prefetch="intent">prefetch when hovers
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+note theta the then exits in the Promise.prortoptype
+*so all instnaces of the promise share the common then
+*so we are able to cahin then then
+*so promisseinstance.then(()=>{
+return Promise
+})so we aplly then again
+
+
+*Note:that new Promise(()=>{
+resolve (1)
+}).then(()=>{
+return v+1;
+}.then
+*here first thn does not resolve promise but its being wrapped in new Promise(()=>{
+reolve with the callback function value
+})
+
+
+same cases with the catch until exolixixty we return with the wrapped rejected promise with return values of function from first catch
+*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+React perfrmanvc
+
+1.Problem sttaemnet is we have so many nodes
+*feed size can increase
+
+Requirements
+*yt videos
+*and diffrente items like questions
+*diffrenet items may varies in sizes
+
+
+Now the solutions can be 
+1.Pagination
+2.Virtualization
+
+
+*in bacakground we have list of the all itema nd we have one vieport where the width of box only that much items is rendered and shown
+*as soon as we scroll items move out of the window box and replaced by other itsm
+*so for the box we uses the div which listen to scroll and offset and check what items to show
+*So for the virtualization we can make use of the react-window or the react-virtuso
+*
+<Virtuoso
+  data={items}
+  itemContent={(index, item) => (
+    <div style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
+      {item}
+    </div>
+  )}
+/>
+so here we dont have the window scroll so whene we scroll we see fixed no of node in dom than changes on scrolling
+
+
+
+
+Perfect 👌 let’s go step by step. You’re using the Virtuoso component with the data prop:
+
+<Virtuoso
+  data={items}
+  itemContent={(index, item) => (
+    <div style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
+      {item}
+    </div>
+  )}
+/>
+
+🔹 How this will look
+
+Each item in items (like "Item 1", "Item 2", etc.) will be rendered inside a <div>.
+
+Each row will:
+
+Have 10px padding.
+
+A bottom border (1px solid #ddd), giving it a table-like look.
+
+So visually: a scrollable vertical list of items with separators.
+
+Example (simplified for 3 items):
+
+Item 1
+----------------
+Item 2
+----------------
+Item 3
+----------------
+...
+
+🔹 Fixed number of nodes on screen
+
+Yes ✅
+Virtuoso only renders enough items to fill the visible viewport + a small buffer.
+
+Suppose the container is 500px tall and each row is 40px.
+
+Then about 12–13 rows are mounted in the DOM at once.
+
+As you scroll, Virtuoso reuses DOM nodes (windowing / virtualization).
+
+This means:
+
+Even if you have 10,000 items, only ~15 are in the DOM at a time.
+
+That’s why Virtuoso is super fast for huge lists.
+
+🔹 Will there be a window scroll?
+
+No, not the full-page scroll.
+
+Virtuoso creates its own internal scrollable container.
+
+You control its size using a parent wrapper (e.g., height = 400px or 100vh).
+
+Example:
+
+<div style={{ height: "400px" }}>
+  <Virtuoso data={items} itemContent={(index, item) => <div>{item}</div>} />
+</div>
+
+
+👉 Now you’ll see a 400px tall scrolling list with virtualization.
+
+If you don’t give it a height, Virtuoso tries to grow with content, which defeats virtualization. So you must fix the height of the container.
+
+✅ Summary
+
+It will look like a simple vertical list with dividers.
+
+Only a fixed number of nodes (rows) are mounted at once.
+
+Scrolling happens inside Virtuoso’s container, not the window.
+
+Do you want me to make you a codesandbox-style full demo with App.js where you can scroll through 10,000 items?
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------

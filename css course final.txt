@@ -1,0 +1,545 @@
+spring boot
+java
+design patterns
+lld
+
+
+
+
+
+typescript
+css
+java script and react--question linkedin and ss
+cosing question for ereact
+mongo db
+
+
+
+
+node js
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Type of selectors
+*element selector
+*class selectors .
+*id selectors # id is unique
+*text-align 
+by default text is aligned from left to right
+*but we can set it to the right,center
+*text align works according to the parent its left or right aligned according to the parent
+*<body>
+    <h1>
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Explicabo
+      molestias maiores repellat id omnis placeat perferendis unde veniam cum
+      praesentium velit aliquam, molestiae minus quasi? Eos ipsam voluptatum
+      maxime magnam.
+    </h1>
+  </body>
+*here text aligned according to parent body
+*Note: <a href="https://www.google.com">clcik</a>
+*here text decoration :none will be text decoration will be none
+*font-weight is normally from lighter,bol,bolder,normal
+*its value is from 100 to 900
+*absolute units->95 px=1inch=2.54 cm
+*line height is the height of line means the distance between line can be imprpved by ths
+*text-transform-uppercase,lowercase,npne
+*when we inspect any elements than blue content is blue is text content and orange i the mrgin
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+*box models say we have the contenet it has some height and width and then the outer space around contenet called padding and then border and the distnac eof 1 element to other called margin
+*so if  div{
+height:30px;
+}
+*here height is of the content
+*div {
+  height: 200px;
+  background-color: red;
+}
+*by default the heght of div is the line of height in its content
+*and above we explicity set the height of thge contenet
+*1. <div>
+
+A <div> is a block-level element by default.
+
+Block-level elements in HTML expand to take 100% of the available width of their parent container, unless you set a width (CSS) or the parent restricts it.
+👉 So yes, a <div> behaves as if it takes the full width of the screen (if its parent is <body>).
+
+2. <h1>
+
+<h1> is also a block-level element by default.
+
+Like <div>, it stretches to 100% of the available width of its parent container.
+
+Even if the text inside is short, the element still reserves the entire row (so the next element starts on a new line).
+
+✅ Example:
+<h1>Hello</h1>
+<div>I'm a div</div>
+<p>I'm a paragraph</p>
+
+
+Even if "Hello" is just 5 characters wide, the <h1> stretches across the full row. Same for <div> and <p>
+*same for the border bordre-width,border-stye,border -color;
+*border radius :in px or percentage,now to cocnvert the boc ito cicle set the box to 50%
+*Here the thing is that now after giving height and width if i give the text align than now it will shift according to the contente if center than the center with respect to text contenet
+*div {
+  background-color: red;
+  height: 200px;
+  width: 200px;
+  border-style: dotted;
+  text-align: right;
+}
+*next is the property that is padding so its space between border and text context
+*iv {
+  background-color: red;
+  height: 200px;
+  width: 200px;
+  border-style: dotted;
+
+  padding-left: 25px;
+}
+*so here the contenet area is still 200*200,thne padding of 25 px,then the border,margin
+*margin is the area between 2 boxes border
+*To design the navbar
+* <div id="navbar">
+      <a id="logo"> amazon.in </a>
+      <a> about us </a>
+      <a> conatct us </a>
+      <input placeholder="search here" />
+      <button>clcik me</button>
+    </div>
+** {
+  color: white;
+}
+#navbar {
+  height: 200px;
+  background-color: black;
+}
+#logo {
+  color: yellow;
+}
+a {
+  margin-right: 80px;
+}
+*block elements are div,heading
+*inline ae a,input,button
+*hen declared inline any elemenst then line height is calculated on basis of font metrics not the height of inline elemenst so margin-top and magin bottom does not behave exactly and the height and the width also
+*div {
+  height: 200px;
+  width: 200px;
+  padding: 20px;
+  margin: 20px;
+  display: inline;
+}
+*so to set the margin ofr the inline elmenet swe use the inline block elemensy as display
+*display:none removes elements from document flow as well as remove sthe space also it takes
+*visibility:hidden measn cant show but space is resrved
+*Relative units are %.em,rem
+*% means relative to parents object
+*em means if 2 em means double of the font -size of the oarent
+*.box1 {
+  height: 200px;
+  width: 200px;
+  background-color: red;
+  font-size: 10px;
+}
+.box2 {
+  height: 20px;
+  width: 10%;
+  background-color: blue;
+  margin-left: 20%;
+  font-size: 2em;
+}
+*and if em using other property like width than relative to font size of its element
+*.box1 {
+  height: 200px;
+  width: 200px;
+  background-color: red;
+  font-size: 10px;
+}
+.box2 {
+  height: 20px;
+
+  background-color: blue;
+  margin-left: 20%;
+  font-size: 2em;
+  width: 5em;
+}
+Note:here width will be the 100 px
+*rem:mena relative to the root elemnst
+*.box1 {
+  height: 200px;
+  width: 200px;
+  background-color: red;
+  font-size: 10px;
+}
+.box2 {
+  height: 20px;
+
+  background-color: blue;
+  margin-left: 20%;
+  font-size: 2em;
+  width: 5rem;
+}
+
+*so here write hello after body inspecat find font size so relative to the font size of theroot body element
+*its 5 time sof that
+
+
+*1vh measn 1% of viewport height
+*1vw mean 1% of viewport width
+
+Position
+*it tells how the elements are position in the document
+*suppose we have taken 3 duv with heigh and width same for all div 
+<div id="box1">box1</div>
+    <div id="box2">box2</div>
+    <div id="box3">box3</div>
+    <div id="box4">box4</div>
+
+div {
+  height: 200px;
+  width: 200px;
+  background-color: red;
+  font-size: 10px;
+  display: inline-block;
+}
+
+1.suppose now the give box 1 position as static ,no change as by ceafult position is static and there is no effect of the top,botto,right,left and z-index
+*Note:top measn element is position how much from top
+*2.position:relative means relative to itself
+
+#box2 {
+  position: relative;
+  top: 80px;
+  left: 50px;
+}
+
+
+*here top measn upar ki taraf element ke but khiskega neeche as compared to refernce
+3.Position:absolute means that the relative to closest ancestor which is non static
+4.position fixed means relative to browser ,it is fixed when we scroll it remain fixed
+5.position :sticky means one it reaches the postsion it becomes fixed then 
+
+
+	
+
+
+z-index
+*suppose that many div ae overlapping
+*now which one will ovrlpa which is decide bu z index
+*by default after wlaa overlap before wala
+*by default  z index is 0
+*if positive z index than taht elemenst priority of overlap another is higher
+*
+
+
+Background-image
+*to set the background image
+*download image then the 
+*background-image:url("")//here in "" write image name saved in the structure
+*div {
+  height: 200px;
+  width: 200px;
+  background-color: red;
+  font-size: 10px;
+  display: inline-block;
+}
+#box1 {
+  background-image: url("background-image.jpg");
+}
+*now here in image whole image saml part comes
+If image is greater than box
+*so wnat image part that can come in the box will come so ues bcakgroun size :covermust come
+*But next is we want full image making it small and put in the box so here use the contain
+*but contain part will be repeating we can ignore that  y background-repeat:no-repeat
+*Please try to use the cover
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Flexbox layout
+*It is one dimanesional layout for arranging items in a row or columns
+*Note:all items get fit in the container they adjust height so that they can be fit in a contaimer
+
+*flex means flexible layout
+*So we have the flex container that can be the div,span
+*and inside it we have the main axis and then the cross axis
+*<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div id="box1" class="box1">box1</div>
+      <div id="box2" class="box2">box2</div>
+      <div id="box3" class="box3">box3</div>
+      <div id="box4" class="box4">box4</div>
+    </div>
+  </body>
+</html>
+
+*div {
+  height: 200px;
+  width: 200px;
+
+  font-size: 10px;
+  display: inline-block;
+}
+#container {
+  border: 2px solid black;
+  width: 420px;
+  height: 420px;
+}
+#box1 {
+  background-color: lightblue;
+}
+#box2 {
+  background-color: lightgreen;
+}
+#box3 {
+  background-color: lightcoral;
+}
+#box4 {
+  background-color: lightgoldenrodyellow;
+}
+
+*display:flex on the container means that the item are aligned on main axis and fromnleft to right by default
+*flex-direction:row-reverse->means how the items are placed in the flex container
+*and justify-content:means aligned along the main axis justify-content:flex-start
+*container {
+  border: 2px solid black;
+  width: 800px;
+  height: 800px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+*Here means the elemnst are placed fro right to left and align at the end
+*justify-content:space-around first place at center and then space around between box those one at age o its extreme side gets half distance as between box
+*align-items:alignment of items along the cross axis
+*flex-wrap is a CSS property used inside a flex container (display: flex;).
+
+By default, flex items are placed in a single line (no wrapping).
+The flex-wrap property tells the browser whether flex items should stay in one line or be allowed to move (“wrap”) onto multiple lines when there isn’t enough space.
+
+✅ Values of flex-wrap
+
+nowrap (default)
+
+All items stay in one row (or column for flex-direction: column).
+
+Items may shrink to fit, or overflow the container.
+
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+
+wrap
+
+Items wrap onto multiple lines when needed.
+
+In row direction, wrapping goes from left → right, then a new line below.
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+wrap-reverse
+
+Same as wrap, but wrapping happens in the reverse cross-axis direction.
+
+For rows: items wrap above instead of below.
+
+.container {
+  display: flex;
+  flex-wrap: wrap-reverse;
+}
+
+🔹 Example
+<div class="container">
+  <div class="box">1</div>
+  <div class="box">2</div>
+  <div class="box">3</div>
+  <div class="box">4</div>
+</div>
+
+<style>
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 200px;
+  border: 1px solid black;
+}
+.box {
+  flex: 0 0 100px;
+  height: 50px;
+  background: lightblue;
+  margin: 5px;
+}
+</style>
+
+
+Here, since the container is only 200px wide and each box is ~100px, they’ll wrap into multiple rows.
+
+👉 In short:
+flex-wrap controls whether flex items stay in one line or break into multiple lines when space runs out.
+*align -content does not supports the wrpa and tak whole thing without space and then align
+
+
+Note:all property of display:flex,fles direction:row,justify-content:flexs start,align:items,align content applies on flex contatiner and now the properties for the flex item
+*align-self->to align along the cross axis
+*Note:if flex container is small thn all flex items get shrink by factor 1 mean in same quantity
+*if large:then they increase in size by factor 1
+*i want one indivsual item to shrink or grow then the so flex-shrink:more than one if want should shrink more ,less than 
+*
+
+
+
+Media queries
+*Help create the responsive websites
+*so building any page that looks diffrenet on ipad,laptop
+*with the help of media queries
+*suppose i have div
+{
+}
+i want exactly at 600 x width it mus be backgeound color:red
+
+#container {
+  width: 800px;
+  height: 800px;
+  background-color: red;
+}
+@media (width: 600px) {
+  #container {
+    background-color: blue;
+  }
+}
+so exactly at the 600 px it will be blue
+*want that fater 600 pix changes must be there so min-width=600
+*want that max-width so atmost this to see the change
+
+
+
+Transition
+*It helps you to transition between 2 states of an element
+*state of elemnst are active wjen clicked ,hover when hover
+*so on any div set transition property to all
+*transition-duration:2s tim to amke transition
+*transition timing-function-ste(2)p when we make tranition than it take place in steps
+*then transition-delay after how much time transition must occur
+*
+
+
+
+css transform
+*first value in transform is rotate(45deg)
+*Note:here ranform alos works on the content inside the lemenst
+*transform: scale(2);so hat it can be whole increased including content2 times of actual
+*
+
+#container {
+  width: 200px;
+  height: 200px;
+  background-color: red;
+
+  transition: all 0.5s ease;
+}
+#container:hover {
+  background-color: blue;
+
+  transform: scale(2);
+} 
+so trasion propert to al and duration is 0.5 s and ease and when hover than increase the scak of element
+
+*transform:translatex(20px)So what it does is the whats the origin element move 20 to the x axis -20 to left
+and 20 above and -20 below
+*Note:here 100 up means up not like the top
+
+
+
+Animation
+*Just advancement of the transform
+*so to apply animation we need to make the template
+@keyframe myname{
+//so here we rwt the start stage and end stage an dbetween these is the animation
+from {backgroyn-colr:red} 
+to {background-color:blue}
+
+}
+*so we have property as animation name,animation direction,animation timing function,animatin delay
+*#container {
+  width: 200px;
+  height: 200px;
+  background-color: red;
+
+  animation-name: identifier;
+  animation-duration: 2s;
+  animation-timing-function: ease-in;
+  animation-delay: 1s;
+}
+@keyframes identifier {
+  from {
+    background-color: red;
+  }
+  to {
+    background-color: yellow;
+  }
+}
+
+
+% in the @keyframes identifier {
+  0% {
+    background-color: red;
+    transform: translateX(0px);
+  }
+
+  100% {
+    background-color: green;
+    transform: translateX(0px);
+  }
+}
+
+
+
+We  need 
+#container {
+  width: 200px;
+  height: 200px;
+
+  border: palegoldenrod 20px solid;
+  border-top: blue 20px solid;
+  border-radius: 50%;
+  animation-name: identifier;
+  animation-duration: 2s;
+  animation-timing-function: ease-in;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+}
+@keyframes identifier {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+NotE:border:border-box means that the with the content border must be counted
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
