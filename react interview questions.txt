@@ -7509,4 +7509,57 @@ so accordion item will be the duv
 title will be button
 than again div as content 
 -----------------------------------------------------------
+Todo list
+problem statement 
+1.add a new todo item
+2.mark the todo as completed
+3.delete a todo item
+4.view the list of todo
 
+requirements:
+a component must have the list of todos in its state
+*a todo has id,text,and completed boolean
+there should be one input box with the placeholder enter the todo and the add todo button
+each todo item shown by text ang checknox to marks its completion
+each todo should also have the delete the todo 
+and each completed todo must be shown by the strikethrough style
+
+
+
+div
+input plaxehold onchane:setinput(e.target.value) value:input
+button onclick:additem
+todos.map return ul li than the checkbox and text and button of the delete
+
+
+now in additem logic
+settodode((prev)=>[...prev,item])
+setinput to empty 
+
+
+
+now when i click on the checkbox here on chabge in fubruokn pass the index
+and in rge handlecompleted fubction eguch recieve id as argument on the selected checkbox here first map ober tge today find that id and tgere return object with the updated status and now update the settodos
+note:to store the id in recursive manner store the id as todos.length+1
+
+
+
+
+deletetodo code
+here first filter whose id is not equal to the argument id and sertidos
+
+
+and here in the addtodo edge case 
+if input ==='' return immediately 
+input.trim() is trim the cases
+
+
+
+
+----------------------------/---------------------
+
+
+
+
+
+-----------------------------------------
