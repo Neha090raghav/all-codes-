@@ -7487,4 +7487,26 @@ worker.onmessage = function (e) {
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 0----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Commonly asked react lld design questions and syatem design questions
+by akshay saini 
+playlist-frontend machine coding inteeview questions usibg reactct
+
+
+
+
+accordion
+so we have initially the list pf accordions totle and content 
+*which is basically closed
+*when we click on it they became expand
+*when one is open and i click amother closed than previous one automatically closed
+*that means one is expanded at one time
+*and if no item is present than show no items available
+
+so basically all closed we have a condition
+if we click one only that opens means we need to check on rhe index with some set index
+and index is when we click any accordion than first check if setindex===index than set it to null so that open can be closed ptherwise setindex to clicked index
+next condution rendering on the content thst if setindex===index than only show contebt for tgat use the &&
+so accordion item will be the duv
+title will be button
+than again div as content 
+-----------------------------------------------------------
 
