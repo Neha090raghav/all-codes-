@@ -7557,6 +7557,11 @@ input.trim() is trim the cases
 
 
 ----------------------------/---------------------
+otp login 
+*so basically in otp input
+*when i write one number it automatically takes to the next input
+
+
 
 
 
