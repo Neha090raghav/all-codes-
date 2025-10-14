@@ -7557,9 +7557,20 @@ input.trim() is trim the cases
 
 
 ----------------------------/---------------------
-otp login 
-*so basically in otp input
-*when i write one number it automatically takes to the next input
+Next js tutorial
+*There are 2 types of the react componenet
+*So basically what happens there are 2 componnet server componenets and the clinet componnets
+*By default Nextjs componnets are the server components are the servre side componnets that means they can directly feych data from db or the read from the files
+*Only points is that they cant use the react hooks or the or handle user intercations
+*But if we want to use the  react hooks or the clinet interactions than use the use clinet at top but it will now acts as the servre componenst
+*next js uses the file based routing measn url in browser is depended on the how you organise the files in your folders
+*npx create-next-app@latest
+*Some routing conventions are
+1.Each folder represents the segmnet of url path
+2.each file must be named as the page.jsx or the page.tsx
+3.each file must be under the app folder
+Note:So good thing that hapens there is we needs not to install the react router dom here our folder structure does the routing
+*
 
 
 
