@@ -1413,6 +1413,18 @@ Some intermediate operation
 filter
 map
 sorted
+peek give us the values  for each iteration
+ *List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+
+
+        List<Integer>filter=list.stream().filter((n)->n%2==0).peek((Integerval)->System.out.println(Integerval)).collect(Collectors.toList());
+    }
+*Note:here that the if i remove the .collect than the sysout will not printoi anything reason is that the intermediate operatiosn are lazy
+*thy will get invokes nce terminal operatiosn are being invoked
+*
 
 Note:why intermediate operation are lazy
 *Sorted()INTERMEDIATE operatio want whole collection data than ony work rest work with one and send at bottom
@@ -1424,7 +1436,29 @@ count
 collect
 foreach
 
-Note:one teh teminal operation is close we can resume stream
+Note:one teh teminal operation is close its means the stram is closed we cant open the stream again take example as thje 
+*import java.util.*;
+import java.util.stream.*;
+
+public class StreamReuseExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(2, 1, 4, 7, 10);
+
+        // Create a stream and apply filter
+        Stream<Integer> filteredNumbers = numbers.stream()
+                .filter((Integer val) -> val >= 3);
+
+        // Terminal operation 1 — consumes the stream
+        filteredNumbers.forEach((Integer val) -> System.out.println(val));
+
+        // Trying to use the same stream again will cause an error
+        // java.lang.IllegalStateException: stream has already been operated upon or closed
+        List<Integer> listFromStream = filteredNumbers.collect(Collectors.toList());
+        System.out.println(listFromStream);
+    }
+}
+*then error  as the terminal operation done stream closed
+*
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Multthreading and concurrency
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1479,13 +1513,32 @@ public class ThreadDemo2 {
 3.Creating anonymous class
 
 4using lambda expression
+
+Thread lifecycle
+*new>thread has been created and its just the object in memory
+*Runnable is thready is ready to run witing when cpu is free
+*Running when thread start executing the code
+*now scenarios where runnable thread goes into the blocking state is the that taking input and output from file or database,when thread want lock but lock is acquired bya nother thread than the wait
+*wait()when we call the wait method than the we make it as the non runnable,when we call notify than it will come to runnable state,release the monitor locks
+*timed waiting means remains in the non runnable state for some time and if condition met come to runnable state again and i does not realease the monitor locks
+*terminate:life of thread is completed
+*
+*
+*
+*
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Daemon thread
 *Daemon thread are the low priority threads tahn run in bacakground that support the non daemon thread or the user thread
+*Hence the daemon thread provides the services to the main thread
+*suppose the main methid wants the more memeory than the garbage collector thread runs in background and check that the it want memoery lets cleans so here garbage collector is the daemon thread
 *we need to call the setdeamon() methid befor thread start otherwise exception will be throen
+*and to check if the daemon is true or not we can use isDaemon()
 *Daemon thread will automatically terminate when all non daemon thread are have completed
 *where as non daemon will continue until they complete
 *main diffrenec is thet jvm will not wait for deamon thread to complete but it will wait for user thread to complete
+*We cant make the main thread as the daemon because wehn the main thraed start that is in the psvm we cant make th ethread as the daemon here set must be setted before the thread start
+
+*More of the time the priority of the daemon thread is low but we can set the priority of the daemmon thread as low
 *package com.comviva.roadmap.service;
 
 public class Test {
@@ -1540,8 +1593,56 @@ public class Test {
     }
 
 }
-here for thead 1 jvm executes but for thread 2levaveit at 0
+here for thead 1 jvm executes for all values  but for thread 2levaveit at some 
+*lets take simple example package com.example.demo;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Test extends Thread{
+    @Override
+    public void run() {
+        System.out.println("Daemon thread running");
+    }
+
+    public static void main(String[] args) {
+      System.out.println("main thread  running ");
+      Test test = new Test();
+      test.setDaemon(true);
+      test.start();
+    }
+}
+here output will be main thread running and then the daemon thread running
+*But we can change its priority
+*package com.example.demo;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Test extends Thread{
+    @Override
+    public void run() {
+        System.out.println("Daemon thread running");
+    }
+
+    public static void main(String[] args) {
+
+      Test test = new Test();
+      test.setDaemon(true);
+      test.start();
+    }
+}
+It should not give any output as the main thread has not done anything whjere will the daemon provide services
 *
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Race coditon
 *when many thread access the same resorce,and the result is depending the timing order of theradexecuion is alled race condition
