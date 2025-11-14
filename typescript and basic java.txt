@@ -1545,6 +1545,7 @@ here for thead 1 jvm executes but for thread 2levaveit at 0
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Race coditon
 *when many thread access the same resorce,and the result is depending the timing order of theradexecuion is alled race condition
+*both can get the same time which cn lead to inconsistency
 *and which leads the inconsistency
 *Thre are 2types of race conditios
 1.read modifyand write
@@ -1557,7 +1558,39 @@ so order oftherad execution dpends on the os and scheduling algorihm so topereve
 *thread a come write as 6
 *another thrad b updatss 6 
 *so its a race condition ki on oder of eeceution one is modify so its not atomic operation the operation which happens i one go it will done or not start not in intermediate state
-*
+*package com.example.demo;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Test {
+     private int count=5;
+
+    public int getCount() {
+        return count;
+    }
+
+    public void incrementCount() {
+        count++;
+    }
+
+    public static void main(String args[])
+    {
+        Test test=new Test();
+        Thread t=new Thread(test::incrementCount);
+        t.start();
+        Thread t1=new Thread(test::incrementCount);
+        t1.start();
+        System.out.println(test.getCount());
+        
+
+    }
+}
+
 
 2.check and act
 *since both the thread can satisfies the check conditions they will both modify the code inside the condition or can modify the critical section
@@ -1645,6 +1678,7 @@ public class RacCondition {
 
 
 }
+*but getcount can print 100 before threacexecute or after 2 thread console or -100 or 0 
 Here ideal condition must be that the in balance reaches to 50 another thread cant withdrawn but since both are accessig at same time
 
 *So to solev this problem we can make use of the synchronized this block
@@ -1675,6 +1709,56 @@ Synchronised method
 
 
 Note:Please find that here we make the class and 2 thread accessing to 2 methods depost and withdraw make them both synchronized and then synchronized this
+*Note:now the thread.sleep()syas i main/runnnable  thread is waiting please execute the thread first ,main will pause ist sys out thing only run thr run methd inside thread
+*class MyThread extends Thread {
+
+    @Override
+    public void run() {
+        try {
+            // Make this thread sleep so main thread can see TIMED_WAITING state
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+
+        MyThread t1 = new MyThread();
+
+        // NEW state (before starting)
+        System.out.println(t1.getState());
+
+        t1.start();
+
+        // RUNNABLE state (after start)
+        System.out.println(t1.getState());
+
+        // Main thread sleeps 100ms so child thread enters sleep()
+        Thread.sleep(100);
+
+        // Should print TIMED_WAITING
+        System.out.println(t1.getState());
+
+        // Wait for t1 to finish
+        t1.join();
+
+        // Now it should be TERMINATED
+        System.out.println(t1.getState());
+    }
+}
+Depending on timing, you will see something like:
+
+NEW
+RUNNABLE
+TIMED_WAITING
+TERMINATED
+Note:t1.join() here says that the main thread is waiting for t1 to complete
+*means next line will be executed once rhe t1.join() is don emeans thread1 is completely exeucuted
+*now the Thread.yield() is a hint to other thread thjat nowscheduled that please run other thread
+
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 What is deadlock
 *Deadlock is a situation that happens when the 2 or more threads ae bocked forever
