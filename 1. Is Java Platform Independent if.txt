@@ -13729,4 +13729,6 @@ Note:add dependencyand enableeurekaserver
 *So eureka store data i memry
 *Yes eureka server is single point of failure if shut down
 *----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+How do you handle the exceptions globally in springboot applications
+*So create teh class as the global exception handler
+*here and annotate with the rest controlleradvice 
